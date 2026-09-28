@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "Internal App — Query & Response Data Flow",
+    "quality_profile": "showcase",
+    "viewBox": [1060, 600],
+    "views": [
+      { "id": "pixels", "label": "Image to results", "focus": ["crop", "qvector", "hits", "results"], "note": "The query image becomes a vector, matches hits, and renders as cards." },
+      { "id": "meta", "label": "Filters to access", "focus": ["filters", "request", "metadata", "sas"], "note": "Facets shape the query; response carries provenance and short-lived SAS." }
+    ]
+  },
+  "stages": [
+    { "label": "Client input" },
+    { "label": "Function" },
+    { "label": "AI Search" },
+    { "label": "Response" }
+  ],
+  "nodes": [
+    { "id": "crop", "type": "frontend", "label": "Query image", "sublabel": "upload / crop", "stage": 0, "row": 0 },
+    { "id": "filters", "type": "frontend", "label": "Facets + filters", "sublabel": "category · color · season", "stage": 0, "row": 2 },
+    { "id": "qvector", "type": "cloud", "label": "Query vector", "sublabel": "1024-dim", "stage": 1, "row": 0 },
+    { "id": "request", "type": "backend", "label": "Search request", "sublabel": "vectorQueries + filter", "stage": 1, "row": 2 },
+    { "id": "hits", "type": "database", "label": "Vector hits", "sublabel": "top-k by cosine", "stage": 2, "row": 0 },
+    { "id": "metadata", "type": "database", "label": "Doc metadata", "sublabel": "score + provenance", "stage": 2, "row": 2 },
+    { "id": "results", "type": "frontend", "label": "Result cards", "sublabel": "images + facets", "stage": 3, "row": 0 },
+    { "id": "sas", "type": "security", "label": "SAS URLs", "sublabel": "read-only · 15 min", "stage": 3, "row": 2 }
+  ],
+  "flows": [
+    { "from": "crop", "to": "qvector", "label": "embed", "classification": "vectorizeImage", "variant": "emphasis", "route": "straight" },
+    { "from": "qvector", "to": "hits", "label": "vector query", "classification": "k=top", "variant": "emphasis", "route": "straight" },
+    { "from": "hits", "to": "results", "label": "render", "classification": "grid", "variant": "emphasis", "route": "straight" },
+    { "from": "filters", "to": "request", "label": "compose", "classification": "internal scope", "variant": "default", "route": "straight" },
+    { "from": "request", "to": "metadata", "label": "search", "classification": "REST", "variant": "default", "route": "straight" },
+    { "from": "metadata", "to": "sas", "label": "mint", "classification": "keyless", "variant": "default", "route": "straight" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Two Lineages", "items": ["Pixels flow into a query vector and matched hits", "Filters flow into the request and result metadata", "Both converge on the rendered result cards"] },
+    { "dot": "emerald", "title": "Vector Match", "items": ["The query vector matches imageVector by cosine", "k equals the requested result count", "Hits carry a similarity score and confidence"] },
+    { "dot": "amber", "title": "Provenance + Access", "items": ["Results include celebrity and index timing", "Embedding model version travels with each hit", "Images are served through read-only SAS URLs"] }
+  ]
+}

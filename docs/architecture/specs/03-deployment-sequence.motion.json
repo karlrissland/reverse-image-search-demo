@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "Application Deployment — azd up Sequence",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "viewBox": [1000, 800],
+    "column_fit": "spread",
+    "views": [
+      { "id": "provision", "label": "Provision", "focus": ["dev", "azd", "azure"], "note": "azd applies Bicep and captures endpoint outputs into the environment." },
+      { "id": "configure", "label": "Configure", "focus": ["azd", "hook", "azure", "search"], "note": "The post-provision hook stamps config, loads data, and builds the Search pipeline." },
+      { "id": "verify", "label": "Deploy + verify", "focus": ["azd", "azure", "verify", "dev"], "note": "azd deploy ships code, then the post-deploy hook proves the live config." }
+    ]
+  },
+  "participants": [
+    { "id": "dev", "type": "external", "label": "Developer", "sublabel": "azd CLI" },
+    { "id": "azd", "type": "cloud", "label": "azd + Bicep", "sublabel": "control plane" },
+    { "id": "azure", "type": "cloud", "label": "Azure resources", "sublabel": "rg-visionsearch" },
+    { "id": "hook", "type": "backend", "label": "deploy.ps1", "sublabel": "post-provision" },
+    { "id": "search", "type": "database", "label": "AI Search", "sublabel": "vision-assets" },
+    { "id": "verify", "type": "security", "label": "verify-sites.ps1", "sublabel": "post-deploy" }
+  ],
+  "segments": [
+    { "from": 150, "to": 296, "label": "Provision" },
+    { "from": 308, "to": 494, "label": "Configure" },
+    { "from": 506, "to": 720, "label": "Deploy + verify" }
+  ],
+  "messages": [
+    { "from": "dev", "to": "azd", "y": 180, "label": "azd up", "variant": "emphasis" },
+    { "from": "azd", "to": "azure", "y": 222, "label": "provision (Bicep)", "variant": "emphasis" },
+    { "from": "azure", "to": "azd", "y": 264, "label": "endpoint outputs", "variant": "return" },
+    { "from": "azd", "to": "hook", "y": 320, "label": "run postprovision", "variant": "default" },
+    { "from": "hook", "to": "azure", "y": 362, "label": "stamp config.js + upload 200 images", "variant": "default" },
+    { "from": "hook", "to": "search", "y": 404, "label": "create index / skillset / indexer + run", "variant": "emphasis" },
+    { "from": "search", "to": "hook", "y": 446, "label": "200 docs indexed", "variant": "return" },
+    { "from": "hook", "to": "azd", "y": 488, "label": "scripts complete", "variant": "return" },
+    { "from": "azd", "to": "azure", "y": 540, "label": "azd deploy (api + both sites)", "variant": "emphasis" },
+    { "from": "azd", "to": "verify", "y": 582, "label": "run postdeploy", "variant": "default" },
+    { "from": "verify", "to": "azure", "y": 624, "label": "GET /config.js", "variant": "default" },
+    { "from": "azure", "to": "verify", "y": 666, "label": "apiBaseUrl", "variant": "return" },
+    { "from": "verify", "to": "dev", "y": 708, "label": "deployment verified", "variant": "return" }
+  ],
+  "activations": [
+    { "participant": "azd", "from": 174, "to": 702, "type": "cloud" },
+    { "participant": "hook", "from": 314, "to": 494, "type": "backend" },
+    { "participant": "search", "from": 398, "to": 452, "type": "database" },
+    { "participant": "verify", "from": 576, "to": 702, "type": "security" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "One Command", "items": ["azd up provisions and deploys in sequence", "Bicep outputs feed the environment for later steps", "Two lifecycle hooks bracket the code deploy"] },
+    { "dot": "emerald", "title": "Configure Before Deploy", "items": ["config.js is stamped before the sites ship", "Data and the Search pipeline are ready first", "The indexer must report success before deploy"] },
+    { "dot": "amber", "title": "Proof of Health", "items": ["verify-sites reads the live /config.js", "It asserts apiBaseUrl matches the Function URI", "A stale config fails the deployment"] }
+  ]
+}

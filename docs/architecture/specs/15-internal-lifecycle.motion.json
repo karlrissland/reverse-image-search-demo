@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "diagram_type": "lifecycle",
+  "meta": {
+    "title": "Internal App — Search UI State Machine",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "viewBox": [1000, 660],
+    "views": [
+      { "id": "happy", "label": "Query rail", "focus": ["idle", "submitting", "embedding", "querying", "rendering"], "note": "One submission moves the UI from idle to rendered results." },
+      { "id": "error", "label": "Failure", "focus": ["querying", "error"], "note": "A failed embed or query surfaces an inline error and returns to idle." },
+      { "id": "refilter", "label": "Re-query", "focus": ["rendering", "refiltering"], "note": "Changing a facet re-queries the same endpoint and updates the grid." }
+    ]
+  },
+  "lanes": [
+    { "id": "main", "label": "Search UI" },
+    { "id": "recovery", "label": "Facet re-query" },
+    { "id": "terminal", "label": "Error surface" }
+  ],
+  "states": [
+    { "id": "idle", "type": "start", "label": "Idle", "sublabel": "ready for input", "lane": "main", "col": 0, "step": "01", "tag": "SearchPanel" },
+    { "id": "submitting", "type": "active", "label": "Submitting", "sublabel": "POST /search/internal", "lane": "main", "col": 1, "step": "02", "tag": "multipart" },
+    { "id": "embedding", "type": "active", "label": "Embedding", "sublabel": "vectorizeImage", "lane": "main", "col": 2, "step": "03", "tag": "1024-dim" },
+    { "id": "querying", "type": "decision", "label": "Querying", "sublabel": "vector query", "lane": "main", "col": 3, "step": "04", "tag": "gate" },
+    { "id": "rendering", "type": "success", "label": "Rendering", "sublabel": "grid + facets", "lane": "main", "col": 4, "step": "05", "tag": "results" },
+    { "id": "refiltering", "type": "active", "label": "Re-filtering", "sublabel": "facet re-query", "lane": "recovery", "col": 2, "tag": "same endpoint" },
+    { "id": "error", "type": "failure", "label": "Error", "sublabel": "inline message", "lane": "terminal", "col": 1, "tag": "retry" }
+  ],
+  "transitions": [
+    { "from": "querying", "to": "error", "label": "request failed", "variant": "security", "route": "straight", "fromSide": "bottom", "toSide": "top", "labelDy": 44 },
+    { "from": "rendering", "to": "refiltering", "label": "facet change", "variant": "dashed", "route": "straight", "fromSide": "bottom", "toSide": "top", "labelDy": 44 }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "One Rail", "items": ["Idle, submitting, embedding, querying, rendering", "A crop or URL starts the submission", "Results render as a grid with a facet panel"] },
+    { "dot": "rose", "title": "Failure Surface", "items": ["A failed embed or query shows an inline error", "The user can adjust the image and retry", "No partial results are shown"] },
+    { "dot": "amber", "title": "Refine In Place", "items": ["Changing a facet re-queries the same endpoint", "The vector is reused where possible", "The grid updates without a full reset"] }
+  ]
+}

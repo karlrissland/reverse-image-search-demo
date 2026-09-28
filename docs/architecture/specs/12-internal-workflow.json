@@ -1,0 +1,47 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Internal App — Search Request Workflow",
+    "quality_profile": "showcase",
+    "viewBox": [1240, 680],
+    "views": [
+      { "id": "input", "label": "Compose query", "focus": ["select", "post"], "note": "The user picks an image or URL, optionally crops, and posts to the Function." },
+      { "id": "process", "label": "Embed + query", "focus": ["embed", "query", "sas"], "note": "The Function embeds the image, runs a vector query, and mints SAS for results." },
+      { "id": "output", "label": "Render", "focus": ["render"], "note": "Results and facets render; facet changes re-query the same endpoint." }
+    ]
+  },
+  "lanes": [
+    { "id": "app", "label": "Internal React app" },
+    { "id": "function", "label": "Search Function · SearchInternal" }
+  ],
+  "phases": [
+    { "id": "input", "label": "Compose", "fromCol": 0, "toCol": 1 },
+    { "id": "process", "label": "Embed + query", "fromCol": 2, "toCol": 4, "variant": "emphasis" },
+    { "id": "output", "label": "Render", "fromCol": 5, "toCol": 5 }
+  ],
+  "groups": [
+    { "id": "handler", "label": "Function handler · keyless", "lane": "function", "fromCol": 2, "toCol": 4, "variant": "emphasis" }
+  ],
+  "mainPath": ["select", "post", "embed", "query", "sas", "render"],
+  "nodes": [
+    { "id": "select", "lane": "app", "col": 0, "type": "frontend", "label": "pick image", "sublabel": "upload / URL · crop", "width": 156 },
+    { "id": "post", "lane": "app", "col": 1, "type": "frontend", "label": "post query", "sublabel": "multipart or JSON", "width": 156 },
+    { "id": "embed", "lane": "function", "col": 2, "type": "cloud", "label": "embed image", "sublabel": "vectorizeImage 1024-dim", "width": 156 },
+    { "id": "query", "lane": "function", "col": 3, "type": "database", "label": "vector query", "sublabel": "imageVector · k=top", "width": 156 },
+    { "id": "sas", "lane": "function", "col": 4, "type": "security", "label": "mint SAS", "sublabel": "read-only · 15 min", "width": 156 },
+    { "id": "render", "lane": "app", "col": 5, "type": "frontend", "label": "render results", "sublabel": "grid + facet panel", "width": 156 }
+  ],
+  "edges": [
+    { "from": "select", "to": "post" },
+    { "from": "post", "to": "embed", "label": "/search/internal", "variant": "emphasis" },
+    { "from": "embed", "to": "query", "label": "1024-dim vector" },
+    { "from": "query", "to": "sas", "label": "top hits" },
+    { "from": "sas", "to": "render", "label": "results + provenance", "variant": "emphasis" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "One Endpoint", "items": ["Upload and URL tabs share one call", "A crop is sent as multipart form data", "Otherwise the app posts JSON with an image URL"] },
+    { "dot": "emerald", "title": "Function Orchestrates", "items": ["It embeds the image to a 1024-dim vector", "It runs a vector query over vision-assets", "It mints short-lived SAS for each result"] },
+    { "dot": "amber", "title": "Internal Scope", "items": ["The internal response adds score and confidence", "It includes celebrity, provenance, and index timing", "Facet changes re-query the same endpoint"] }
+  ]
+}

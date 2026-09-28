@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Application Deployment — azd Lifecycle",
+    "quality_profile": "showcase",
+    "viewBox": [1240, 700],
+    "views": [
+      { "id": "provision", "label": "Provision infrastructure", "focus": ["provision", "sites"], "note": "azd provision applies subscription-scope Bicep, then the post-provision hook begins." },
+      { "id": "configure", "label": "Post-provision scripts", "focus": ["sites", "data", "search", "loadtest"], "note": "deploy.ps1 stamps config, loads data, builds the Search pipeline, and uploads the load test." },
+      { "id": "ship", "label": "Deploy and verify", "focus": ["deploycode", "verify"], "note": "azd deploy publishes the API and both sites; the post-deploy hook asserts the live config." }
+    ]
+  },
+  "lanes": [
+    { "id": "infra", "label": "azd provision (Bicep)" },
+    { "id": "scripts", "label": "Post-provision · deploy.ps1" },
+    { "id": "deploy", "label": "azd deploy" },
+    { "id": "verify", "label": "Post-deploy verify" }
+  ],
+  "phases": [
+    { "id": "prov", "label": "Provision", "fromCol": 0, "toCol": 0 },
+    { "id": "config", "label": "Configure (post-provision hook)", "fromCol": 1, "toCol": 4, "variant": "emphasis" },
+    { "id": "ship", "label": "Deploy + verify", "fromCol": 5, "toCol": 5, "variant": "dashed" }
+  ],
+  "groups": [
+    { "id": "orchestration", "label": "deploy.ps1 orchestration", "lane": "scripts", "fromCol": 1, "toCol": 4, "variant": "emphasis" }
+  ],
+  "mainPath": ["provision", "sites", "data", "search", "loadtest", "deploycode"],
+  "nodes": [
+    { "id": "provision", "lane": "infra", "col": 0, "type": "cloud", "label": "azd provision", "sublabel": "subscription-scope Bicep", "tag": "rg + 9 modules", "width": 156 },
+    { "id": "sites", "lane": "scripts", "col": 1, "type": "backend", "label": "configure-sites", "sublabel": "stamp config.js", "width": 156 },
+    { "id": "data", "lane": "scripts", "col": 2, "type": "backend", "label": "deploy-demo-data", "sublabel": "200 images + metadata", "width": 156 },
+    { "id": "search", "lane": "scripts", "col": 3, "type": "backend", "label": "configure-search", "sublabel": "index · skillset · indexer", "width": 156 },
+    { "id": "loadtest", "lane": "scripts", "col": 4, "type": "backend", "label": "configure-loadtest", "sublabel": "upload Locust plan", "width": 156 },
+    { "id": "deploycode", "lane": "deploy", "col": 5, "type": "cloud", "label": "azd deploy", "sublabel": "api + internal + public", "width": 156 },
+    { "id": "verify", "lane": "verify", "col": 5, "type": "security", "label": "verify-sites.ps1", "sublabel": "assert apiBaseUrl", "tag": "post-deploy hook", "width": 156 }
+  ],
+  "edges": [
+    { "from": "provision", "to": "sites", "label": "postprovision", "variant": "emphasis" },
+    { "from": "sites", "to": "data" },
+    { "from": "data", "to": "search" },
+    { "from": "search", "to": "loadtest" },
+    { "from": "loadtest", "to": "deploycode", "label": "azd deploy", "variant": "emphasis" },
+    { "from": "deploycode", "to": "verify", "label": "postdeploy", "variant": "security" }
+  ],
+  "cards": [
+    { "dot": "emerald", "title": "One azd up", "items": ["Provision and deploy run from a single command", "A post-provision hook runs four idempotent scripts", "A post-deploy hook verifies the live sites"] },
+    { "dot": "cyan", "title": "Post-provision scripts", "items": ["configure-sites stamps the Function URI into config.js", "deploy-demo-data uploads 200 images and blob metadata", "configure-search builds the index, skillset, and indexer", "configure-loadtest uploads the Locust plan"] },
+    { "dot": "amber", "title": "Guardrails", "items": ["Bicep rolls back on provisioning failure", "verify-sites asserts apiBaseUrl matches the Function URI", "All access is keyless via managed identity"] }
+  ]
+}

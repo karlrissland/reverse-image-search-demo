@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "Ingestion & Index — Asset Data Lineage",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "viewBox": [1060, 600],
+    "views": [
+      { "id": "pixels", "label": "Image to vector", "focus": ["image", "blob", "normalized", "vector"], "note": "Each image is normalized then vectorized into a 1024-dim field." },
+      { "id": "meta", "label": "Metadata to facets", "focus": ["manifest", "blobmeta", "fieldmap", "doc"], "note": "Manifest and AI sidecars become stamped blob metadata and indexed facets." }
+    ]
+  },
+  "stages": [
+    { "label": "Source" },
+    { "label": "Blob" },
+    { "label": "Indexer" },
+    { "label": "Index document" }
+  ],
+  "nodes": [
+    { "id": "image", "type": "database", "label": "Source image", "sublabel": "jpg asset", "stage": 0, "row": 0 },
+    { "id": "manifest", "type": "external", "label": "Manifest + sidecars", "sublabel": "facets + gpt-4o", "stage": 0, "row": 2 },
+    { "id": "blob", "type": "database", "label": "Blob image", "sublabel": "container images", "stage": 1, "row": 0 },
+    { "id": "blobmeta", "type": "database", "label": "Blob metadata", "sublabel": "assetId + facets", "stage": 1, "row": 2 },
+    { "id": "normalized", "type": "cloud", "label": "Normalized image", "sublabel": "generateNormalizedImages", "stage": 2, "row": 0 },
+    { "id": "fieldmap", "type": "backend", "label": "Field mappings", "sublabel": "urlDecode · jsonArray", "stage": 2, "row": 2 },
+    { "id": "vector", "type": "database", "label": "imageVector", "sublabel": "1024-dim HNSW", "stage": 3, "row": 0 },
+    { "id": "doc", "type": "database", "label": "Search document", "sublabel": "facets + provenance", "stage": 3, "row": 2 }
+  ],
+  "flows": [
+    { "from": "image", "to": "blob", "label": "upload", "classification": "keyless", "variant": "emphasis", "route": "straight" },
+    { "from": "blob", "to": "normalized", "label": "indexer reads", "classification": "batch 5", "variant": "emphasis", "route": "straight" },
+    { "from": "normalized", "to": "vector", "label": "vectorize", "classification": "1024-dim", "variant": "emphasis", "route": "straight" },
+    { "from": "manifest", "to": "blobmeta", "label": "stamp", "classification": "metadata", "variant": "default", "route": "straight" },
+    { "from": "blobmeta", "to": "fieldmap", "label": "indexer reads", "classification": "REST", "variant": "default", "route": "straight" },
+    { "from": "fieldmap", "to": "doc", "label": "map", "classification": "facets", "variant": "default", "route": "straight" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Two Lineages", "items": ["Pixels flow into a normalized image and a vector", "Metadata flows into stamped blob fields and facets", "Both converge on one document per asset"] },
+    { "dot": "emerald", "title": "Vector Is Validated", "items": ["The Vision skill returns a 1024-dim vector", "The output maps to the imageVector field", "The index stores no image binaries"] },
+    { "dot": "amber", "title": "Provenance Preserved", "items": ["assetId is the stable document key", "Field mappings urlDecode captions and split tags", "Embedding model version travels with the document"] }
+  ]
+}

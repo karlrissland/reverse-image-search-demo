@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Internal App — Runtime Search Topology",
+    "quality_profile": "showcase",
+    "viewBox": [1240, 720],
+    "views": [
+      { "id": "call", "label": "Search call graph", "focus": ["user", "internalapp", "fn"], "note": "The internal React app posts an image to one Function endpoint." },
+      { "id": "fanout", "label": "Backend fan-out", "focus": ["fn", "vision", "search", "blob"], "note": "The Function embeds the image, runs a vector query, and mints read-only SAS." },
+      { "id": "keyless", "label": "Keyless data plane", "focus": ["fn", "vision", "search", "blob"], "note": "The Function's managed identity reaches every backing service — no keys in code." }
+    ]
+  },
+  "components": [
+    { "id": "user", "type": "external", "label": "Internal user", "sublabel": "curator / merchandiser", "pos": [40, 210], "size": [150, 72] },
+    { "id": "internalapp", "type": "frontend", "label": "Internal App", "sublabel": "React SWA · SearchPanel", "pos": [250, 296], "size": [176, 80] },
+    { "id": "appi", "type": "external", "label": "Monitoring", "sublabel": "App Insights + Logs", "pos": [512, 110], "size": [180, 66] },
+    { "id": "fn", "type": "backend", "label": "Search Function", "sublabel": "SearchInternal · .NET 10", "pos": [512, 296], "size": [180, 80], "tag": "internal scope" },
+    { "id": "entra", "type": "security", "label": "Managed identity", "sublabel": "tokens per scope", "pos": [512, 470], "size": [180, 66] },
+    { "id": "vision", "type": "cloud", "label": "AI Services Vision", "sublabel": "vectorizeImage 2024-02-01", "pos": [790, 110], "size": [176, 66] },
+    { "id": "search", "type": "database", "label": "Azure AI Search", "sublabel": "vision-assets index", "pos": [790, 296], "size": [176, 66] },
+    { "id": "blob", "type": "database", "label": "Blob Storage", "sublabel": "private images", "pos": [790, 472], "size": [176, 66] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Internal app runtime · rg-visionsearch-{env}", "wraps": ["internalapp", "appi", "fn", "entra", "vision", "search", "blob"], "pad": 22 },
+    { "kind": "security-group", "label": "Keyless data plane · AAD + RBAC", "wraps": ["vision", "search", "blob"], "pad": 16 }
+  ],
+  "connections": [
+    { "from": "user", "to": "internalapp", "variant": "emphasis" },
+    { "from": "internalapp", "to": "fn", "label": "/search/internal", "variant": "emphasis", "labelDy": -28 },
+    { "from": "fn", "to": "appi", "label": "telemetry", "variant": "dashed", "fromSide": "top", "toSide": "bottom" },
+    { "from": "entra", "to": "fn", "label": "token per scope", "variant": "security", "fromSide": "top", "toSide": "bottom" },
+    { "from": "fn", "to": "vision", "label": "embed image", "variant": "emphasis", "labelDy": -26 },
+    { "from": "fn", "to": "search", "label": "vector query", "variant": "emphasis", "labelDy": 14 },
+    { "from": "fn", "to": "blob", "label": "mint SAS", "variant": "security", "labelDy": 26 }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "One Endpoint", "items": ["The internal app posts an image or crop", "It calls a single Function: /search/internal", "The Function runs with the internal scope enabled"] },
+    { "dot": "emerald", "title": "Fan-Out At Query Time", "items": ["The Function embeds the image to a 1024-dim vector", "It runs a vector query over vision-assets", "It mints short-lived SAS for each result image"] },
+    { "dot": "rose", "title": "Keyless By Design", "items": ["Every backing service is reached by managed identity", "Tokens are cached per scope by the token provider", "Result images use read-only SAS valid for 15 minutes"] }
+  ]
+}

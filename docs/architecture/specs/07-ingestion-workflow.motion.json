@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Ingestion & Index — Build Pipeline",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "viewBox": [1240, 680],
+    "views": [
+      { "id": "ingest", "label": "Ingest images", "focus": ["enrich", "upload"], "note": "Offline enrichment writes sidecars; upload stamps blob metadata per asset." },
+      { "id": "configure", "label": "Configure Search", "focus": ["build", "run"], "note": "configure-search creates the data source, index, skillset, and indexer, then runs it." },
+      { "id": "index", "label": "Vectorize + index", "focus": ["vectorize", "poll"], "note": "The indexer normalizes images, vectorizes them, and writes one document per asset." }
+    ]
+  },
+  "lanes": [
+    { "id": "offline", "label": "Offline enrichment" },
+    { "id": "ingest", "label": "deploy-demo-data.ps1" },
+    { "id": "build", "label": "configure-search.ps1" },
+    { "id": "execute", "label": "Indexer execution" }
+  ],
+  "phases": [
+    { "id": "prep", "label": "Enrich", "fromCol": 0, "toCol": 0, "variant": "dashed" },
+    { "id": "load", "label": "Ingest", "fromCol": 1, "toCol": 1 },
+    { "id": "configure", "label": "Configure Search", "fromCol": 2, "toCol": 3, "variant": "emphasis" },
+    { "id": "index", "label": "Vectorize + index", "fromCol": 4, "toCol": 5 }
+  ],
+  "groups": [
+    { "id": "search", "label": "configure-search REST 2026-04-01", "lane": "build", "fromCol": 2, "toCol": 3, "variant": "emphasis" }
+  ],
+  "mainPath": ["enrich", "upload", "build", "run", "vectorize", "poll"],
+  "nodes": [
+    { "id": "enrich", "lane": "offline", "col": 0, "type": "backend", "label": "enrich-metadata", "sublabel": "gpt-4o sidecars", "tag": "decoupled", "width": 156 },
+    { "id": "upload", "lane": "ingest", "col": 1, "type": "database", "label": "upload + stamp", "sublabel": "jpgs to Blob · metadata", "width": 156 },
+    { "id": "build", "lane": "build", "col": 2, "type": "cloud", "label": "create objects", "sublabel": "data source · index · skillset", "width": 156 },
+    { "id": "run", "lane": "build", "col": 3, "type": "backend", "label": "run indexer", "sublabel": "POST run · batch 5", "width": 156 },
+    { "id": "vectorize", "lane": "execute", "col": 4, "type": "cloud", "label": "normalize + vectorize", "sublabel": "VectorizeSkill 1024-dim", "width": 156 },
+    { "id": "poll", "lane": "execute", "col": 5, "type": "security", "label": "poll to success", "sublabel": "200 processed · 0 failed", "tag": "20-min deadline", "width": 156 }
+  ],
+  "edges": [
+    { "from": "enrich", "to": "upload", "label": "sidecars", "variant": "dashed" },
+    { "from": "upload", "to": "build" },
+    { "from": "build", "to": "run", "label": "create + run", "variant": "emphasis" },
+    { "from": "run", "to": "vectorize", "label": "normalized images" },
+    { "from": "vectorize", "to": "poll", "label": "write docs", "variant": "emphasis" }
+  ],
+  "cards": [
+    { "dot": "emerald", "title": "One Pipeline", "items": ["Upload stamps blob metadata per asset", "configure-search creates every Search object", "The indexer vectorizes and writes documents"] },
+    { "dot": "cyan", "title": "Vectorize In-Indexer", "items": ["imageAction generates normalized images", "VectorizeSkill returns a validated 1024-dim vector", "Output maps to the imageVector field"] },
+    { "dot": "amber", "title": "Readiness Gate", "items": ["Run is idempotent; a 409 is suppressed", "Status is polled every 10 seconds", "Success requires all items processed, zero failed"] }
+  ]
+}

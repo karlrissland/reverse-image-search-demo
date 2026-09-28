@@ -1,0 +1,841 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vision Search UX Concept</title>
+  <link rel="icon" href="data:,">
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(177, 31, 75, 0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(41, 41, 41, 0.88);
+      --cp-panel: rgba(41, 41, 41, 0.72);
+      --cp-panel-strong: rgba(41, 41, 41, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(253, 142, 161, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, var(--cp-accent-soft), transparent 34rem),
+        linear-gradient(180deg, var(--cp-bg-elevated), var(--cp-bg));
+      color: var(--cp-text);
+      font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    .page {
+      min-height: 100vh;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 2rem;
+      padding: 1.25rem clamp(1rem, 4vw, 4rem);
+      background: var(--cp-panel-strong);
+      border-bottom: 1px solid var(--cp-border);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      color: var(--cp-text);
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      font-size: clamp(1rem, 2vw, 1.55rem);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(0.75rem, 2.4vw, 2rem);
+      color: var(--cp-text-muted);
+      font-size: 0.74rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .nav span:first-child {
+      color: var(--cp-text);
+      text-decoration: underline;
+      text-underline-offset: 0.35rem;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      color: var(--cp-text);
+      font-size: 1rem;
+    }
+
+    .hero {
+      max-width: 118rem;
+      margin: 0 auto;
+      padding: clamp(1rem, 2vw, 2rem) clamp(1rem, 4vw, 4rem) 0;
+    }
+
+    .campaign {
+      position: relative;
+      min-height: clamp(24rem, 48vw, 42rem);
+      overflow: hidden;
+      border-radius: 0.625rem;
+      background:
+        linear-gradient(110deg, var(--cp-surface-soft), var(--cp-border), var(--cp-surface)),
+        var(--cp-surface-soft);
+      border: 1px solid var(--cp-border);
+      box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.14);
+    }
+
+    .campaign::before,
+    .campaign::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 24%, var(--cp-sheen), transparent 18rem),
+        radial-gradient(circle at 70% 18%, var(--cp-highlight), transparent 20rem),
+        linear-gradient(90deg, var(--cp-overlay), transparent 40%, var(--cp-overlay));
+    }
+
+    .campaign::after {
+      inset: 8% 22% auto;
+      height: 44%;
+      border-radius: 0 0 0.625rem 0.625rem;
+      background:
+        linear-gradient(135deg, var(--cp-border-strong), var(--cp-surface-soft), var(--cp-surface));
+      opacity: 0.72;
+      box-shadow: var(--cp-shadow);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(18rem, 0.95fr) minmax(18rem, 1.15fr);
+      align-items: end;
+      gap: clamp(1rem, 3vw, 4rem);
+      min-height: inherit;
+      padding: clamp(1.25rem, 5vw, 5rem);
+    }
+
+    .headline {
+      align-self: center;
+      max-width: 44rem;
+    }
+
+    .eyebrow,
+    .section-eyebrow,
+    .spec-kicker {
+      color: var(--cp-text-muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+      font-size: clamp(2.5rem, 6vw, 6rem);
+      line-height: 0.92;
+      letter-spacing: -0.07em;
+    }
+
+    .headline p {
+      max-width: 31rem;
+      color: var(--cp-text-muted);
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      line-height: 1.6;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.75rem;
+      padding: 0.75rem 1.25rem;
+      border-radius: 0.625rem;
+      border: 1px solid var(--cp-border-strong);
+      background: var(--cp-panel-strong);
+      color: var(--cp-text);
+      text-decoration: none;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn.primary {
+      border-color: var(--cp-accent);
+      background: var(--cp-accent);
+      color: var(--cp-accent-fg);
+    }
+
+    .search-card {
+      align-self: end;
+      justify-self: end;
+      width: min(100%, 31rem);
+      padding: 1rem;
+      border-radius: 16px;
+      border: 1px solid var(--cp-border);
+      background: var(--cp-panel-strong);
+      box-shadow: var(--cp-shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .card-head {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .card-head h2 {
+      margin-bottom: 0.25rem;
+      font-size: 1.05rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.65rem;
+      border: 1px solid var(--cp-border);
+      border-radius: 999px;
+      background: var(--cp-surface);
+      color: var(--cp-text-muted);
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    .segmented {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.35rem;
+      padding: 0.25rem;
+      margin-bottom: 0.85rem;
+      border: 1px solid var(--cp-border);
+      border-radius: 999px;
+      background: var(--cp-surface-soft);
+    }
+
+    .segmented button {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.58rem 0.7rem;
+      color: var(--cp-text-muted);
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .segmented button.active {
+      background: var(--cp-surface);
+      color: var(--cp-text);
+      box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.14);
+    }
+
+    .dropzone {
+      display: grid;
+      place-items: center;
+      min-height: 14rem;
+      padding: 1rem;
+      border: 1px dashed var(--cp-border-strong);
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at top, var(--cp-accent-soft), transparent 16rem),
+        var(--cp-surface);
+      text-align: center;
+    }
+
+    .dropzone strong {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-size: 1.2rem;
+    }
+
+    .dropzone span {
+      color: var(--cp-text-muted);
+    }
+
+    .quick-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin: 0.85rem 0;
+    }
+
+    .search-actions {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .search-actions input {
+      min-width: 0;
+      padding: 0.75rem 0.9rem;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      background: var(--cp-surface);
+      color: var(--cp-text);
+    }
+
+    .showcase {
+      max-width: 118rem;
+      margin: 0 auto;
+      padding: clamp(4rem, 8vw, 8rem) clamp(1rem, 4vw, 4rem);
+    }
+
+    .section-title {
+      max-width: 52rem;
+      margin: 0 auto 2.5rem;
+      text-align: center;
+    }
+
+    .section-title h2 {
+      margin: 0.4rem 0 0.7rem;
+      font-size: clamp(2.2rem, 5vw, 4.8rem);
+      line-height: 0.95;
+      letter-spacing: -0.055em;
+    }
+
+    .section-title p {
+      color: var(--cp-text-muted);
+      line-height: 1.6;
+    }
+
+    .results-shell {
+      display: grid;
+      grid-template-columns: 18rem 1fr;
+      gap: 1.25rem;
+      align-items: start;
+    }
+
+    .filters,
+    .principles,
+    .product-card,
+    .state-card {
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      background: var(--cp-surface);
+      box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.14);
+    }
+
+    .filters {
+      position: sticky;
+      top: 6rem;
+      padding: 1rem;
+    }
+
+    .filters h3,
+    .principles h3,
+    .state-card h3 {
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+    }
+
+    .filter-group {
+      padding: 1rem 0;
+      border-top: 1px solid var(--cp-border);
+    }
+
+    .filter-group:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .filter-group strong {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.6rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .check {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.45rem 0;
+      color: var(--cp-text-muted);
+      font-size: 0.92rem;
+    }
+
+    .check span:last-child {
+      color: var(--cp-text-soft);
+      font-size: 0.78rem;
+    }
+
+    .results-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .results-head h3 {
+      margin-bottom: 0.25rem;
+      font-size: 1.6rem;
+    }
+
+    .results-head p {
+      margin-bottom: 0;
+      color: var(--cp-text-muted);
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .product-card {
+      overflow: hidden;
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-0.25rem);
+      box-shadow: var(--cp-shadow);
+    }
+
+    .product-img {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      background:
+        radial-gradient(circle at 30% 20%, var(--cp-sheen), transparent 7rem),
+        linear-gradient(135deg, var(--cp-surface-soft), var(--cp-border), var(--cp-surface));
+    }
+
+    .product-img::before {
+      content: "";
+      position: absolute;
+      inset: 16% 22% 10%;
+      border-radius: 0.625rem;
+      background:
+        linear-gradient(160deg, var(--cp-border-strong), var(--cp-surface-soft) 46%, var(--cp-highlight));
+      opacity: 0.7;
+    }
+
+    .score {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      padding: 0.35rem 0.55rem;
+      border-radius: 999px;
+      background: var(--cp-panel-strong);
+      color: var(--cp-text);
+      font-size: 0.78rem;
+      font-weight: 700;
+      box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.14);
+    }
+
+    .product-body {
+      padding: 0.9rem;
+    }
+
+    .product-body h4 {
+      margin: 0 0 0.35rem;
+      font-size: 1rem;
+    }
+
+    .product-body p {
+      margin-bottom: 0.75rem;
+      color: var(--cp-text-muted);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .experience-states {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .state-card {
+      padding: 1rem;
+    }
+
+    .state-card p,
+    .principles li {
+      color: var(--cp-text-muted);
+      line-height: 1.55;
+    }
+
+    .principles-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .principles {
+      padding: 1.25rem;
+    }
+
+    .principles ol,
+    .principles ul {
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+
+    .principles li + li {
+      margin-top: 0.55rem;
+    }
+
+    .footer-note {
+      max-width: 76rem;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 4vw, 4rem) 4rem;
+      color: var(--cp-text-muted);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1050px) {
+      .topbar {
+        grid-template-columns: 1fr auto;
+      }
+
+      .nav {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 0.1rem;
+      }
+
+      .hero-content,
+      .results-shell,
+      .principles-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .search-card {
+        justify-self: stretch;
+      }
+
+      .filters {
+        position: static;
+      }
+
+      .result-grid,
+      .experience-states {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 680px) {
+      .topbar {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+      }
+
+      .brand {
+        letter-spacing: 0.26em;
+      }
+
+      .actions {
+        display: none;
+      }
+
+      .campaign {
+        min-height: auto;
+      }
+
+      .hero-content {
+        padding: 1rem;
+      }
+
+      .search-actions,
+      .result-grid,
+      .experience-states {
+        grid-template-columns: 1fr;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="brand">Contoso Apparel</div>
+      <nav class="nav" aria-label="Primary">
+        <span>Men</span>
+        <span>Women</span>
+        <span>Kids &amp; Baby</span>
+        <span>Home</span>
+        <span>Discover</span>
+        <span>Sale</span>
+      </nav>
+      <div class="actions" aria-label="Utility actions">
+        <span>⌕</span>
+        <span>♡</span>
+        <span>▢</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-label="Vision search concept">
+        <div class="campaign">
+          <div class="hero-content">
+            <div class="headline">
+              <div class="eyebrow">Reverse image search concept</div>
+              <h1>Find the look from any image.</h1>
+              <p>Upload a product photo, campaign image, or reference shot and discover visually similar pieces across the catalog.</p>
+              <div class="hero-ctas">
+                <a class="btn primary" href="#results">Explore matches</a>
+                <a class="btn" href="#results">Results experience</a>
+              </div>
+            </div>
+
+            <section class="search-card" aria-label="Search module mockup">
+              <div class="card-head">
+                <div>
+                  <h2>Visual Search</h2>
+                  <div class="eyebrow">Upload, crop, match, refine</div>
+                </div>
+                <span class="pill">Internal catalog</span>
+              </div>
+              <div class="segmented" role="tablist" aria-label="Search source">
+                <button class="active" type="button">Upload image</button>
+                <button type="button">Image URL</button>
+              </div>
+              <div class="dropzone">
+                <div>
+                  <strong>Drop a campaign, product, or street-style image</strong>
+                  <span>Auto-preview with crop handles before search</span>
+                </div>
+              </div>
+              <div class="quick-filters">
+                <span class="pill">Men</span>
+                <span class="pill">Outerwear</span>
+                <span class="pill">Fall</span>
+                <span class="pill">Published only</span>
+              </div>
+              <div class="search-actions">
+                <input type="text" value="12 results · strong matches first" aria-label="Result settings">
+                <button class="btn primary" type="button">Find similar</button>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section class="showcase" id="results">
+        <div class="section-title">
+          <div class="section-eyebrow">Primary screen</div>
+          <h2>Editorial polish, operational clarity.</h2>
+          <p>A restrained luxury system: prominent wordmark, small uppercase navigation, cinematic imagery, centered category moments, and minimal chrome. This adapts that language to a productive internal tool.</p>
+        </div>
+
+        <div class="results-shell">
+          <aside class="filters" aria-label="Filter mockup">
+            <h3>Refine matches</h3>
+            <div class="filter-group">
+              <strong>Category <span>3</span></strong>
+              <div class="check"><span>Outerwear</span><span>8</span></div>
+              <div class="check"><span>Shirts</span><span>3</span></div>
+              <div class="check"><span>Accessories</span><span>1</span></div>
+            </div>
+            <div class="filter-group">
+              <strong>Collection <span>4</span></strong>
+              <div class="check"><span>Polo</span><span>5</span></div>
+              <div class="check"><span>Purple Label</span><span>3</span></div>
+              <div class="check"><span>Double RL</span><span>2</span></div>
+            </div>
+            <div class="filter-group">
+              <strong>Quality <span>2</span></strong>
+              <div class="check"><span>Strong only</span><span>7</span></div>
+              <div class="check"><span>Include diagnostic</span><span>12</span></div>
+            </div>
+          </aside>
+
+          <section>
+            <div class="results-head">
+              <div>
+                <h3>12 visually similar assets</h3>
+                <p>Sorted by calibrated nearest-neighbor score with match quality labels.</p>
+              </div>
+              <span class="pill">Query crop: jacket torso</span>
+            </div>
+
+            <div class="result-grid">
+              <article class="product-card">
+                <div class="product-img"><span class="score">Strong · 94%</span></div>
+                <div class="product-body">
+                  <h4>Quilted Field Jacket</h4>
+                  <p>Matches silhouette, collar contrast, and cool-weather styling.</p>
+                  <div class="meta-row"><span class="pill">Outerwear</span><span class="pill">Navy</span></div>
+                </div>
+              </article>
+
+              <article class="product-card">
+                <div class="product-img"><span class="score">Strong · 91%</span></div>
+                <div class="product-body">
+                  <h4>Corduroy Utility Shirt</h4>
+                  <p>Close texture and folded-stack color family for commerce lookup.</p>
+                  <div class="meta-row"><span class="pill">Shirts</span><span class="pill">Tan</span></div>
+                </div>
+              </article>
+
+              <article class="product-card">
+                <div class="product-img"><span class="score">Fair · 78%</span></div>
+                <div class="product-body">
+                  <h4>Heritage Layering Look</h4>
+                  <p>Useful inspiration match; visually adjacent but below direct-match threshold.</p>
+                  <div class="meta-row"><span class="pill">Look</span><span class="pill">Fall</span></div>
+                </div>
+              </article>
+            </div>
+          </section>
+        </div>
+
+        <div class="experience-states">
+          <section class="state-card">
+            <div class="spec-kicker">Empty state</div>
+            <h3>Inspire before asking</h3>
+            <p>Replace the plain instruction with an editorial hero, three example chips, and a clear drag/drop or URL choice.</p>
+          </section>
+          <section class="state-card">
+            <div class="spec-kicker">Loading state</div>
+            <h3>Make search feel premium</h3>
+            <p>Use skeleton product cards and a subtle progress line; avoid spinners as the primary feedback.</p>
+          </section>
+          <section class="state-card">
+            <div class="spec-kicker">No strong match</div>
+            <h3>Protect confidence</h3>
+            <p>Show the no-match message prominently, then tuck weak nearest neighbors into an expandable diagnostic area.</p>
+          </section>
+        </div>
+      </section>
+
+      <section class="showcase">
+        <div class="section-title">
+          <div class="section-eyebrow">Experience principles</div>
+          <h2>Designed for discovery.</h2>
+          <p>Every state keeps the shopper or associate oriented: what was searched, why an item matched, and how to refine the look without leaving the visual flow.</p>
+        </div>
+
+        <div class="principles-grid">
+          <section class="principles">
+            <h3>Effortless search</h3>
+            <ol>
+              <li>Choose a photo or paste an image link.</li>
+              <li>Crop to the item, texture, or silhouette that matters.</li>
+              <li>Search the catalog and see the strongest visual matches first.</li>
+            </ol>
+          </section>
+
+          <section class="principles">
+            <h3>Confident refinement</h3>
+            <ul>
+              <li>Filter by category, collection, color, and season.</li>
+              <li>Understand match strength at a glance.</li>
+              <li>Open item details when provenance or metadata matters.</li>
+            </ul>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <p class="footer-note">A visual search experience with editorial restraint: spacious, polished, confident, and focused on the look.</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "diagram_type": "lifecycle",
+  "meta": {
+    "title": "Application Deployment — Lifecycle States",
+    "quality_profile": "showcase",
+    "viewBox": [1000, 660],
+    "views": [
+      { "id": "rail", "label": "Deployment rail", "focus": ["provisioning", "configuring", "deploying", "verifying", "ready"], "note": "One azd up moves the environment from empty to a live demo." },
+      { "id": "recovery", "label": "Failure + rollback", "focus": ["deploying", "rollback", "failed"], "note": "A failed deploy rolls back and can retry or end as failed." },
+      { "id": "exits", "label": "Terminal exits", "focus": ["verifying", "verifyfail", "ready", "torndown"], "note": "Stale config fails verification; azd down tears the environment down." }
+    ]
+  },
+  "lanes": [
+    { "id": "main", "label": "Deployment phases" },
+    { "id": "recovery", "label": "Rollback controller" },
+    { "id": "terminal", "label": "Terminal exits" }
+  ],
+  "states": [
+    { "id": "provisioning", "type": "start", "label": "Provisioning", "sublabel": "Bicep applying", "lane": "main", "col": 0, "step": "01", "tag": "azd up" },
+    { "id": "configuring", "type": "active", "label": "Configuring", "sublabel": "post-provision scripts", "lane": "main", "col": 1, "step": "02", "tag": "hook" },
+    { "id": "deploying", "type": "active", "label": "Deploying", "sublabel": "azd deploy", "lane": "main", "col": 2, "step": "03", "tag": "code" },
+    { "id": "verifying", "type": "decision", "label": "Verifying", "sublabel": "verify-sites.ps1", "lane": "main", "col": 3, "step": "04", "tag": "gate" },
+    { "id": "ready", "type": "success", "label": "Ready", "sublabel": "demo live", "lane": "main", "col": 4, "step": "05", "tag": "success" },
+    { "id": "rollback", "type": "active", "label": "Rolling Back", "sublabel": "restore or retry", "lane": "recovery", "col": 0, "tag": "automatic" },
+    { "id": "failed", "type": "failure", "label": "Failed", "sublabel": "deploy aborted", "lane": "terminal", "col": 0, "tag": "terminal" },
+    { "id": "verifyfail", "type": "failure", "label": "Config Stale", "sublabel": "apiBaseUrl mismatch", "lane": "terminal", "col": 1, "tag": "terminal" },
+    { "id": "torndown", "type": "neutral", "label": "Torn Down", "sublabel": "azd down", "lane": "terminal", "col": 2, "tag": "cleanup" }
+  ],
+  "transitions": [
+    { "from": "deploying", "to": "rollback", "label": "deploy error", "variant": "security", "route": "straight", "fromSide": "bottom", "toSide": "top", "labelDy": 34 },
+    { "from": "rollback", "to": "failed", "label": "give up", "variant": "security", "route": "straight", "fromSide": "bottom", "toSide": "top", "labelDy": 36 },
+    { "from": "verifying", "to": "verifyfail", "label": "stale config", "variant": "security", "route": "straight", "fromSide": "bottom", "toSide": "top", "labelDy": 44 },
+    { "from": "ready", "to": "torndown", "label": "azd down", "variant": "dashed", "route": "straight", "fromSide": "bottom", "toSide": "top", "labelDy": 44 }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "One Rail", "items": ["Provision, configure, deploy, verify, ready", "The post-provision hook configures data and Search", "Ready means both sites reach the live Function URI"] },
+    { "dot": "rose", "title": "Failure Paths", "items": ["A failed deploy rolls back automatically", "Bicep also rolls back a failed provision", "Rollback retries once, then ends as Failed"] },
+    { "dot": "amber", "title": "Gate + Cleanup", "items": ["verify-sites fails on a stale config.js", "A mismatch blocks a broken demo from going live", "azd down tears the whole environment down"] }
+  ]
+}

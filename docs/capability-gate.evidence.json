@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-09-18T15:53:42.0315181Z",
+  "visionEndpoint": "https://kvr-ai-sandbox.cognitiveservices.azure.com/",
+  "visionApiVersion": "2024-02-01",
+  "modelVersion": "2023-04-15",
+  "expectedDims": 1024,
+  "vectorizeText": {
+    "modelVersion": "2023-04-15",
+    "dims": 1024
+  },
+  "vectorizeImage": {
+    "modelVersion": "2023-04-15",
+    "dims": 1024,
+    "sample": "data/images/Women/001.jpg"
+  },
+  "searchSkillset": {
+    "accepted": true,
+    "apiVersion": "2025-09-01"
+  },
+  "decision": "go"
+}

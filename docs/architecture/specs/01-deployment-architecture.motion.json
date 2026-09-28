@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Application Deployment — Azure Topology",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "viewBox": [1240, 720],
+    "views": [
+      { "id": "deploy", "label": "How it ships", "focus": ["dev", "internal", "public", "fn"], "note": "One azd flow provisions infrastructure and deploys the Function API and both sites." },
+      { "id": "runtime", "label": "Runtime call graph", "focus": ["internal", "public", "fn", "search", "ai", "blob"], "note": "Both sites call one Function API, which fans out to Search, AI Services, and Blob." },
+      { "id": "keyless", "label": "Keyless data plane", "focus": ["fn", "search", "ai", "blob"], "note": "The Function's managed identity reaches every backing service — no keys or SAS in code." }
+    ]
+  },
+  "components": [
+    { "id": "dev", "type": "external", "label": "Developer", "sublabel": "azd CLI", "pos": [40, 210], "size": [150, 72] },
+    { "id": "internal", "type": "frontend", "label": "Internal Site", "sublabel": "React Static Web App", "pos": [250, 110], "size": [172, 66] },
+    { "id": "public", "type": "frontend", "label": "Public Site", "sublabel": "React Static Web App", "pos": [250, 300], "size": [172, 66] },
+    { "id": "appi", "type": "external", "label": "Monitoring", "sublabel": "App Insights + Logs", "pos": [512, 110], "size": [180, 66] },
+    { "id": "fn", "type": "backend", "label": "Query API", "sublabel": ".NET 10 Flex Function", "pos": [512, 296], "size": [180, 80], "tag": "managed identity" },
+    { "id": "loadtest", "type": "external", "label": "Load Testing", "sublabel": "Locust scenario", "pos": [512, 470], "size": [180, 66] },
+    { "id": "search", "type": "database", "label": "Azure AI Search", "sublabel": "vision-assets index", "pos": [790, 110], "size": [176, 66] },
+    { "id": "ai", "type": "cloud", "label": "AI Services", "sublabel": "Vision + gpt-4o", "pos": [790, 296], "size": [176, 66] },
+    { "id": "blob", "type": "database", "label": "Blob Storage", "sublabel": "private images", "pos": [790, 472], "size": [176, 66] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Resource group · rg-visionsearch-{env}", "wraps": ["internal", "public", "appi", "fn", "loadtest", "search", "ai", "blob"], "pad": 22 },
+    { "kind": "security-group", "label": "Keyless data plane · AAD + RBAC", "wraps": ["search", "ai", "blob"], "pad": 16 }
+  ],
+  "connections": [
+    { "from": "dev", "to": "internal", "variant": "dashed" },
+    { "from": "dev", "to": "public", "variant": "dashed" },
+    { "from": "dev", "to": "fn", "label": "azd up", "variant": "dashed", "labelDx": -60 },
+    { "from": "internal", "to": "fn", "label": "/search/internal", "variant": "emphasis", "labelDy": -26 },
+    { "from": "public", "to": "fn", "label": "/search", "labelDy": 26 },
+    { "from": "fn", "to": "appi", "label": "telemetry", "variant": "dashed", "fromSide": "top", "toSide": "bottom" },
+    { "from": "loadtest", "to": "fn", "label": "load", "fromSide": "top", "toSide": "bottom" },
+    { "from": "fn", "to": "search", "label": "vector query", "variant": "emphasis", "labelDy": -26 },
+    { "from": "fn", "to": "ai", "label": "embed image", "labelDy": 14 },
+    { "from": "fn", "to": "blob", "label": "mint SAS", "variant": "security", "labelDy": 26 }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "One Deploy Flow", "items": ["azd provisions Bicep, then deploys the Function API and both React sites", "Post-provision hooks stamp the API origin into each site's config.js", "A post-deploy hook fails loudly if a site ships a stale API URL"] },
+    { "dot": "emerald", "title": "Runtime Topology", "items": ["Internal and public sites share one Function API surface", "The API fans out to Search, AI Services, and Blob at query time", "Ingestion wiring (Search to Blob and AI) is covered in the ingestion diagrams"] },
+    { "dot": "rose", "title": "Keyless By Design", "items": ["Every backing service is reached with the Function's managed identity", "Local auth is disabled on Search and AI Services", "Result images are served through short-lived read-only SAS URLs"] }
+  ]
+}

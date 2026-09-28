@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+name: visionsearch
+metadata:
+  template: visionsearch@0.1.0
+
+infra:
+  provider: bicep
+  path: infra
+  module: main
+
+services:
+  api:
+    project: src/api
+    language: dotnet
+    host: function
+  internal:
+    project: src/apps/internal
+    language: js
+    host: staticwebapp
+    dist: dist
+  public:
+    project: src/apps/public
+    language: js
+    host: staticwebapp
+    dist: dist
+
+hooks:
+  postprovision:
+    windows:
+      shell: pwsh
+      run: ./src/hooks/deploy.ps1
+      interactive: false
+      continueOnError: false
+    posix:
+      shell: pwsh
+      run: ./src/hooks/deploy.ps1
+      interactive: false
+      continueOnError: false
+  postdeploy:
+    windows:
+      shell: pwsh
+      run: ./src/hooks/verify-sites.ps1
+      interactive: false
+      continueOnError: false
+    posix:
+      shell: pwsh
+      run: ./src/hooks/verify-sites.ps1
+      interactive: false
+      continueOnError: false

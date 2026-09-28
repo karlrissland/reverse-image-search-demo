@@ -1,0 +1,25 @@
+{
+  "name": "visionsearch-internal",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Vision Search internal image-library site (React/Vite/TypeScript).",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "test": "vitest run && node --experimental-strip-types --test ../../tests/celebrity-reasoning.test.mjs && node --test ../../tests/frontend-ux-contract.test.mjs",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.9"
+  }
+}

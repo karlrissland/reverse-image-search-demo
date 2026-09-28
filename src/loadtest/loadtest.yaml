@@ -1,0 +1,35 @@
+# Azure Load Testing configuration for the Vision Search POC (Locust).
+# Upload with: az load test create/update --load-test-config-file loadtest.yaml
+# Size knobs: engineInstances (parallel engines) x locust.conf users.
+# Keep both small to start; scale up later.
+
+version: v0.1
+testId: vision-search-api
+displayName: Vision Search - API search
+description: Public search API load (POST /api/search) via Locust.
+testType: Locust
+testPlan: locustfile.py
+
+# Extra files uploaded alongside the test plan.
+configurationFiles:
+  - locust.conf
+
+# Number of parallel Locust engine instances (start with 1).
+engineInstances: 1
+
+# Runtime parameters passed to locustfile.py. Set API_IMAGE_URL and the
+# target host here or override per run. Do not store secrets in this file.
+env:
+  - name: TARGET_MODE
+    value: api
+  - name: API_TOP
+    value: "10"
+  # - name: API_IMAGE_URL
+  #   value: https://<publicly-reachable-image>
+  # - name: LOCUST_HOST
+  #   value: https://vs-fn-4hjvlm.azurewebsites.net
+
+# Simple pass/fail gates. Adjust thresholds as you learn the baseline.
+failureCriteria:
+  - avg(response_time) > 2000
+  - percentage(error) > 5

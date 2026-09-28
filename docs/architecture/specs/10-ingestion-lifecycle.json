@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "diagram_type": "lifecycle",
+  "meta": {
+    "title": "Ingestion & Index — Indexer Run Lifecycle",
+    "quality_profile": "showcase",
+    "viewBox": [1000, 660],
+    "views": [
+      { "id": "run", "label": "Processing rail", "focus": ["running", "normalizing", "vectorizing", "polling", "succeeded"], "note": "One run normalizes, vectorizes, and writes a document per asset." },
+      { "id": "retry", "label": "Transient retries", "focus": ["vectorizing", "retrying", "procfailed"], "note": "Transient failures back off and retry; exhausted retries fail the batch." },
+      { "id": "gate", "label": "Success gate", "focus": ["polling", "pollfailed", "succeeded"], "note": "Success requires every item processed with zero failures inside the deadline." }
+    ]
+  },
+  "lanes": [
+    { "id": "main", "label": "Indexer processing" },
+    { "id": "recovery", "label": "Retry controller" },
+    { "id": "terminal", "label": "Terminal outcomes" }
+  ],
+  "states": [
+    { "id": "running", "type": "start", "label": "Running", "sublabel": "POST run", "lane": "main", "col": 0, "step": "01", "tag": "batch 5" },
+    { "id": "normalizing", "type": "active", "label": "Normalizing", "sublabel": "generate images", "lane": "main", "col": 1, "step": "02", "tag": "imageAction" },
+    { "id": "vectorizing", "type": "active", "label": "Vectorizing", "sublabel": "VectorizeSkill", "lane": "main", "col": 2, "step": "03", "tag": "1024-dim" },
+    { "id": "polling", "type": "decision", "label": "Polling", "sublabel": "status every 10s", "lane": "main", "col": 3, "step": "04", "tag": "gate" },
+    { "id": "succeeded", "type": "success", "label": "Succeeded", "sublabel": "200 processed", "lane": "main", "col": 4, "step": "05", "tag": "0 failed" },
+    { "id": "retrying", "type": "active", "label": "Retrying", "sublabel": "transient backoff", "lane": "recovery", "col": 0, "tag": "automatic" },
+    { "id": "procfailed", "type": "failure", "label": "Batch Failed", "sublabel": "retries exhausted", "lane": "terminal", "col": 0, "tag": "terminal" },
+    { "id": "pollfailed", "type": "failure", "label": "Run Failed", "sublabel": "itemsFailed or deadline", "lane": "terminal", "col": 1, "tag": "terminal" }
+  ],
+  "transitions": [
+    { "from": "vectorizing", "to": "retrying", "label": "transient", "variant": "security", "route": "straight", "fromSide": "bottom", "toSide": "top", "labelDy": 34 },
+    { "from": "retrying", "to": "procfailed", "label": "exhausted", "variant": "security", "route": "straight", "fromSide": "bottom", "toSide": "top", "labelDy": 36 },
+    { "from": "polling", "to": "pollfailed", "label": "failed / timeout", "variant": "security", "route": "straight", "fromSide": "bottom", "toSide": "top", "labelDy": 44 }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "One Rail", "items": ["Run, normalize, vectorize, poll, succeed", "Each asset yields one document", "The vector maps to the imageVector field"] },
+    { "dot": "rose", "title": "Retry Path", "items": ["Transient failures back off and retry", "Retries run automatically inside the indexer", "Exhausted retries fail the batch"] },
+    { "dot": "amber", "title": "Success Gate", "items": ["Status is polled every 10 seconds", "A 20-minute deadline bounds the run", "Success requires 200 processed, zero failed"] }
+  ]
+}

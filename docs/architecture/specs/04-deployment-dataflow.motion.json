@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "Application Deployment — Artifact & Config Data Flow",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "viewBox": [1060, 600],
+    "views": [
+      { "id": "data", "label": "Data + index", "focus": ["dataset", "hook", "blob", "searchidx"], "note": "The demo dataset flows through the hook into Blob and then the Search index." },
+      { "id": "infra", "label": "Infra + code", "focus": ["bicep", "provision", "resources", "sites"], "note": "Bicep becomes the resource group; azd deploy publishes the sites." }
+    ]
+  },
+  "stages": [
+    { "label": "Repo inputs" },
+    { "label": "azd + hooks" },
+    { "label": "Blob + resources" },
+    { "label": "Search + sites" }
+  ],
+  "nodes": [
+    { "id": "dataset", "type": "database", "label": "Demo dataset", "sublabel": "200 images + manifest", "stage": 0, "row": 0 },
+    { "id": "bicep", "type": "external", "label": "Bicep + code", "sublabel": "IaC + api + sites", "stage": 0, "row": 2 },
+    { "id": "hook", "type": "backend", "label": "deploy.ps1", "sublabel": "post-provision", "stage": 1, "row": 0 },
+    { "id": "provision", "type": "cloud", "label": "azd provision", "sublabel": "Bicep apply", "stage": 1, "row": 2 },
+    { "id": "blob", "type": "database", "label": "Blob storage", "sublabel": "images container", "stage": 2, "row": 0 },
+    { "id": "resources", "type": "cloud", "label": "Provisioned rg", "sublabel": "resources + identities", "stage": 2, "row": 2 },
+    { "id": "searchidx", "type": "database", "label": "Search index", "sublabel": "vision-assets", "stage": 3, "row": 0 },
+    { "id": "sites", "type": "frontend", "label": "Static Web Apps", "sublabel": "internal + public", "stage": 3, "row": 2 }
+  ],
+  "flows": [
+    { "from": "dataset", "to": "hook", "label": "manifest", "classification": "batch", "variant": "default", "route": "straight" },
+    { "from": "hook", "to": "blob", "label": "upload", "classification": "keyless", "variant": "emphasis", "route": "straight" },
+    { "from": "blob", "to": "searchidx", "label": "indexer reads", "classification": "REST 2026-04-01", "variant": "emphasis", "route": "straight" },
+    { "from": "bicep", "to": "provision", "label": "templates", "classification": "IaC", "variant": "default", "route": "straight" },
+    { "from": "provision", "to": "resources", "label": "create", "classification": "control plane", "variant": "emphasis", "route": "straight" },
+    { "from": "resources", "to": "sites", "label": "azd deploy", "classification": "SWA CLI", "variant": "default", "route": "straight" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Two Lineages", "items": ["The data path carries images into Blob and the index", "The infra path turns Bicep into resources and sites", "Both complete before the demo is usable"] },
+    { "dot": "emerald", "title": "Blob Is The Pivot", "items": ["deploy.ps1 uploads images with blob metadata", "The indexer reads Blob to build vision-assets", "config.js is stamped into the site bundles"] },
+    { "dot": "amber", "title": "No Secrets In Transit", "items": ["Uploads use managed identity (--auth-mode login)", "Search binds to AI Services by identity", "No keys or SAS URLs are written to source"] }
+  ]
+}

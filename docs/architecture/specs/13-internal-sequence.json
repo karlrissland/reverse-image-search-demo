@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "Internal App — Runtime Search Sequence",
+    "quality_profile": "showcase",
+    "viewBox": [1000, 800],
+    "column_fit": "spread",
+    "views": [
+      { "id": "compose", "label": "Compose", "focus": ["user", "app", "fn"], "note": "The user picks an image or crop and the app posts it to the Function." },
+      { "id": "embed", "label": "Embed + query", "focus": ["fn", "vision", "search"], "note": "The Function embeds the image, then runs a vector query over vision-assets." },
+      { "id": "render", "label": "SAS + render", "focus": ["fn", "blob", "app", "user"], "note": "The Function mints read-only SAS and returns results with provenance." }
+    ]
+  },
+  "participants": [
+    { "id": "user", "type": "external", "label": "Internal user", "sublabel": "curator" },
+    { "id": "app", "type": "frontend", "label": "Internal app", "sublabel": "SearchPanel" },
+    { "id": "fn", "type": "backend", "label": "Search Function", "sublabel": "SearchInternal" },
+    { "id": "vision", "type": "cloud", "label": "AI Services Vision", "sublabel": "vectorizeImage" },
+    { "id": "search", "type": "database", "label": "AI Search", "sublabel": "vision-assets" },
+    { "id": "blob", "type": "database", "label": "Blob Storage", "sublabel": "private images" }
+  ],
+  "segments": [
+    { "from": 150, "to": 200, "label": "Compose" },
+    { "from": 212, "to": 318, "label": "Embed" },
+    { "from": 330, "to": 402, "label": "Query" },
+    { "from": 414, "to": 486, "label": "Mint SAS" },
+    { "from": 498, "to": 570, "label": "Render" }
+  ],
+  "messages": [
+    { "from": "user", "to": "app", "y": 180, "label": "pick image + crop", "variant": "emphasis" },
+    { "from": "app", "to": "fn", "y": 222, "label": "POST /search/internal", "variant": "emphasis" },
+    { "from": "fn", "to": "vision", "y": 264, "label": "vectorizeImage (2024-02-01)", "variant": "emphasis" },
+    { "from": "vision", "to": "fn", "y": 306, "label": "1024-dim vector", "variant": "return" },
+    { "from": "fn", "to": "search", "y": 348, "label": "vector query · k=top", "variant": "emphasis" },
+    { "from": "search", "to": "fn", "y": 390, "label": "top hits + metadata", "variant": "return" },
+    { "from": "fn", "to": "blob", "y": 432, "label": "mint user-delegation SAS", "variant": "default" },
+    { "from": "blob", "to": "fn", "y": 474, "label": "read-only SAS (15 min)", "variant": "return" },
+    { "from": "fn", "to": "app", "y": 516, "label": "results + provenance", "variant": "return" },
+    { "from": "app", "to": "user", "y": 558, "label": "render grid + facets", "variant": "return" }
+  ],
+  "activations": [
+    { "participant": "fn", "from": 216, "to": 540, "type": "backend" },
+    { "participant": "vision", "from": 258, "to": 312, "type": "cloud" },
+    { "participant": "search", "from": 342, "to": 396, "type": "database" },
+    { "participant": "blob", "from": 426, "to": 480, "type": "database" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Image In, Results Out", "items": ["A crop is posted as multipart form data", "The Function embeds the exact pixels queried", "Results render in a grid with facets"] },
+    { "dot": "emerald", "title": "Vector Query", "items": ["The 1024-dim vector queries imageVector", "k equals the requested result count", "Hits carry score, facets, and provenance"] },
+    { "dot": "amber", "title": "Short-Lived Access", "items": ["Every backend call is keyless", "SAS is user-delegation, read-only", "SAS URLs expire after 15 minutes"] }
+  ]
+}

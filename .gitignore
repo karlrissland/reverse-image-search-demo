@@ -1,0 +1,22 @@
+# Azure and local environment
+.env
+.env.*
+!src/.env.example
+.azure/
+
+# Build output
+bin/
+obj/
+dist/
+node_modules/
+
+# Local test output
+TestResults/
+src/loadtest/results/
+logs/
+
+# Restricted or staging source data (committed demo images live in data/images/)
+data/raw/
+data/source/
+*.sas
+*.key

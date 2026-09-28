@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "Ingestion & Index — Indexer Run Sequence",
+    "quality_profile": "showcase",
+    "viewBox": [1000, 760],
+    "column_fit": "spread",
+    "views": [
+      { "id": "upload", "label": "Upload", "focus": ["script", "blob"], "note": "deploy-demo-data uploads jpgs and stamps blob metadata per asset." },
+      { "id": "build", "label": "Create + run", "focus": ["config", "search"], "note": "configure-search creates the Search objects and starts the indexer." },
+      { "id": "vectorize", "label": "Vectorize + poll", "focus": ["search", "ai", "config"], "note": "The indexer normalizes and vectorizes each image, then reports success." }
+    ]
+  },
+  "participants": [
+    { "id": "script", "type": "backend", "label": "deploy-demo-data", "sublabel": "upload" },
+    { "id": "blob", "type": "database", "label": "Blob images", "sublabel": "container images" },
+    { "id": "config", "type": "backend", "label": "configure-search", "sublabel": "REST 2026-04-01" },
+    { "id": "search", "type": "cloud", "label": "AI Search", "sublabel": "vision-assets" },
+    { "id": "ai", "type": "cloud", "label": "AI Services", "sublabel": "Vision · 2023-04-15" }
+  ],
+  "segments": [
+    { "from": 150, "to": 200, "label": "Upload" },
+    { "from": 212, "to": 276, "label": "Create + run" },
+    { "from": 288, "to": 444, "label": "Vectorize" },
+    { "from": 456, "to": 528, "label": "Poll" }
+  ],
+  "messages": [
+    { "from": "script", "to": "blob", "y": 180, "label": "upload jpgs + stamp metadata", "variant": "emphasis" },
+    { "from": "config", "to": "search", "y": 222, "label": "create data source / index / skillset / indexer", "variant": "emphasis" },
+    { "from": "config", "to": "search", "y": 264, "label": "POST run indexer", "variant": "default" },
+    { "from": "search", "to": "blob", "y": 306, "label": "read images · normalize", "variant": "default" },
+    { "from": "blob", "to": "search", "y": 348, "label": "normalized images", "variant": "return" },
+    { "from": "search", "to": "ai", "y": 390, "label": "vectorize image", "variant": "emphasis" },
+    { "from": "ai", "to": "search", "y": 432, "label": "1024-dim vector to imageVector", "variant": "return" },
+    { "from": "config", "to": "search", "y": 474, "label": "GET status (poll 10s)", "variant": "default" },
+    { "from": "search", "to": "config", "y": 516, "label": "success · 200 processed / 0 failed", "variant": "return" }
+  ],
+  "activations": [
+    { "participant": "search", "from": 216, "to": 528, "type": "cloud" },
+    { "participant": "blob", "from": 300, "to": 354, "type": "database" },
+    { "participant": "ai", "from": 384, "to": 438, "type": "cloud" }
+  ],
+  "cards": [
+    { "dot": "emerald", "title": "Upload Then Build", "items": ["Images and metadata land in Blob first", "configure-search creates every Search object", "The indexer starts with a single POST run"] },
+    { "dot": "cyan", "title": "Vectorize Per Asset", "items": ["The indexer generates normalized images", "The Vision skill returns a 1024-dim vector", "The vector maps to the imageVector field"] },
+    { "dot": "amber", "title": "Readiness Gate", "items": ["Status is polled every 10 seconds", "A 409 on run is treated as already running", "Success requires 200 processed, zero failed"] }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Ingestion & Index — Azure AI Search Topology",
+    "quality_profile": "showcase",
+    "animation": "trace",
+    "viewBox": [1300, 660],
+    "views": [
+      { "id": "ingest", "label": "Ingest images", "focus": ["dataset", "deployscript", "blob"], "note": "The manifest drives keyless uploads with blob metadata stamped per asset." },
+      { "id": "build", "label": "Build the index", "focus": ["configscript", "indexer", "index"], "note": "One script creates the data source, skillset, index, and indexer, then runs it." },
+      { "id": "vectorize", "label": "Vectorize", "focus": ["indexer", "skillset", "ai", "index"], "note": "The indexer normalizes images and the Vision skill returns 1024-dim vectors." }
+    ]
+  },
+  "components": [
+    { "id": "dataset", "type": "external", "label": "Demo dataset", "sublabel": "manifest + jpgs + sidecars", "pos": [40, 120], "size": [160, 68] },
+    { "id": "deployscript", "type": "backend", "label": "deploy-demo-data.ps1", "sublabel": "upload + stamp", "pos": [290, 120], "size": [175, 68] },
+    { "id": "blob", "type": "database", "label": "Blob images", "sublabel": "metadata stamped", "pos": [565, 120], "size": [150, 68] },
+    { "id": "skillset", "type": "cloud", "label": "Skillset", "sublabel": "VectorizeSkill 2023-04-15", "pos": [800, 120], "size": [185, 68] },
+    { "id": "ai", "type": "cloud", "label": "AI Services", "sublabel": "multimodal embed", "pos": [1080, 120], "size": [170, 68] },
+    { "id": "enrich", "type": "backend", "label": "enrich-metadata.ps1", "sublabel": "gpt-4o sidecars", "tag": "offline", "pos": [40, 320], "size": [160, 66] },
+    { "id": "configscript", "type": "backend", "label": "configure-search.ps1", "sublabel": "REST 2026-04-01", "pos": [290, 320], "size": [175, 66] },
+    { "id": "indexer", "type": "backend", "label": "Indexer", "sublabel": "reads vision-assets-blob", "pos": [800, 320], "size": [185, 66] },
+    { "id": "index", "type": "database", "label": "Index vision-assets", "sublabel": "imageVector 1024-dim", "pos": [1080, 320], "size": [170, 66] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Azure AI Search + AI Services", "wraps": ["skillset", "ai", "indexer", "index"], "pad": 20 }
+  ],
+  "connections": [
+    { "from": "dataset", "to": "deployscript", "label": "manifest" },
+    { "from": "deployscript", "to": "blob", "label": "stamp", "variant": "emphasis" },
+    { "from": "enrich", "to": "dataset", "label": "sidecars", "variant": "dashed", "fromSide": "top", "toSide": "bottom" },
+    { "from": "configscript", "to": "indexer", "label": "create + run", "variant": "emphasis", "labelDx": -70 },
+    { "from": "indexer", "to": "blob", "label": "read images", "fromSide": "left", "toSide": "bottom", "labelDy": -46 },
+    { "from": "indexer", "to": "skillset", "label": "normalize", "variant": "emphasis", "fromSide": "top", "toSide": "bottom" },
+    { "from": "skillset", "to": "ai", "label": "vectorize", "variant": "security", "fromSide": "right", "toSide": "left" },
+    { "from": "indexer", "to": "index", "label": "write docs", "variant": "emphasis", "fromSide": "right", "toSide": "left" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Two Metadata Sources", "items": ["The manifest supplies direct facets and provenance", "AI sidecars add subcategory, color, season, caption, tags", "Enrichment is offline and decoupled from upload"] },
+    { "dot": "emerald", "title": "One Document Per Asset", "items": ["configure-search creates the data source, skillset, index, and indexer", "The indexer reads Blob and writes vision-assets", "assetId is the document key"] },
+    { "dot": "amber", "title": "Keyless By Design", "items": ["Uploads use managed identity", "Search binds to AI Services by identity", "No image binaries are stored in the index"] }
+  ]
+}

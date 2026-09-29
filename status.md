@@ -27,13 +27,15 @@ See [plan.md](plan.md) for full detail.
 - ✅ **CHECKPOINT 1** — [x] user confirmed baseline works and the generic skin is correct
 
 ## Phase 2 — MCP + skills scaffold
-- [ ] `.vscode/mcp.json` — register `playwright` MCP (keyless)
-- [ ] `.github/skills/customer-onboarding/SKILL.md` — orchestrator (interview, guardrails, sequencing)
-- [ ] `.github/skills/scrape-branding/SKILL.md` — palette/fonts/logo → brand + theme
-- [ ] `.github/skills/build-catalog/SKILL.md` — metadata interview + scrape + manifest
-- [ ] `.github/skills/reskin/SKILL.md` — apply/iterate skin, deploy-test-refine loop
-- [ ] `.github/copilot-instructions.md` — add Personalization/onboarding subsection
-- 🛑 **CHECKPOINT 2** — [ ] user reads the 4 SKILL.md files, mcp.json, and instructions changes
+- [x] `.vscode/mcp.json` — register `playwright` MCP (keyless)
+- [x] `.github/skills/customer-onboarding/SKILL.md` — orchestrator (interview, guardrails, sequencing)
+- [x] `.github/skills/scrape-branding/SKILL.md` — palette/fonts/logo → brand + theme
+- [x] `.github/skills/build-catalog/SKILL.md` — metadata interview + scrape + manifest
+- [x] `.github/skills/reskin/SKILL.md` — apply/iterate skin, deploy-test-refine loop
+- [x] `.github/skills/adapt-layout/SKILL.md` — OPTIONAL/riskier/do-last: edit React code to flow like the site
+- [x] `tools/onboarding/CONTRACT.md` — script/JSON interface appendix (anti-drift anchor for Phase 3)
+- [x] `.github/copilot-instructions.md` — add Personalization/onboarding subsection
+- ✅ **CHECKPOINT 2** — [x] user reviewed the 5 SKILL.md files, mcp.json, CONTRACT.md, and instructions changes — **Phase 2 complete**
 
 ## Phase 3 — Onboarding scraper + scripts (Node, keyless OSS)
 - [ ] `tools/onboarding/package.json` (deps: crawlee, playwright, node-vibrant)
@@ -41,7 +43,7 @@ See [plan.md](plan.md) for full detail.
 - [ ] `download-catalog.mjs` — download images, write/merge manifest + sidecars (idempotent, validated)
 - [ ] `extract-branding.mjs` — screenshot + palette + fonts + logo URL → branding.json
 - [ ] `apply-branding.mjs` — map palette→theme, set brand text + logo in both config.js
-- [ ] `reset-to-sample.mjs` (or documented git restore)
+- [ ] Document git-based revert (`git restore` / `git clean`) — no reset script
 - [ ] `tools/onboarding/README.md` — shapes, invocation, idempotency, robots.txt, playwright install
 - 🛑 **CHECKPOINT 3** — [ ] user runs scripts against a test site and verifies output
 
@@ -65,6 +67,6 @@ See [plan.md](plan.md) for full detail.
 - [ ] Pre-flight: build both apps; frontend-ux-contract + unit tests green; schema-validate dry-run; no secrets
 - [ ] Push finished repo to GitHub
 - [ ] Fork into a clean, separate location (cold-start new user)
-- [ ] Follow only `docs/personalize.md`: personalize for a real customer (e.g. spirithalloween.com)
+- [ ] Follow only `docs/personalize.md`: personalize for a real customer (e.g. tailwindtoys.com)
 - [ ] Verify branding + catalog + build; optional `azd up` renders customer sites; verify-sites passes; time it
 - 🛑 **CHECKPOINT 7 (final)** — [ ] user confirms fork-to-demo is fast, clear, and correct = DONE

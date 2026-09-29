@@ -7,7 +7,7 @@ search demo. Delivered through Copilot skills + **keyless, open-source** web scr
 deterministic Node scripts + docs. Edits are applied **in place** (the fork is handed to the customer).
 
 ## Confirmed decisions
-- In-place editing (no per-customer folders); revert-to-sample via a reset script / `git restore`.
+- In-place editing (no per-customer folders); revert via `git restore` / `git clean` (no reset script).
 - **Keyless, all open-source** scraping. No Firecrawl, no API keys, no per-request limits.
 - Iterative fidelity: start with a simple skin, deploy, test, then refine until the demoer is happy.
 - Interview-driven / variable metadata; Copilot proposes fields from the site; enrichment optional.
@@ -74,8 +74,15 @@ any personalization tooling — this is the reference point every customer run i
   manifest + sidecars; validate uniqueness / required fields / Unicode.
 - `.github/skills/reskin/SKILL.md` — apply/iterate the visual skin (theme tokens, logo, fonts, hero
   copy), rebuild, verify locally, then the deploy-test-refine loop.
+- `.github/skills/adapt-layout/SKILL.md` — OPTIONAL, riskier, do-LAST skill that edits real React code
+  so the demo *flows* like the customer's site (layout/structure/navigation). Gated behind committed
+  branding+catalog+skin; reverts via git if it destabilizes the demo.
+- Onboarding practice: user-gated stages, and **commit after every approved stage** with a descriptive
+  message so each stable point is an easy git rollback target.
 - Update `.github/copilot-instructions.md` with a "Personalization / onboarding" subsection.
-- **CHECKPOINT 2:** user reads the 4 SKILL.md files, `mcp.json`, and copilot-instructions changes.
+- `tools/onboarding/CONTRACT.md` — pin the Phase 3 script names/flags and the `catalog.json` /
+  `branding.json` shapes + palette→token mapping, so the skills-first order can't drift from Phase 3.
+- **CHECKPOINT 2:** user reads the 4 SKILL.md files, `mcp.json`, `CONTRACT.md`, and copilot-instructions changes.
 
 ### Phase 3 — Onboarding scraper + scripts (Node, keyless OSS)
 - `tools/onboarding/` Node package (own `package.json`; deps: crawlee, playwright, node-vibrant):
@@ -87,7 +94,7 @@ any personalization tooling — this is the reference point every customer run i
     computed fonts + logo URL.
   - `apply-branding.mjs --input branding.json` — map palette -> theme tokens, set brand text + logo in
     both `public/config.js`; download logo into each app's `public/`.
-  - `reset-to-sample.mjs` (or documented `git restore`) — restore neutral sample data + config.
+  - Revert is a git operation (`git restore` / `git clean`) — no bundled reset script.
 - `tools/onboarding/README.md` — catalog.json + branding.json shapes, invocation, idempotency,
   robots.txt/rate-limit behavior, Node/Playwright install (`npx playwright install`).
 - **CHECKPOINT 3:** user runs the scripts against a test site and verifies output.
@@ -123,14 +130,14 @@ any personalization tooling — this is the reference point every customer run i
 - Push the finished repo to GitHub.
 - Fork it into a clean, separate location (a new user with no prior context).
 - From a cold start, follow ONLY `docs/personalize.md`: install prereqs, enable Playwright MCP, open
-  Copilot, and ask it to personalize the demo for a specific real customer (e.g. spirithalloween.com).
+  Copilot, and ask it to personalize the demo for a specific real customer (e.g. tailwindtoys.com).
 - Verify: branding -> both config.js skinned; catalog -> data/images + valid manifest; both apps build;
   optional `azd up` renders the customer-branded internal + public sites and verify-sites.ps1 passes.
   **Time the run — it must be quick.**
 - **CHECKPOINT 7 (final):** user confirms the fork-to-demo experience is fast, clear, and correct.
 
 ## Relevant files
-- `.vscode/mcp.json` (new, playwright only); `.github/skills/{customer-onboarding,scrape-branding,build-catalog,reskin}/SKILL.md` (new)
+- `.vscode/mcp.json` (new, playwright only); `.github/skills/{customer-onboarding,scrape-branding,build-catalog,reskin,adapt-layout}/SKILL.md` (new); `tools/onboarding/CONTRACT.md` (new, script/JSON interface spec)
 - `.github/copilot-instructions.md` (edit)
 - `tools/onboarding/*.mjs` + package.json + README (new)
 - `data/manifest.schema.json` (relax), `data/README.md` (edit)

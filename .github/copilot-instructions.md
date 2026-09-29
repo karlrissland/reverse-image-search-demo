@@ -21,4 +21,13 @@ This repository contains an Azure-native image-search POC. Keep image binaries i
 
 Run focused tests after each change. For infrastructure, validate Bicep and `azd` configuration before deployment. For .NET, use `dotnet build` and `dotnet test`. For frontend apps, use the package manager scripts in the app. For Search/data changes, run manifest validation and indexer/query checks. Do not claim capability support until the capability spike has evidence.
 
+## Personalization / customer onboarding
+
+This repo can be forked and personalized to demo Vision Search for a specific company or website. When a user asks to personalize, skin, or onboard a customer (e.g. "make this look like `<site>`", "load `<site>`'s catalog"):
+
+- Start with the `customer-onboarding` orchestrator skill; it interviews the user, enforces guardrails, and sequences the `scrape-branding`, `build-catalog`, and `reskin` skills. Each stage is user-gated, and every approved stage is committed with a descriptive message so any stable point is an easy git rollback target. `adapt-layout` (editing React code so the demo *flows* like the customer's site) is optional, riskier, and runs LAST on top of a committed good state — reverting via git if it destabilizes the demo.
+- Surface the legal/ethical guardrails **before** any scraping: demo-only, respect `robots.txt`/ToS, images belong to their owners, keep the public "not affiliated" disclaimer, and remove customer data before non-demo use. Never commit customer images or private data to a shared branch.
+- Browser automation uses the keyless **Playwright MCP** server (`.vscode/mcp.json`). Catalog/branding work runs the Node scripts in `tools/onboarding/` whose interface is pinned in `tools/onboarding/CONTRACT.md`.
+- Skinning is runtime via `window.__VISIONSEARCH__` (`brand` + `theme`) in each app's `public/config.js`; the two apps use different theme token names (see the contract's mapping table). Keep the generic facets fixed in v1 — extra scraped fields go to sidecar `attributes`, not new index facets.
+
 

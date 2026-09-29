@@ -7,7 +7,7 @@
 // theme keys map to CSS custom properties (e.g. forest -> --forest). Available tokens
 // include: paper, surface, ink, muted, line, forest, forest-hover, rose, soft, danger.
 window.__VISIONSEARCH__ = {
-  apiBaseUrl: 'https://vs-fn-4hjvlm.azurewebsites.net',
+  apiBaseUrl: 'https://vs-fn-fvdllc.azurewebsites.net',
   brand: {
     name: 'Contoso Apparel',
     tagline: 'Reverse image search concept',

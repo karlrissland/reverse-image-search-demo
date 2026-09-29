@@ -251,8 +251,10 @@ if ($SkipRun) {
 # ── Run and poll to completion ─────────────────────────────────────────────
 Write-Host ''
 Write-Host 'Running indexer...' -ForegroundColor Cyan
+# A freshly created indexer auto-starts; an explicit run then returns 409 "invocation in
+# progress". That is the desired state, so swallow it and let the poll below wait it out.
 try { Invoke-Search -Method Post -Path "indexers/$indexerName/run" | Out-Null }
-catch { if ($_.Exception.Message -notmatch '409') { throw } }  # already running is fine
+catch { if ($_.Exception.Message -notmatch '409|in progress|concurrent invocation') { throw } }
 
 $deadline = (Get-Date).AddMinutes(20)
 $last = $null

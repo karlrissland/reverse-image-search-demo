@@ -7,7 +7,7 @@
 // theme keys map to CSS custom properties (e.g. accent -> --accent). Available tokens
 // include: bg, surface, surface-2, ink, muted, line, accent, accent-dark, blue, danger.
 window.__VISIONSEARCH__ = {
-  apiBaseUrl: 'https://vs-fn-4hjvlm.azurewebsites.net',
+  apiBaseUrl: 'https://vs-fn-fvdllc.azurewebsites.net',
   brand: {
     name: 'Contoso Apparel',
     tagline: 'Reverse image search concept',

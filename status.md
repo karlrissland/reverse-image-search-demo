@@ -38,14 +38,16 @@ See [plan.md](plan.md) for full detail.
 - ✅ **CHECKPOINT 2** — [x] user reviewed the 5 SKILL.md files, mcp.json, CONTRACT.md, and instructions changes — **Phase 2 complete**
 
 ## Phase 3 — Onboarding scraper + scripts (Node, keyless OSS)
-- [ ] `tools/onboarding/package.json` (deps: crawlee, playwright, node-vibrant)
-- [ ] `scrape-catalog.mjs` — discover product pages + extract info/image URLs (robots.txt, rate-limited)
-- [ ] `download-catalog.mjs` — download images, write/merge manifest + sidecars (idempotent, validated)
-- [ ] `extract-branding.mjs` — screenshot + palette + fonts + logo URL → branding.json
-- [ ] `apply-branding.mjs` — map palette→theme, set brand text + logo in both config.js
-- [ ] Document git-based revert (`git restore` / `git clean`) — no reset script
-- [ ] `tools/onboarding/README.md` — shapes, invocation, idempotency, robots.txt, playwright install
-- 🛑 **CHECKPOINT 3** — [ ] user runs scripts against a test site and verifies output
+- [x] `tools/onboarding/package.json` (deps: crawlee, playwright, node-vibrant, sharp, ajv)
+- [x] `scrape-catalog.mjs` — discover product pages + extract info/image URLs (robots.txt, rate-limited)
+- [x] `download-catalog.mjs` — download images, write/merge manifest + sidecars (idempotent, schema-validated)
+- [x] `extract-branding.mjs` — screenshot + palette + fonts + logo URL → branding.json
+- [x] `apply-branding.mjs` — map palette→theme (both token sets), set brand text, preserve apiBaseUrl
+- [x] `lib/util.mjs` + `lib/robots.mjs` — shared helpers (args, hash, color, JSON) + robots.txt matcher
+- [x] Document git-based revert (`git restore` / `git clean`) — no reset script
+- [x] `tools/onboarding/README.md` + `.gitignore` — shapes, invocation, idempotency, robots.txt, playwright install
+- [x] Smoke-tested offline: download-catalog (data-URL → jpg → sidecar → schema-valid manifest, idempotent) and apply-branding (both config.js skinned, apiBaseUrl preserved); baseline restored via git
+- 🛑 **CHECKPOINT 3** — [ ] user runs scripts against a live test site (needs `npx playwright install chromium`) and verifies output
 
 ## Phase 4 — Branding enhancements (progressive fidelity, opt-in)
 - [ ] Logo image slot: BrandConfig + branding.ts + App.tsx header (both apps); falls back to wordmark

@@ -1,0 +1,22 @@
+{
+  "name": "visionsearch-onboarding",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Keyless OSS scraper/branding tools that personalize the Vision Search demo for a customer site. See CONTRACT.md for the pinned interface.",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "install:browsers": "playwright install chromium",
+    "scrape-catalog": "node scrape-catalog.mjs",
+    "download-catalog": "node download-catalog.mjs",
+    "extract-branding": "node extract-branding.mjs",
+    "apply-branding": "node apply-branding.mjs"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "crawlee": "^3.11.5",
+    "node-vibrant": "^3.1.6",
+    "playwright": "^1.47.2",
+    "sharp": "^0.33.5"
+  }
+}

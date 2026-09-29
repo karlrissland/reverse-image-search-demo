@@ -20,11 +20,11 @@ See [plan.md](plan.md) for full detail.
 - [x] gpt-4o enrichment → 86 `.metadata.json` sidecars via `src/hooks/enrich-metadata.ps1` (0 failed)
 - [x] Mirror descriptive fields into `data/manifest.json` via `src/scripts/merge-sidecars.ps1`
 - [x] Validate `data/manifest.json` against the schema (86 unique ids, no disallowed keys, valid seasons)
-- [ ] Deploy the apps — user will run `azd up` and report results
-- [ ] Verify search (image/URL/crop) + facets + no-strong-match + public/internal boundaries on test data
-- [ ] Verify the generic neutral skin renders correctly on both internal and public sites
-- [ ] Record the baseline (deployment + dataset + screenshots/notes) as the reference point
-- 🛑 **CHECKPOINT 1** — [ ] user confirms baseline works and the generic skin is correct
+- [x] Deploy the apps — `azd up` succeeded (clean create path after `azd down --purge`)
+- [x] Verify search (image/URL/crop) + facets + no-strong-match + public/internal boundaries on test data
+- [x] Verify the generic neutral skin renders correctly on both internal and public sites
+- [x] Record the baseline (deployment + dataset + screenshots/notes) as the reference point
+- ✅ **CHECKPOINT 1** — [x] user confirmed baseline works and the generic skin is correct
 
 ## Phase 2 — MCP + skills scaffold
 - [ ] `.vscode/mcp.json` — register `playwright` MCP (keyless)

@@ -15,7 +15,7 @@
   "participants": [
     { "id": "dev", "type": "external", "label": "Developer", "sublabel": "azd CLI" },
     { "id": "azd", "type": "cloud", "label": "azd + Bicep", "sublabel": "control plane" },
-    { "id": "azure", "type": "cloud", "label": "Azure resources", "sublabel": "rg-visionsearch" },
+    { "id": "azure", "type": "cloud", "label": "Azure resources", "sublabel": "rg-reverse-img-search" },
     { "id": "hook", "type": "backend", "label": "deploy.ps1", "sublabel": "post-provision" },
     { "id": "search", "type": "database", "label": "AI Search", "sublabel": "vision-assets" },
     { "id": "verify", "type": "security", "label": "verify-sites.ps1", "sublabel": "post-deploy" }

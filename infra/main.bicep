@@ -61,7 +61,7 @@ var defaultTags = union(tags, {
 })
 
 resource rg 'Microsoft.Resources/resourceGroups@2024-03-01' = {
-  name: 'rg-visionsearch-${environmentName}'
+  name: 'rg-reverse-img-search-${environmentName}'
   location: location
   tags: defaultTags
 }

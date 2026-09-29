@@ -24,7 +24,7 @@
     { "id": "blob", "type": "database", "label": "Blob Storage", "sublabel": "private images", "pos": [790, 472], "size": [176, 66] }
   ],
   "boundaries": [
-    { "kind": "region", "label": "Resource group · rg-visionsearch-{env}", "wraps": ["internal", "public", "appi", "fn", "loadtest", "search", "ai", "blob"], "pad": 22 },
+    { "kind": "region", "label": "Resource group · rg-reverse-img-search-{env}", "wraps": ["internal", "public", "appi", "fn", "loadtest", "search", "ai", "blob"], "pad": 22 },
     { "kind": "security-group", "label": "Keyless data plane · AAD + RBAC", "wraps": ["search", "ai", "blob"], "pad": 16 }
   ],
   "connections": [

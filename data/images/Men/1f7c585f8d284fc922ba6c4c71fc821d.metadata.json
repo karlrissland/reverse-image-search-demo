@@ -1,0 +1,19 @@
+{
+  "assetId": "men_1f7c585f8d284fc922ba6c4c71fc821d",
+  "subcategory": "blazer",
+  "color": "blue",
+  "season": "All-Season",
+  "caption": "A sleek blue blazer with a two-button closure and notched lapels.",
+  "tags": [
+    "blazer",
+    "formal",
+    "blue",
+    "menswear",
+    "jacket"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:41:30.1296540Z"
+  }
+}

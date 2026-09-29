@@ -1,0 +1,19 @@
+{
+  "assetId": "women_0beab4c0b9ffe5752dcfaa18749c8406",
+  "subcategory": "zip-up hoodie",
+  "color": "gray",
+  "season": "All-Season",
+  "caption": "Gray and maroon zip-up hoodie with front pockets and drawstring hood.",
+  "tags": [
+    "hoodie",
+    "zip-up",
+    "casual",
+    "gray",
+    "maroon"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:42:56.2949495Z"
+  }
+}

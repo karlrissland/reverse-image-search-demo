@@ -1,0 +1,20 @@
+{
+  "assetId": "women_00b6d6ed71e27101211bd77627e5c1b2",
+  "subcategory": "cold shoulder top",
+  "color": "gray",
+  "season": "All-Season",
+  "caption": "Gray cold shoulder top with a casual and stylish design.",
+  "tags": [
+    "cold shoulder",
+    "gray",
+    "casual",
+    "top",
+    "fashion",
+    "all-season"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:41:46.1662418Z"
+  }
+}

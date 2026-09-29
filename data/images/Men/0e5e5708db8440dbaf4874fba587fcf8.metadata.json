@@ -1,0 +1,20 @@
+{
+  "assetId": "men_0e5e5708db8440dbaf4874fba587fcf8",
+  "subcategory": "plaid shirt",
+  "color": "blue",
+  "season": "All-Season",
+  "caption": "Men's blue plaid shirt with long sleeves and button-down design.",
+  "tags": [
+    "plaid",
+    "shirt",
+    "blue",
+    "long sleeves",
+    "casual",
+    "button-down"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:40:40.7717206Z"
+  }
+}

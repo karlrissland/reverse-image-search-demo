@@ -1,0 +1,20 @@
+{
+  "assetId": "women_0aab5a12b159ff4cd71c9612025ed1e0",
+  "subcategory": "sundress",
+  "color": "white",
+  "season": "Summer",
+  "caption": "A woman in a floral sundress and straw hat sitting on a bamboo bench at the beach.",
+  "tags": [
+    "sundress",
+    "beach",
+    "summer",
+    "straw hat",
+    "floral",
+    "bamboo"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:42:21.4442728Z"
+  }
+}

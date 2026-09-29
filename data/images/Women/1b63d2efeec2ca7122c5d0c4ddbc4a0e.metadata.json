@@ -1,0 +1,20 @@
+{
+  "assetId": "women_1b63d2efeec2ca7122c5d0c4ddbc4a0e",
+  "subcategory": "strapless dress",
+  "color": "black",
+  "season": "All-Season",
+  "caption": "Elegant black strapless dress with tiered design and floral detail.",
+  "tags": [
+    "dress",
+    "strapless",
+    "black",
+    "formal",
+    "tiered",
+    "elegant"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:44:08.8150842Z"
+  }
+}

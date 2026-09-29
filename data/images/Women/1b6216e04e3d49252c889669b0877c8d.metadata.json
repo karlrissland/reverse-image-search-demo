@@ -1,0 +1,19 @@
+{
+  "assetId": "women_1b6216e04e3d49252c889669b0877c8d",
+  "subcategory": "evening gown",
+  "color": "blue",
+  "season": "All-Season",
+  "caption": "Elegant blue evening gown with embellished straps and pleated bodice.",
+  "tags": [
+    "evening wear",
+    "formal",
+    "blue dress",
+    "embellished",
+    "pleated"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:44:05.1196708Z"
+  }
+}

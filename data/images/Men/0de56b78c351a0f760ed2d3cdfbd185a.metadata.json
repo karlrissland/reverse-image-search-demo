@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0de56b78c351a0f760ed2d3cdfbd185a",
+  "subcategory": "v-neck t-shirt",
+  "color": "white",
+  "season": "All-Season",
+  "caption": "White V-neck t-shirt with black accents on the sides and neckline.",
+  "tags": [
+    "v-neck",
+    "t-shirt",
+    "white",
+    "casual",
+    "short-sleeve"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:40:29.9237566Z"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0aafdfd5a9514e4a7ed5904b46e2f86d",
+  "subcategory": "sweater",
+  "color": "gray",
+  "season": "Fall",
+  "caption": "Two-tone fuzzy sweater with gray and olive green panels.",
+  "tags": [
+    "sweater",
+    "fuzzy",
+    "two-tone",
+    "long-sleeve",
+    "casual"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:39:33.7557262Z"
+  }
+}

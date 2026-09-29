@@ -1,0 +1,20 @@
+{
+  "assetId": "women_0dd7b45b77c55ad3862e297b2488bb5b",
+  "subcategory": "striped blouse",
+  "color": "blue",
+  "season": "Spring",
+  "caption": "Blue striped blouse paired with flared jeans and white belt.",
+  "tags": [
+    "striped",
+    "blouse",
+    "flared jeans",
+    "spring",
+    "casual",
+    "outdoor"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:43:25.7699983Z"
+  }
+}

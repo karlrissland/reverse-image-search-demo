@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0d17b18b0b538661f1a977959461c2f2",
+  "subcategory": "suit",
+  "color": "gray",
+  "season": "All-Season",
+  "caption": "A man wearing a gray suit with a black tie, standing against a cityscape background.",
+  "tags": [
+    "suit",
+    "formal",
+    "gray",
+    "business",
+    "cityscape"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:40:06.9887563Z"
+  }
+}

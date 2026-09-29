@@ -1,0 +1,19 @@
+{
+  "assetId": "men_1e4f090be89da2a6981b0f3f56e90615",
+  "subcategory": "striped sweater",
+  "color": "white",
+  "season": "All-Season",
+  "caption": "White striped sweater with a casual design and a collared neckline.",
+  "tags": [
+    "striped",
+    "sweater",
+    "casual",
+    "white",
+    "long-sleeve"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:41:18.1282212Z"
+  }
+}

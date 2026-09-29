@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0a24eff1139cd773e466bda2c2b28eaa",
+  "subcategory": "blazer",
+  "color": "gray",
+  "season": "All-Season",
+  "caption": "Gray pinstripe blazer paired with a blue shirt and jeans.",
+  "tags": [
+    "blazer",
+    "gray",
+    "formal",
+    "pinstripe",
+    "menswear"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:39:06.1230185Z"
+  }
+}

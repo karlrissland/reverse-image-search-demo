@@ -1,0 +1,20 @@
+{
+  "assetId": "women_00a4ba6f18cc6c5d618b5f0993785210",
+  "subcategory": "wedding dress",
+  "color": "white",
+  "season": "All-Season",
+  "caption": "Elegant strapless white wedding dress with a fitted bodice and flared tulle skirt.",
+  "tags": [
+    "wedding",
+    "dress",
+    "strapless",
+    "tulle",
+    "formal",
+    "bridal"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:41:41.6492201Z"
+  }
+}

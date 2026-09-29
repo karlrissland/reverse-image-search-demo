@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0da503a32d09f9929adf81fe327296a7",
+  "subcategory": "mesh jersey",
+  "color": "white",
+  "season": "All-Season",
+  "caption": "White mesh jersey with short sleeves and a V-neck design.",
+  "tags": [
+    "jersey",
+    "white",
+    "mesh",
+    "sportswear",
+    "short sleeve"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:40:22.6954065Z"
+  }
+}

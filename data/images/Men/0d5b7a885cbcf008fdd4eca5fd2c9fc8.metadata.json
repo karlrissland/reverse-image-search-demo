@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0d5b7a885cbcf008fdd4eca5fd2c9fc8",
+  "subcategory": "flannel shirt",
+  "color": "red",
+  "season": "Fall",
+  "caption": "Red and black checkered flannel shirt with button closure and chest pockets.",
+  "tags": [
+    "flannel",
+    "checkered",
+    "red",
+    "casual",
+    "long-sleeve"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:40:18.7455777Z"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "assetId": "women_0fd5ccf7ebafd87546e37be0c95fd253",
+  "subcategory": "turtleneck sweater",
+  "color": "white",
+  "season": "Fall",
+  "caption": "A cozy white ribbed turtleneck sweater with long sleeves.",
+  "tags": [
+    "sweater",
+    "turtleneck",
+    "ribbed",
+    "white",
+    "fall",
+    "casual"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:43:54.3254790Z"
+  }
+}

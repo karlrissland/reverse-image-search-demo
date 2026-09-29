@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0a4d12577220e6024193a9543202453e",
+  "subcategory": "winter coat",
+  "color": "gray",
+  "season": "Winter",
+  "caption": "Gray winter coat with fur-lined hood draped over arm.",
+  "tags": [
+    "winter",
+    "coat",
+    "gray",
+    "fur-lined",
+    "outerwear"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:39:14.0030231Z"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "assetId": "women_0b7eb3f09b412b77a22e9c6dbdc4113b",
+  "subcategory": "sleeveless dress",
+  "color": "multicolor",
+  "season": "Summer",
+  "caption": "Vibrant sleeveless bodycon dress with a colorful graffiti-inspired print.",
+  "tags": [
+    "dress",
+    "multicolor",
+    "graffiti",
+    "sleeveless",
+    "bodycon",
+    "summer"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:42:44.3882149Z"
+  }
+}

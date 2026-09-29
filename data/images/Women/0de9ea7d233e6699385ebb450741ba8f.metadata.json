@@ -1,0 +1,19 @@
+{
+  "assetId": "women_0de9ea7d233e6699385ebb450741ba8f",
+  "subcategory": "evening gown",
+  "color": "orange",
+  "season": "All-Season",
+  "caption": "Elegant orange one-shoulder evening gown with draped design.",
+  "tags": [
+    "evening wear",
+    "one-shoulder",
+    "draped",
+    "formal",
+    "orange"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:43:29.0947816Z"
+  }
+}

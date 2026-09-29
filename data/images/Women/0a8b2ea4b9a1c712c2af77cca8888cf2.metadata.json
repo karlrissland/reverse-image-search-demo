@@ -1,0 +1,20 @@
+{
+  "assetId": "women_0a8b2ea4b9a1c712c2af77cca8888cf2",
+  "subcategory": "strapless dress",
+  "color": "white",
+  "season": "Summer",
+  "caption": "Elegant white strapless high-low dress with embellished waistline.",
+  "tags": [
+    "strapless",
+    "high-low",
+    "white",
+    "summer",
+    "formal",
+    "dress"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:42:17.0035587Z"
+  }
+}

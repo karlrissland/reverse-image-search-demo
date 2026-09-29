@@ -1,0 +1,19 @@
+{
+  "assetId": "women_0ca49efba2d8bb2d8190f7fb69f225cb",
+  "subcategory": "button-up shirt",
+  "color": "blue",
+  "season": "All-Season",
+  "caption": "A stylish navy blue button-up shirt paired with gray trousers and a decorative belt.",
+  "tags": [
+    "shirt",
+    "blue",
+    "formal",
+    "long-sleeve",
+    "button-up"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:43:04.3690816Z"
+  }
+}

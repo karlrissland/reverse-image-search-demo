@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0fcbff4822c0fda1dd3ccf0f3585ad36",
+  "subcategory": "bandhgala blazer",
+  "color": "black",
+  "season": "All-Season",
+  "caption": "A sleek black bandhgala blazer with subtle pinstripes and button closure.",
+  "tags": [
+    "blazer",
+    "formal",
+    "black",
+    "bandhgala",
+    "menswear"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:40:52.1116770Z"
+  }
+}

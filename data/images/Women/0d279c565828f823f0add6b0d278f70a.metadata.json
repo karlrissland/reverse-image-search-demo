@@ -1,0 +1,20 @@
+{
+  "assetId": "women_0d279c565828f823f0add6b0d278f70a",
+  "subcategory": "halter dress",
+  "color": "yellow",
+  "season": "Summer",
+  "caption": "Bright yellow halter dress with side cutouts, perfect for summer outings.",
+  "tags": [
+    "halter",
+    "dress",
+    "yellow",
+    "summer",
+    "cutout",
+    "fashion"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:43:14.3919208Z"
+  }
+}

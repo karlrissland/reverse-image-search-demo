@@ -1,0 +1,20 @@
+{
+  "assetId": "women_000e147149bf33c584afaa953bc198ed",
+  "subcategory": "wedding dress",
+  "color": "white",
+  "season": "All-Season",
+  "caption": "Elegant strapless white wedding dress with a layered skirt and lace details.",
+  "tags": [
+    "wedding",
+    "bridal",
+    "formal",
+    "strapless",
+    "lace",
+    "gown"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:41:37.8026235Z"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "assetId": "women_0a8501f3f9ea29191891928bd8be1872",
+  "subcategory": "evening gown",
+  "color": "white",
+  "season": "All-Season",
+  "caption": "Elegant strapless white evening gown with a draped design.",
+  "tags": [
+    "evening wear",
+    "strapless",
+    "formal",
+    "gown",
+    "white"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:42:13.8441299Z"
+  }
+}

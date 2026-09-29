@@ -200,3 +200,9 @@ This is a demo-quality POC. Production hardening should include:
 - Load testing at representative scale.
 - Monitoring, alerting, and cost governance.
 - Production data-quality processes for metadata, special characters, and celebrity attribution.
+
+## Credits & attributions
+
+- **Demo imagery** — the neutral sample image corpus is sourced from [Fashionpedia](https://github.com/cvdfoundation/fashionpedia) (CVD Foundation). Verify individual image licenses before any non-demo or public use.
+- **Architecture diagrams** — generated with the [Archify](.github/skills/archify/SKILL.md) skill.
+- **Web scraping & personalization tooling** — [Playwright MCP](https://github.com/microsoft/playwright-mcp), [Crawlee](https://github.com/apify/crawlee), and [node-vibrant](https://github.com/Vibrant-Colors/node-vibrant).

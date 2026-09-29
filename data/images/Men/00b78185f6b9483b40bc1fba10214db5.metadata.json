@@ -1,0 +1,19 @@
+{
+  "assetId": "men_00b78185f6b9483b40bc1fba10214db5",
+  "subcategory": "sweatshirt",
+  "color": "gray",
+  "season": "All-Season",
+  "caption": "Men's gray crewneck sweatshirt with long sleeves.",
+  "tags": [
+    "sweatshirt",
+    "gray",
+    "casual",
+    "long-sleeve",
+    "crewneck"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:38:57.8942507Z"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "assetId": "women_1aede06311dcae4d510489a0a768ddc5",
+  "subcategory": "sleeveless top",
+  "color": "black",
+  "season": "All-Season",
+  "caption": "Black sleeveless top with white accents and draped design.",
+  "tags": [
+    "sleeveless",
+    "black",
+    "draped",
+    "top",
+    "white accents"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:43:57.4057066Z"
+  }
+}

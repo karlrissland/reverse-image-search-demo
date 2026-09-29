@@ -1,0 +1,20 @@
+{
+  "assetId": "women_0b8354dcaeb5040903f64366e4b7f3e7",
+  "subcategory": "pinstripe pants",
+  "color": "black",
+  "season": "All-Season",
+  "caption": "Black pinstripe pants with a high-waisted design for a sleek look.",
+  "tags": [
+    "pants",
+    "pinstripe",
+    "black",
+    "high-waisted",
+    "formal",
+    "all-season"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:42:48.8160381Z"
+  }
+}

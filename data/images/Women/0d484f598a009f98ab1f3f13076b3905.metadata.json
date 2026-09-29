@@ -1,0 +1,19 @@
+{
+  "assetId": "women_0d484f598a009f98ab1f3f13076b3905",
+  "subcategory": "halter dress",
+  "color": "gray",
+  "season": "All-Season",
+  "caption": "Gray halter dress with layered fringe design, perfect for a stylish look.",
+  "tags": [
+    "halter dress",
+    "gray",
+    "fringe",
+    "fashion",
+    "runway"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:43:18.3368180Z"
+  }
+}

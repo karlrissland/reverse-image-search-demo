@@ -1,0 +1,19 @@
+{
+  "assetId": "men_1af51266dbe3f33f6ca566085c520667",
+  "subcategory": "blazer",
+  "color": "black",
+  "season": "All-Season",
+  "caption": "Black checkered blazer paired with a white shirt and grey pants.",
+  "tags": [
+    "blazer",
+    "checkered",
+    "formal",
+    "black",
+    "menswear"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:41:03.6894909Z"
+  }
+}

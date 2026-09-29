@@ -1,0 +1,19 @@
+{
+  "assetId": "women_0dd1b2cfba7e2939590e0c95dfd6d126",
+  "subcategory": "bomber jacket",
+  "color": "navy",
+  "season": "Fall",
+  "caption": "Navy bomber jacket paired with black leather pants and a red handbag.",
+  "tags": [
+    "bomber jacket",
+    "navy",
+    "fall fashion",
+    "leather pants",
+    "red handbag"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:43:21.8707331Z"
+  }
+}

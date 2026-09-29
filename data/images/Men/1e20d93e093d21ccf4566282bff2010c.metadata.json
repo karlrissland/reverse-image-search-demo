@@ -1,0 +1,19 @@
+{
+  "assetId": "men_1e20d93e093d21ccf4566282bff2010c",
+  "subcategory": "t-shirt",
+  "color": "black",
+  "season": "All-Season",
+  "caption": "Black short-sleeve t-shirt with a simple and casual design.",
+  "tags": [
+    "t-shirt",
+    "black",
+    "casual",
+    "short-sleeve",
+    "basic"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:41:14.6615567Z"
+  }
+}

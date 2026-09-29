@@ -1,0 +1,19 @@
+{
+  "assetId": "men_1a25a98ca71175ab5cdc22f2af452fc7",
+  "subcategory": "tuxedo",
+  "color": "black",
+  "season": "All-Season",
+  "caption": "Elegant black tuxedo with satin lapels and bow tie.",
+  "tags": [
+    "formal",
+    "tuxedo",
+    "black",
+    "menswear",
+    "elegant"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:40:59.2572222Z"
+  }
+}

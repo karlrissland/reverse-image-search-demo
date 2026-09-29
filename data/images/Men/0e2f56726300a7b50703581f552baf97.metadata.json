@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0e2f56726300a7b50703581f552baf97",
+  "subcategory": "dress shirt",
+  "color": "beige",
+  "season": "All-Season",
+  "caption": "Beige long-sleeve dress shirt with button-up front and pointed collar.",
+  "tags": [
+    "dress shirt",
+    "beige",
+    "long-sleeve",
+    "formal",
+    "button-up"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:40:33.0312733Z"
+  }
+}

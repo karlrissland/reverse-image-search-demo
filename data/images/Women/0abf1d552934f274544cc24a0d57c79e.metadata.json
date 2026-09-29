@@ -1,0 +1,19 @@
+{
+  "assetId": "women_0abf1d552934f274544cc24a0d57c79e",
+  "subcategory": "peplum top",
+  "color": "white",
+  "season": "Summer",
+  "caption": "White sleeveless peplum top paired with blue wide-leg pants.",
+  "tags": [
+    "peplum",
+    "sleeveless",
+    "summer",
+    "casual",
+    "fashion"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:42:26.1867843Z"
+  }
+}

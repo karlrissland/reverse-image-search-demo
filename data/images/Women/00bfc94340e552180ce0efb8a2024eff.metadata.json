@@ -1,0 +1,20 @@
+{
+  "assetId": "women_00bfc94340e552180ce0efb8a2024eff",
+  "subcategory": "evening gown",
+  "color": "white",
+  "season": "All-Season",
+  "caption": "Elegant white evening gown with a pleated skirt and embellished neckline.",
+  "tags": [
+    "evening wear",
+    "formal",
+    "gown",
+    "white",
+    "pleated",
+    "embellished"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:41:50.0464660Z"
+  }
+}

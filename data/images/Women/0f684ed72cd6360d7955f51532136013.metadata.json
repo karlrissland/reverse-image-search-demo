@@ -1,0 +1,19 @@
+{
+  "assetId": "women_0f684ed72cd6360d7955f51532136013",
+  "subcategory": "zip-up hoodie",
+  "color": "gray",
+  "season": "All-Season",
+  "caption": "Gray zip-up hoodie with white drawstrings and front pockets.",
+  "tags": [
+    "hoodie",
+    "zip-up",
+    "gray",
+    "casual",
+    "all-season"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:43:46.4725759Z"
+  }
+}

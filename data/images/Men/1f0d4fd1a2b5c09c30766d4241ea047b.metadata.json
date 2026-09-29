@@ -1,0 +1,19 @@
+{
+  "assetId": "men_1f0d4fd1a2b5c09c30766d4241ea047b",
+  "subcategory": "double-breasted blazer",
+  "color": "black",
+  "season": "All-Season",
+  "caption": "Elegant black double-breasted blazer with a classic lapel design.",
+  "tags": [
+    "blazer",
+    "formal",
+    "black",
+    "double-breasted",
+    "menswear"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:41:22.0749925Z"
+  }
+}

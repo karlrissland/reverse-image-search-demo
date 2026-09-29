@@ -1,0 +1,19 @@
+{
+  "assetId": "women_1b137e06c02325498fc204e05fabe2ef",
+  "subcategory": "knit sweater",
+  "color": "beige",
+  "season": "Fall",
+  "caption": "Beige knit sweater with a textured pattern, perfect for fall weather.",
+  "tags": [
+    "sweater",
+    "knit",
+    "beige",
+    "fall",
+    "cozy"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:44:01.6100882Z"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "assetId": "women_1f5e803ea0574ad02b13086243a60138",
+  "subcategory": "sun hat",
+  "color": "blue",
+  "season": "Summer",
+  "caption": "Striped sun hat and sunglasses paired with a red and orange striped dress.",
+  "tags": [
+    "sun hat",
+    "sunglasses",
+    "striped dress",
+    "summer fashion",
+    "accessories"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:44:19.7126700Z"
+  }
+}

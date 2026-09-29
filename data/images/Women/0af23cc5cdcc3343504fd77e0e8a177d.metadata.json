@@ -1,0 +1,19 @@
+{
+  "assetId": "women_0af23cc5cdcc3343504fd77e0e8a177d",
+  "subcategory": "wedding dress",
+  "color": "white",
+  "season": "All-Season",
+  "caption": "Elegant white lace wedding dress with cap sleeves and a long train.",
+  "tags": [
+    "wedding",
+    "lace",
+    "formal",
+    "bridal",
+    "gown"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:42:33.3522140Z"
+  }
+}

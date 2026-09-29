@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0d34296e4a75d02017380a5875569dc6",
+  "subcategory": "dress shirt",
+  "color": "orange",
+  "season": "All-Season",
+  "caption": "Slim-fit orange dress shirt with long sleeves and button closure.",
+  "tags": [
+    "dress shirt",
+    "orange",
+    "long sleeves",
+    "formal",
+    "slim-fit"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:40:15.0217892Z"
+  }
+}

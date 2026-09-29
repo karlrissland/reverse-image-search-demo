@@ -1,0 +1,19 @@
+{
+  "assetId": "women_0ade1c146ceb67172ad78d188a66c18d",
+  "subcategory": "sleeveless dress",
+  "color": "black",
+  "season": "All-Season",
+  "caption": "Elegant black sleeveless dress with lace details, perfect for formal occasions.",
+  "tags": [
+    "dress",
+    "black",
+    "sleeveless",
+    "formal",
+    "lace"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:42:29.6112828Z"
+  }
+}

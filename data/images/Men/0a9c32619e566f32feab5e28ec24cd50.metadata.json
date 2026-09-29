@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0a9c32619e566f32feab5e28ec24cd50",
+  "subcategory": "polo shirt",
+  "color": "orange",
+  "season": "All-Season",
+  "caption": "Striped orange polo shirt paired with blue pants and casual shoes.",
+  "tags": [
+    "polo shirt",
+    "striped",
+    "casual",
+    "blue pants",
+    "all-season"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:39:29.3216178Z"
+  }
+}

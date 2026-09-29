@@ -1,0 +1,20 @@
+{
+  "assetId": "men_0fe5d53b48af59ece6d35993eccc0969",
+  "subcategory": "dress pants",
+  "color": "gray",
+  "season": "All-Season",
+  "caption": "Men's gray dress pants with a tailored fit and belt loops.",
+  "tags": [
+    "formal",
+    "tailored",
+    "gray",
+    "pants",
+    "men",
+    "classic"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:40:55.2124675Z"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0bd70b4c7f8936220fbc76069cb2fb7d",
+  "subcategory": "t-shirt",
+  "color": "brown",
+  "season": "All-Season",
+  "caption": "Brown t-shirt with a black snake graphic design on the front.",
+  "tags": [
+    "t-shirt",
+    "snake",
+    "graphic",
+    "casual",
+    "brown"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:39:48.4698160Z"
+  }
+}

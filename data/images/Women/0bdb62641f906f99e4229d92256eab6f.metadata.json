@@ -1,0 +1,19 @@
+{
+  "assetId": "women_0bdb62641f906f99e4229d92256eab6f",
+  "subcategory": "flannel shirt",
+  "color": "blue",
+  "season": "Winter",
+  "caption": "Blue plaid flannel shirt paired with ripped jeans and brown boots in a snowy setting.",
+  "tags": [
+    "flannel",
+    "winter",
+    "plaid",
+    "boots",
+    "jeans"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:42:52.6850217Z"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "assetId": "men_0a3ea3a4c016e47cb1fbf08943571ed0",
+  "subcategory": "hoodie",
+  "color": "gray",
+  "season": "All-Season",
+  "caption": "Gray hoodie with high collar and studded shoulder details.",
+  "tags": [
+    "hoodie",
+    "gray",
+    "studs",
+    "casual",
+    "fashion",
+    "high collar"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:39:09.8360656Z"
+  }
+}

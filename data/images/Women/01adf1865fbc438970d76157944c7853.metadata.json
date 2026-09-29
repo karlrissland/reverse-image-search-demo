@@ -1,0 +1,20 @@
+{
+  "assetId": "women_01adf1865fbc438970d76157944c7853",
+  "subcategory": "hooded jacket",
+  "color": "navy",
+  "season": "Fall",
+  "caption": "Navy hooded jacket paired with a red sweater and black pants.",
+  "tags": [
+    "jacket",
+    "hooded",
+    "navy",
+    "fall",
+    "casual",
+    "outerwear"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:41:57.8983297Z"
+  }
+}

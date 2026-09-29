@@ -1,0 +1,20 @@
+{
+  "assetId": "men_0b0a12e8640472681f93e31d44f68e5d",
+  "subcategory": "button-up shirt",
+  "color": "blue",
+  "season": "All-Season",
+  "caption": "Blue and white checkered button-up shirt with long sleeves and a chest pocket.",
+  "tags": [
+    "button-up",
+    "checkered",
+    "long sleeves",
+    "blue",
+    "casual",
+    "shirt"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:39:37.4212929Z"
+  }
+}

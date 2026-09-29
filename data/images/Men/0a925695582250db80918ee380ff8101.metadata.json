@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0a925695582250db80918ee380ff8101",
+  "subcategory": "leather jacket",
+  "color": "brown",
+  "season": "Fall",
+  "caption": "Brown leather jacket with a zip-up front, paired with a gray shirt and dark pants.",
+  "tags": [
+    "leather",
+    "jacket",
+    "brown",
+    "fall",
+    "menswear"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:39:25.7104996Z"
+  }
+}

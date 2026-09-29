@@ -1,0 +1,20 @@
+{
+  "assetId": "men_0fba89a34ab14217aa10aca4a8fe4212",
+  "subcategory": "t-shirt",
+  "color": "gray",
+  "season": "All-Season",
+  "caption": "A casual gray t-shirt with a simple design, perfect for everyday wear.",
+  "tags": [
+    "t-shirt",
+    "gray",
+    "casual",
+    "short-sleeve",
+    "basic",
+    "unisex"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:40:48.0905850Z"
+  }
+}

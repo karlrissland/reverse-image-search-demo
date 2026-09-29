@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0ca613830684668f8eab0a8cbd16b278",
+  "subcategory": "hoodie",
+  "color": "gray",
+  "season": "All-Season",
+  "caption": "Casual gray hoodie with front pocket and drawstring hood.",
+  "tags": [
+    "hoodie",
+    "gray",
+    "casual",
+    "comfortable",
+    "all-season"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:39:59.5014124Z"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "assetId": "women_0b6c46e35d4dbcf11409d0774f400059",
+  "subcategory": "evening gown",
+  "color": "purple",
+  "season": "All-Season",
+  "caption": "Elegant purple evening gown with embellished waist and sheer neckline.",
+  "tags": [
+    "evening wear",
+    "formal dress",
+    "purple",
+    "gown",
+    "embellished",
+    "sleeveless"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:42:40.8121413Z"
+  }
+}

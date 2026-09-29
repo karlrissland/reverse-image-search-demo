@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0b6d006caf77034fc4e5a65de1323ba9",
+  "subcategory": "leather jacket",
+  "color": "black",
+  "season": "Fall",
+  "caption": "Black leather jacket paired with a vibrant striped shirt.",
+  "tags": [
+    "leather jacket",
+    "striped shirt",
+    "fall fashion",
+    "outerwear",
+    "casual"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:39:41.0936218Z"
+  }
+}

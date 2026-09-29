@@ -1,0 +1,19 @@
+{
+  "assetId": "women_1ea73de26e3e183b113082b16dbb1864",
+  "subcategory": "women's suit",
+  "color": "black",
+  "season": "All-Season",
+  "caption": "Black pinstripe women's suit with a blue top, perfect for professional settings.",
+  "tags": [
+    "suit",
+    "formal",
+    "pinstripe",
+    "professional",
+    "women's wear"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:44:12.4740178Z"
+  }
+}

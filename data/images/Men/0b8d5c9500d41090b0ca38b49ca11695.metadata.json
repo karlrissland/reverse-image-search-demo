@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0b8d5c9500d41090b0ca38b49ca11695",
+  "subcategory": "cardigan",
+  "color": "blue",
+  "season": "All-Season",
+  "caption": "Light blue cardigan with button closure, paired with a green shirt.",
+  "tags": [
+    "cardigan",
+    "blue",
+    "casual",
+    "button-up",
+    "layering"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:39:44.8187040Z"
+  }
+}

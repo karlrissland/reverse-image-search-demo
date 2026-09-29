@@ -1,0 +1,19 @@
+{
+  "assetId": "men_1f2c862f5dd42c0ccdc1d662940e0d23",
+  "subcategory": "graphic t-shirt",
+  "color": "gray",
+  "season": "All-Season",
+  "caption": "Gray graphic t-shirt with 'WEEKND' print, paired with gray pants and a black hat.",
+  "tags": [
+    "graphic tee",
+    "casual",
+    "gray",
+    "hat",
+    "modern"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:41:26.1651647Z"
+  }
+}

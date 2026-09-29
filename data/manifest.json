@@ -1,0 +1,1492 @@
+[
+  {
+    "assetId": "men_00b78185f6b9483b40bc1fba10214db5",
+    "imagePath": "images/Men/00b78185f6b9483b40bc1fba10214db5.jpg",
+    "category": "Men",
+    "subcategory": "sweatshirt",
+    "color": "gray",
+    "season": "All-Season",
+    "caption": "Men's gray crewneck sweatshirt with long sleeves.",
+    "tags": [
+      "sweatshirt",
+      "gray",
+      "casual",
+      "long-sleeve",
+      "crewneck"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_01de41d210af9428235a33ba42312636",
+    "imagePath": "images/Men/01de41d210af9428235a33ba42312636.jpg",
+    "category": "Men",
+    "subcategory": "denim shirt",
+    "color": "blue",
+    "season": "All-Season",
+    "caption": "Stylish blue denim shirt with button-down collar and chest pockets.",
+    "tags": [
+      "denim",
+      "shirt",
+      "blue",
+      "casual",
+      "long-sleeve"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0a24eff1139cd773e466bda2c2b28eaa",
+    "imagePath": "images/Men/0a24eff1139cd773e466bda2c2b28eaa.jpg",
+    "category": "Men",
+    "subcategory": "blazer",
+    "color": "gray",
+    "season": "All-Season",
+    "caption": "Gray pinstripe blazer paired with a blue shirt and jeans.",
+    "tags": [
+      "blazer",
+      "gray",
+      "formal",
+      "pinstripe",
+      "menswear"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0a3ea3a4c016e47cb1fbf08943571ed0",
+    "imagePath": "images/Men/0a3ea3a4c016e47cb1fbf08943571ed0.jpg",
+    "category": "Men",
+    "subcategory": "hoodie",
+    "color": "gray",
+    "season": "All-Season",
+    "caption": "Gray hoodie with high collar and studded shoulder details.",
+    "tags": [
+      "hoodie",
+      "gray",
+      "studs",
+      "casual",
+      "fashion",
+      "high collar"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0a4d12577220e6024193a9543202453e",
+    "imagePath": "images/Men/0a4d12577220e6024193a9543202453e.jpg",
+    "category": "Men",
+    "subcategory": "winter coat",
+    "color": "gray",
+    "season": "Winter",
+    "caption": "Gray winter coat with fur-lined hood draped over arm.",
+    "tags": [
+      "winter",
+      "coat",
+      "gray",
+      "fur-lined",
+      "outerwear"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0a657c09b2f668075d758bdaaf0bb6f8",
+    "imagePath": "images/Men/0a657c09b2f668075d758bdaaf0bb6f8.jpg",
+    "category": "Men",
+    "subcategory": "hoodie",
+    "color": "gray",
+    "season": "All-Season",
+    "caption": "Gray hoodie with maroon sleeves and a front pocket.",
+    "tags": [
+      "hoodie",
+      "casual",
+      "gray",
+      "maroon",
+      "long-sleeve"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0a6f1c749b91422ea630a25e86ebaff8",
+    "imagePath": "images/Men/0a6f1c749b91422ea630a25e86ebaff8.jpg",
+    "category": "Men",
+    "subcategory": "dress shirt",
+    "color": "white",
+    "season": "All-Season",
+    "caption": "White dress shirt paired with a leather-strap watch and a black necklace.",
+    "tags": [
+      "shirt",
+      "white",
+      "formal",
+      "watch",
+      "necklace"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0a925695582250db80918ee380ff8101",
+    "imagePath": "images/Men/0a925695582250db80918ee380ff8101.jpg",
+    "category": "Men",
+    "subcategory": "leather jacket",
+    "color": "brown",
+    "season": "Fall",
+    "caption": "Brown leather jacket with a zip-up front, paired with a gray shirt and dark pants.",
+    "tags": [
+      "leather",
+      "jacket",
+      "brown",
+      "fall",
+      "menswear"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0a9c32619e566f32feab5e28ec24cd50",
+    "imagePath": "images/Men/0a9c32619e566f32feab5e28ec24cd50.jpg",
+    "category": "Men",
+    "subcategory": "polo shirt",
+    "color": "orange",
+    "season": "All-Season",
+    "caption": "Striped orange polo shirt paired with blue pants and casual shoes.",
+    "tags": [
+      "polo shirt",
+      "striped",
+      "casual",
+      "blue pants",
+      "all-season"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0aafdfd5a9514e4a7ed5904b46e2f86d",
+    "imagePath": "images/Men/0aafdfd5a9514e4a7ed5904b46e2f86d.jpg",
+    "category": "Men",
+    "subcategory": "sweater",
+    "color": "gray",
+    "season": "Fall",
+    "caption": "Two-tone fuzzy sweater with gray and olive green panels.",
+    "tags": [
+      "sweater",
+      "fuzzy",
+      "two-tone",
+      "long-sleeve",
+      "casual"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0b0a12e8640472681f93e31d44f68e5d",
+    "imagePath": "images/Men/0b0a12e8640472681f93e31d44f68e5d.jpg",
+    "category": "Men",
+    "subcategory": "button-up shirt",
+    "color": "blue",
+    "season": "All-Season",
+    "caption": "Blue and white checkered button-up shirt with long sleeves and a chest pocket.",
+    "tags": [
+      "button-up",
+      "checkered",
+      "long sleeves",
+      "blue",
+      "casual",
+      "shirt"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0b6d006caf77034fc4e5a65de1323ba9",
+    "imagePath": "images/Men/0b6d006caf77034fc4e5a65de1323ba9.jpg",
+    "category": "Men",
+    "subcategory": "leather jacket",
+    "color": "black",
+    "season": "Fall",
+    "caption": "Black leather jacket paired with a vibrant striped shirt.",
+    "tags": [
+      "leather jacket",
+      "striped shirt",
+      "fall fashion",
+      "outerwear",
+      "casual"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0b8d5c9500d41090b0ca38b49ca11695",
+    "imagePath": "images/Men/0b8d5c9500d41090b0ca38b49ca11695.jpg",
+    "category": "Men",
+    "subcategory": "cardigan",
+    "color": "blue",
+    "season": "All-Season",
+    "caption": "Light blue cardigan with button closure, paired with a green shirt.",
+    "tags": [
+      "cardigan",
+      "blue",
+      "casual",
+      "button-up",
+      "layering"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0bd70b4c7f8936220fbc76069cb2fb7d",
+    "imagePath": "images/Men/0bd70b4c7f8936220fbc76069cb2fb7d.jpg",
+    "category": "Men",
+    "subcategory": "t-shirt",
+    "color": "brown",
+    "season": "All-Season",
+    "caption": "Brown t-shirt with a black snake graphic design on the front.",
+    "tags": [
+      "t-shirt",
+      "snake",
+      "graphic",
+      "casual",
+      "brown"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0bed1fff01706578c78e89998057e8c1",
+    "imagePath": "images/Men/0bed1fff01706578c78e89998057e8c1.jpg",
+    "category": "Men",
+    "subcategory": "graphic t-shirt",
+    "color": "black",
+    "season": "All-Season",
+    "caption": "Black graphic t-shirt featuring a bold illustrated design and text.",
+    "tags": [
+      "t-shirt",
+      "graphic",
+      "black",
+      "casual",
+      "illustration"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0bf58c72ed715defbf5d7df0c8a94655",
+    "imagePath": "images/Men/0bf58c72ed715defbf5d7df0c8a94655.jpg",
+    "category": "Men",
+    "subcategory": "t-shirt",
+    "color": "blue",
+    "season": "All-Season",
+    "caption": "Men's blue V-neck t-shirt with short sleeves.",
+    "tags": [
+      "t-shirt",
+      "blue",
+      "v-neck",
+      "casual",
+      "short sleeves"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0ca613830684668f8eab0a8cbd16b278",
+    "imagePath": "images/Men/0ca613830684668f8eab0a8cbd16b278.jpg",
+    "category": "Men",
+    "subcategory": "hoodie",
+    "color": "gray",
+    "season": "All-Season",
+    "caption": "Casual gray hoodie with front pocket and drawstring hood.",
+    "tags": [
+      "hoodie",
+      "gray",
+      "casual",
+      "comfortable",
+      "all-season"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0d16fca3f6aa58b785b02494581fec7e",
+    "imagePath": "images/Men/0d16fca3f6aa58b785b02494581fec7e.jpg",
+    "category": "Men",
+    "subcategory": "blazer",
+    "color": "black",
+    "season": "Fall",
+    "caption": "Black blazer with leather sleeves and zippered pockets.",
+    "tags": [
+      "blazer",
+      "leather sleeves",
+      "formal",
+      "black",
+      "fall",
+      "zippered pockets"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0d17b18b0b538661f1a977959461c2f2",
+    "imagePath": "images/Men/0d17b18b0b538661f1a977959461c2f2.jpg",
+    "category": "Men",
+    "subcategory": "suit",
+    "color": "gray",
+    "season": "All-Season",
+    "caption": "A man wearing a gray suit with a black tie, standing against a cityscape background.",
+    "tags": [
+      "suit",
+      "formal",
+      "gray",
+      "business",
+      "cityscape"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0d25c10a8cdeb84bdf2a0a8005fa7dec",
+    "imagePath": "images/Men/0d25c10a8cdeb84bdf2a0a8005fa7dec.jpg",
+    "category": "Men",
+    "subcategory": "t-shirt",
+    "color": "green",
+    "season": "All-Season",
+    "caption": "Green t-shirt with a printed design and text on the front.",
+    "tags": [
+      "t-shirt",
+      "green",
+      "casual",
+      "printed",
+      "short-sleeve"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0d34296e4a75d02017380a5875569dc6",
+    "imagePath": "images/Men/0d34296e4a75d02017380a5875569dc6.jpg",
+    "category": "Men",
+    "subcategory": "dress shirt",
+    "color": "orange",
+    "season": "All-Season",
+    "caption": "Slim-fit orange dress shirt with long sleeves and button closure.",
+    "tags": [
+      "dress shirt",
+      "orange",
+      "long sleeves",
+      "formal",
+      "slim-fit"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0d5b7a885cbcf008fdd4eca5fd2c9fc8",
+    "imagePath": "images/Men/0d5b7a885cbcf008fdd4eca5fd2c9fc8.jpg",
+    "category": "Men",
+    "subcategory": "flannel shirt",
+    "color": "red",
+    "season": "Fall",
+    "caption": "Red and black checkered flannel shirt with button closure and chest pockets.",
+    "tags": [
+      "flannel",
+      "checkered",
+      "red",
+      "casual",
+      "long-sleeve"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0da503a32d09f9929adf81fe327296a7",
+    "imagePath": "images/Men/0da503a32d09f9929adf81fe327296a7.jpg",
+    "category": "Men",
+    "subcategory": "mesh jersey",
+    "color": "white",
+    "season": "All-Season",
+    "caption": "White mesh jersey with short sleeves and a V-neck design.",
+    "tags": [
+      "jersey",
+      "white",
+      "mesh",
+      "sportswear",
+      "short sleeve"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0de04e941cb24cd60306928863605b12",
+    "imagePath": "images/Men/0de04e941cb24cd60306928863605b12.jpg",
+    "category": "Men",
+    "subcategory": "polo shirt",
+    "color": "green",
+    "season": "All-Season",
+    "caption": "Striped green and red polo shirt with short sleeves.",
+    "tags": [
+      "polo shirt",
+      "striped",
+      "green",
+      "red",
+      "casual",
+      "short sleeves"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0de56b78c351a0f760ed2d3cdfbd185a",
+    "imagePath": "images/Men/0de56b78c351a0f760ed2d3cdfbd185a.jpg",
+    "category": "Men",
+    "subcategory": "v-neck t-shirt",
+    "color": "white",
+    "season": "All-Season",
+    "caption": "White V-neck t-shirt with black accents on the sides and neckline.",
+    "tags": [
+      "v-neck",
+      "t-shirt",
+      "white",
+      "casual",
+      "short-sleeve"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0e2f56726300a7b50703581f552baf97",
+    "imagePath": "images/Men/0e2f56726300a7b50703581f552baf97.jpg",
+    "category": "Men",
+    "subcategory": "dress shirt",
+    "color": "beige",
+    "season": "All-Season",
+    "caption": "Beige long-sleeve dress shirt with button-up front and pointed collar.",
+    "tags": [
+      "dress shirt",
+      "beige",
+      "long-sleeve",
+      "formal",
+      "button-up"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0e5547e63b98d0d3145d70993e5297b0",
+    "imagePath": "images/Men/0e5547e63b98d0d3145d70993e5297b0.jpg",
+    "category": "Men",
+    "subcategory": "polo shirt",
+    "color": "green",
+    "season": "All-Season",
+    "caption": "Green polo shirt with contrasting collar and rolled sleeves.",
+    "tags": [
+      "polo shirt",
+      "green",
+      "casual",
+      "short sleeves",
+      "collared"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0e5e5708db8440dbaf4874fba587fcf8",
+    "imagePath": "images/Men/0e5e5708db8440dbaf4874fba587fcf8.jpg",
+    "category": "Men",
+    "subcategory": "plaid shirt",
+    "color": "blue",
+    "season": "All-Season",
+    "caption": "Men's blue plaid shirt with long sleeves and button-down design.",
+    "tags": [
+      "plaid",
+      "shirt",
+      "blue",
+      "long sleeves",
+      "casual",
+      "button-down"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0f3935cb13ee08604958fbb7b61ce573",
+    "imagePath": "images/Men/0f3935cb13ee08604958fbb7b61ce573.jpg",
+    "category": "Men",
+    "subcategory": "button-up shirt",
+    "color": "blue",
+    "season": "All-Season",
+    "caption": "Light blue button-up shirt paired with tan pants and brown shoes.",
+    "tags": [
+      "shirt",
+      "pants",
+      "casual",
+      "blue",
+      "tan",
+      "all-season"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0fba89a34ab14217aa10aca4a8fe4212",
+    "imagePath": "images/Men/0fba89a34ab14217aa10aca4a8fe4212.jpg",
+    "category": "Men",
+    "subcategory": "t-shirt",
+    "color": "gray",
+    "season": "All-Season",
+    "caption": "A casual gray t-shirt with a simple design, perfect for everyday wear.",
+    "tags": [
+      "t-shirt",
+      "gray",
+      "casual",
+      "short-sleeve",
+      "basic",
+      "unisex"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0fcbff4822c0fda1dd3ccf0f3585ad36",
+    "imagePath": "images/Men/0fcbff4822c0fda1dd3ccf0f3585ad36.jpg",
+    "category": "Men",
+    "subcategory": "bandhgala blazer",
+    "color": "black",
+    "season": "All-Season",
+    "caption": "A sleek black bandhgala blazer with subtle pinstripes and button closure.",
+    "tags": [
+      "blazer",
+      "formal",
+      "black",
+      "bandhgala",
+      "menswear"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_0fe5d53b48af59ece6d35993eccc0969",
+    "imagePath": "images/Men/0fe5d53b48af59ece6d35993eccc0969.jpg",
+    "category": "Men",
+    "subcategory": "dress pants",
+    "color": "gray",
+    "season": "All-Season",
+    "caption": "Men's gray dress pants with a tailored fit and belt loops.",
+    "tags": [
+      "formal",
+      "tailored",
+      "gray",
+      "pants",
+      "men",
+      "classic"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_1a25a98ca71175ab5cdc22f2af452fc7",
+    "imagePath": "images/Men/1a25a98ca71175ab5cdc22f2af452fc7.jpg",
+    "category": "Men",
+    "subcategory": "tuxedo",
+    "color": "black",
+    "season": "All-Season",
+    "caption": "Elegant black tuxedo with satin lapels and bow tie.",
+    "tags": [
+      "formal",
+      "tuxedo",
+      "black",
+      "menswear",
+      "elegant"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_1af51266dbe3f33f6ca566085c520667",
+    "imagePath": "images/Men/1af51266dbe3f33f6ca566085c520667.jpg",
+    "category": "Men",
+    "subcategory": "blazer",
+    "color": "black",
+    "season": "All-Season",
+    "caption": "Black checkered blazer paired with a white shirt and grey pants.",
+    "tags": [
+      "blazer",
+      "checkered",
+      "formal",
+      "black",
+      "menswear"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_1b1126d7845d1270834ec19b4757fe52",
+    "imagePath": "images/Men/1b1126d7845d1270834ec19b4757fe52.jpg",
+    "category": "Men",
+    "subcategory": "overcoat",
+    "color": "gray",
+    "season": "Winter",
+    "caption": "A man wearing a gray checkered overcoat and holding a small blue box.",
+    "tags": [
+      "overcoat",
+      "gray",
+      "winter",
+      "checkered",
+      "fashion"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_1c0ca8c82577c47c2e8ba21c222d9b35",
+    "imagePath": "images/Men/1c0ca8c82577c47c2e8ba21c222d9b35.jpg",
+    "category": "Men",
+    "subcategory": "blazer",
+    "color": "gray",
+    "season": "Fall",
+    "caption": "Gray herringbone blazer with black shawl collar and button closure.",
+    "tags": [
+      "blazer",
+      "formal",
+      "gray",
+      "shawl collar",
+      "herringbone"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_1e20d93e093d21ccf4566282bff2010c",
+    "imagePath": "images/Men/1e20d93e093d21ccf4566282bff2010c.jpg",
+    "category": "Men",
+    "subcategory": "t-shirt",
+    "color": "black",
+    "season": "All-Season",
+    "caption": "Black short-sleeve t-shirt with a simple and casual design.",
+    "tags": [
+      "t-shirt",
+      "black",
+      "casual",
+      "short-sleeve",
+      "basic"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_1e4f090be89da2a6981b0f3f56e90615",
+    "imagePath": "images/Men/1e4f090be89da2a6981b0f3f56e90615.jpg",
+    "category": "Men",
+    "subcategory": "striped sweater",
+    "color": "white",
+    "season": "All-Season",
+    "caption": "White striped sweater with a casual design and a collared neckline.",
+    "tags": [
+      "striped",
+      "sweater",
+      "casual",
+      "white",
+      "long-sleeve"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_1f0d4fd1a2b5c09c30766d4241ea047b",
+    "imagePath": "images/Men/1f0d4fd1a2b5c09c30766d4241ea047b.jpg",
+    "category": "Men",
+    "subcategory": "double-breasted blazer",
+    "color": "black",
+    "season": "All-Season",
+    "caption": "Elegant black double-breasted blazer with a classic lapel design.",
+    "tags": [
+      "blazer",
+      "formal",
+      "black",
+      "double-breasted",
+      "menswear"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_1f2c862f5dd42c0ccdc1d662940e0d23",
+    "imagePath": "images/Men/1f2c862f5dd42c0ccdc1d662940e0d23.jpg",
+    "category": "Men",
+    "subcategory": "graphic t-shirt",
+    "color": "gray",
+    "season": "All-Season",
+    "caption": "Gray graphic t-shirt with 'WEEKND' print, paired with gray pants and a black hat.",
+    "tags": [
+      "graphic tee",
+      "casual",
+      "gray",
+      "hat",
+      "modern"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_1f7c585f8d284fc922ba6c4c71fc821d",
+    "imagePath": "images/Men/1f7c585f8d284fc922ba6c4c71fc821d.jpg",
+    "category": "Men",
+    "subcategory": "blazer",
+    "color": "blue",
+    "season": "All-Season",
+    "caption": "A sleek blue blazer with a two-button closure and notched lapels.",
+    "tags": [
+      "blazer",
+      "formal",
+      "blue",
+      "menswear",
+      "jacket"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "men_1ffa444d814a1b39ad5c5f8494dadf9f",
+    "imagePath": "images/Men/1ffa444d814a1b39ad5c5f8494dadf9f.jpg",
+    "category": "Men",
+    "subcategory": "quilted vest",
+    "color": "beige",
+    "season": "Fall",
+    "caption": "Beige quilted vest with navy sleeves and patterned inner shirt.",
+    "tags": [
+      "vest",
+      "beige",
+      "quilted",
+      "fall",
+      "casual",
+      "layered"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_000e147149bf33c584afaa953bc198ed",
+    "imagePath": "images/Women/000e147149bf33c584afaa953bc198ed.jpg",
+    "category": "Women",
+    "subcategory": "wedding dress",
+    "color": "white",
+    "season": "All-Season",
+    "caption": "Elegant strapless white wedding dress with a layered skirt and lace details.",
+    "tags": [
+      "wedding",
+      "bridal",
+      "formal",
+      "strapless",
+      "lace",
+      "gown"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_00a4ba6f18cc6c5d618b5f0993785210",
+    "imagePath": "images/Women/00a4ba6f18cc6c5d618b5f0993785210.jpg",
+    "category": "Women",
+    "subcategory": "wedding dress",
+    "color": "white",
+    "season": "All-Season",
+    "caption": "Elegant strapless white wedding dress with a fitted bodice and flared tulle skirt.",
+    "tags": [
+      "wedding",
+      "dress",
+      "strapless",
+      "tulle",
+      "formal",
+      "bridal"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_00b6d6ed71e27101211bd77627e5c1b2",
+    "imagePath": "images/Women/00b6d6ed71e27101211bd77627e5c1b2.jpg",
+    "category": "Women",
+    "subcategory": "cold shoulder top",
+    "color": "gray",
+    "season": "All-Season",
+    "caption": "Gray cold shoulder top with a casual and stylish design.",
+    "tags": [
+      "cold shoulder",
+      "gray",
+      "casual",
+      "top",
+      "fashion",
+      "all-season"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_00bfc94340e552180ce0efb8a2024eff",
+    "imagePath": "images/Women/00bfc94340e552180ce0efb8a2024eff.jpg",
+    "category": "Women",
+    "subcategory": "evening gown",
+    "color": "white",
+    "season": "All-Season",
+    "caption": "Elegant white evening gown with a pleated skirt and embellished neckline.",
+    "tags": [
+      "evening wear",
+      "formal",
+      "gown",
+      "white",
+      "pleated",
+      "embellished"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_00f8f5f0ed311b44eb6654091001b655",
+    "imagePath": "images/Women/00f8f5f0ed311b44eb6654091001b655.jpg",
+    "category": "Women",
+    "subcategory": "tank top",
+    "color": "red",
+    "season": "Summer",
+    "caption": "Red sleeveless tank top with a scoop neckline.",
+    "tags": [
+      "tank top",
+      "red",
+      "sleeveless",
+      "summer",
+      "casual"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_01adf1865fbc438970d76157944c7853",
+    "imagePath": "images/Women/01adf1865fbc438970d76157944c7853.jpg",
+    "category": "Women",
+    "subcategory": "hooded jacket",
+    "color": "navy",
+    "season": "Fall",
+    "caption": "Navy hooded jacket paired with a red sweater and black pants.",
+    "tags": [
+      "jacket",
+      "hooded",
+      "navy",
+      "fall",
+      "casual",
+      "outerwear"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_01b1dcb223c23f9c5d76e70b47b597a0",
+    "imagePath": "images/Women/01b1dcb223c23f9c5d76e70b47b597a0.jpg",
+    "category": "Women",
+    "subcategory": "hoodie",
+    "color": "black",
+    "season": "All-Season",
+    "caption": "Black hoodie with front pocket and drawstring hood.",
+    "tags": [
+      "hoodie",
+      "black",
+      "casual",
+      "long-sleeve",
+      "comfortable"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0a0930e15c3f11841551ea9816a281c9",
+    "imagePath": "images/Women/0a0930e15c3f11841551ea9816a281c9.jpg",
+    "category": "Women",
+    "subcategory": "crop top",
+    "color": "pink",
+    "season": "Summer",
+    "caption": "Bright pink textured crop top with short sleeves, perfect for summer wear.",
+    "tags": [
+      "crop top",
+      "pink",
+      "summer",
+      "textured",
+      "short sleeves"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0a4a0ca461b21a6d45f830659cdcfa11",
+    "imagePath": "images/Women/0a4a0ca461b21a6d45f830659cdcfa11.jpg",
+    "category": "Women",
+    "subcategory": "sweatshirt",
+    "color": "gray",
+    "season": "All-Season",
+    "caption": "Gray sweatshirt with a golden lucky cat graphic and floral accents.",
+    "tags": [
+      "sweatshirt",
+      "graphic print",
+      "casual",
+      "gray",
+      "cat",
+      "comfortable"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0a8501f3f9ea29191891928bd8be1872",
+    "imagePath": "images/Women/0a8501f3f9ea29191891928bd8be1872.jpg",
+    "category": "Women",
+    "subcategory": "evening gown",
+    "color": "white",
+    "season": "All-Season",
+    "caption": "Elegant strapless white evening gown with a draped design.",
+    "tags": [
+      "evening wear",
+      "strapless",
+      "formal",
+      "gown",
+      "white"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0a8b2ea4b9a1c712c2af77cca8888cf2",
+    "imagePath": "images/Women/0a8b2ea4b9a1c712c2af77cca8888cf2.jpg",
+    "category": "Women",
+    "subcategory": "strapless dress",
+    "color": "white",
+    "season": "Summer",
+    "caption": "Elegant white strapless high-low dress with embellished waistline.",
+    "tags": [
+      "strapless",
+      "high-low",
+      "white",
+      "summer",
+      "formal",
+      "dress"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0aab5a12b159ff4cd71c9612025ed1e0",
+    "imagePath": "images/Women/0aab5a12b159ff4cd71c9612025ed1e0.jpg",
+    "category": "Women",
+    "subcategory": "sundress",
+    "color": "white",
+    "season": "Summer",
+    "caption": "A woman in a floral sundress and straw hat sitting on a bamboo bench at the beach.",
+    "tags": [
+      "sundress",
+      "beach",
+      "summer",
+      "straw hat",
+      "floral",
+      "bamboo"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0abf1d552934f274544cc24a0d57c79e",
+    "imagePath": "images/Women/0abf1d552934f274544cc24a0d57c79e.jpg",
+    "category": "Women",
+    "subcategory": "peplum top",
+    "color": "white",
+    "season": "Summer",
+    "caption": "White sleeveless peplum top paired with blue wide-leg pants.",
+    "tags": [
+      "peplum",
+      "sleeveless",
+      "summer",
+      "casual",
+      "fashion"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0ade1c146ceb67172ad78d188a66c18d",
+    "imagePath": "images/Women/0ade1c146ceb67172ad78d188a66c18d.jpg",
+    "category": "Women",
+    "subcategory": "sleeveless dress",
+    "color": "black",
+    "season": "All-Season",
+    "caption": "Elegant black sleeveless dress with lace details, perfect for formal occasions.",
+    "tags": [
+      "dress",
+      "black",
+      "sleeveless",
+      "formal",
+      "lace"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0af23cc5cdcc3343504fd77e0e8a177d",
+    "imagePath": "images/Women/0af23cc5cdcc3343504fd77e0e8a177d.jpg",
+    "category": "Women",
+    "subcategory": "wedding dress",
+    "color": "white",
+    "season": "All-Season",
+    "caption": "Elegant white lace wedding dress with cap sleeves and a long train.",
+    "tags": [
+      "wedding",
+      "lace",
+      "formal",
+      "bridal",
+      "gown"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0b13557ac48ed58a03f65c1937021c88",
+    "imagePath": "images/Women/0b13557ac48ed58a03f65c1937021c88.jpg",
+    "category": "Women",
+    "subcategory": "polka dot dress",
+    "color": "white",
+    "season": "All-Season",
+    "caption": "White polka dot dress with black lace sleeves and flared skirt.",
+    "tags": [
+      "polka dots",
+      "lace sleeves",
+      "flared dress",
+      "white",
+      "black",
+      "elegant"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0b6c46e35d4dbcf11409d0774f400059",
+    "imagePath": "images/Women/0b6c46e35d4dbcf11409d0774f400059.jpg",
+    "category": "Women",
+    "subcategory": "evening gown",
+    "color": "purple",
+    "season": "All-Season",
+    "caption": "Elegant purple evening gown with embellished waist and sheer neckline.",
+    "tags": [
+      "evening wear",
+      "formal dress",
+      "purple",
+      "gown",
+      "embellished",
+      "sleeveless"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0b7eb3f09b412b77a22e9c6dbdc4113b",
+    "imagePath": "images/Women/0b7eb3f09b412b77a22e9c6dbdc4113b.jpg",
+    "category": "Women",
+    "subcategory": "sleeveless dress",
+    "color": "multicolor",
+    "season": "Summer",
+    "caption": "Vibrant sleeveless bodycon dress with a colorful graffiti-inspired print.",
+    "tags": [
+      "dress",
+      "multicolor",
+      "graffiti",
+      "sleeveless",
+      "bodycon",
+      "summer"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0b8354dcaeb5040903f64366e4b7f3e7",
+    "imagePath": "images/Women/0b8354dcaeb5040903f64366e4b7f3e7.jpg",
+    "category": "Women",
+    "subcategory": "pinstripe pants",
+    "color": "black",
+    "season": "All-Season",
+    "caption": "Black pinstripe pants with a high-waisted design for a sleek look.",
+    "tags": [
+      "pants",
+      "pinstripe",
+      "black",
+      "high-waisted",
+      "formal",
+      "all-season"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0bdb62641f906f99e4229d92256eab6f",
+    "imagePath": "images/Women/0bdb62641f906f99e4229d92256eab6f.jpg",
+    "category": "Women",
+    "subcategory": "flannel shirt",
+    "color": "blue",
+    "season": "Winter",
+    "caption": "Blue plaid flannel shirt paired with ripped jeans and brown boots in a snowy setting.",
+    "tags": [
+      "flannel",
+      "winter",
+      "plaid",
+      "boots",
+      "jeans"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0beab4c0b9ffe5752dcfaa18749c8406",
+    "imagePath": "images/Women/0beab4c0b9ffe5752dcfaa18749c8406.jpg",
+    "category": "Women",
+    "subcategory": "zip-up hoodie",
+    "color": "gray",
+    "season": "All-Season",
+    "caption": "Gray and maroon zip-up hoodie with front pockets and drawstring hood.",
+    "tags": [
+      "hoodie",
+      "zip-up",
+      "casual",
+      "gray",
+      "maroon"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0c26538de480a11a1f0764f7a3239173",
+    "imagePath": "images/Women/0c26538de480a11a1f0764f7a3239173.jpg",
+    "category": "Women",
+    "subcategory": "crossbody bag",
+    "color": "brown",
+    "season": "All-Season",
+    "caption": "Brown leather crossbody bag paired with casual attire outdoors.",
+    "tags": [
+      "crossbody bag",
+      "leather",
+      "casual",
+      "accessory",
+      "outdoor"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0ca49efba2d8bb2d8190f7fb69f225cb",
+    "imagePath": "images/Women/0ca49efba2d8bb2d8190f7fb69f225cb.jpg",
+    "category": "Women",
+    "subcategory": "button-up shirt",
+    "color": "blue",
+    "season": "All-Season",
+    "caption": "A stylish navy blue button-up shirt paired with gray trousers and a decorative belt.",
+    "tags": [
+      "shirt",
+      "blue",
+      "formal",
+      "long-sleeve",
+      "button-up"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0caf221db7dd1ae84519bedb66f8c39a",
+    "imagePath": "images/Women/0caf221db7dd1ae84519bedb66f8c39a.jpg",
+    "category": "Women",
+    "subcategory": "blouse",
+    "color": "blue",
+    "season": "All-Season",
+    "caption": "Bright blue short-sleeve blouse with a high neckline.",
+    "tags": [
+      "blouse",
+      "blue",
+      "short-sleeve",
+      "high-neck",
+      "fashion"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0cd489f33d6fbf78db72b0fb81174370",
+    "imagePath": "images/Women/0cd489f33d6fbf78db72b0fb81174370.jpg",
+    "category": "Women",
+    "subcategory": "halter dress",
+    "color": "black",
+    "season": "All-Season",
+    "caption": "Elegant black halter dress with a keyhole neckline.",
+    "tags": [
+      "dress",
+      "halter",
+      "black",
+      "keyhole",
+      "elegant"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0d279c565828f823f0add6b0d278f70a",
+    "imagePath": "images/Women/0d279c565828f823f0add6b0d278f70a.jpg",
+    "category": "Women",
+    "subcategory": "halter dress",
+    "color": "yellow",
+    "season": "Summer",
+    "caption": "Bright yellow halter dress with side cutouts, perfect for summer outings.",
+    "tags": [
+      "halter",
+      "dress",
+      "yellow",
+      "summer",
+      "cutout",
+      "fashion"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0d484f598a009f98ab1f3f13076b3905",
+    "imagePath": "images/Women/0d484f598a009f98ab1f3f13076b3905.jpg",
+    "category": "Women",
+    "subcategory": "halter dress",
+    "color": "gray",
+    "season": "All-Season",
+    "caption": "Gray halter dress with layered fringe design, perfect for a stylish look.",
+    "tags": [
+      "halter dress",
+      "gray",
+      "fringe",
+      "fashion",
+      "runway"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0dd1b2cfba7e2939590e0c95dfd6d126",
+    "imagePath": "images/Women/0dd1b2cfba7e2939590e0c95dfd6d126.jpg",
+    "category": "Women",
+    "subcategory": "bomber jacket",
+    "color": "navy",
+    "season": "Fall",
+    "caption": "Navy bomber jacket paired with black leather pants and a red handbag.",
+    "tags": [
+      "bomber jacket",
+      "navy",
+      "fall fashion",
+      "leather pants",
+      "red handbag"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0dd7b45b77c55ad3862e297b2488bb5b",
+    "imagePath": "images/Women/0dd7b45b77c55ad3862e297b2488bb5b.jpg",
+    "category": "Women",
+    "subcategory": "striped blouse",
+    "color": "blue",
+    "season": "Spring",
+    "caption": "Blue striped blouse paired with flared jeans and white belt.",
+    "tags": [
+      "striped",
+      "blouse",
+      "flared jeans",
+      "spring",
+      "casual",
+      "outdoor"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0de9ea7d233e6699385ebb450741ba8f",
+    "imagePath": "images/Women/0de9ea7d233e6699385ebb450741ba8f.jpg",
+    "category": "Women",
+    "subcategory": "evening gown",
+    "color": "orange",
+    "season": "All-Season",
+    "caption": "Elegant orange one-shoulder evening gown with draped design.",
+    "tags": [
+      "evening wear",
+      "one-shoulder",
+      "draped",
+      "formal",
+      "orange"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0e6c4b227a1146916323393917adcffd",
+    "imagePath": "images/Women/0e6c4b227a1146916323393917adcffd.jpg",
+    "category": "Women",
+    "subcategory": "wedding dress",
+    "color": "white",
+    "season": "All-Season",
+    "caption": "Elegant strapless white wedding dress with flowing layered skirt.",
+    "tags": [
+      "wedding",
+      "dress",
+      "formal",
+      "bridal",
+      "strapless",
+      "elegant"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0eb92102a012c0ab6119d3e39646b2db",
+    "imagePath": "images/Women/0eb92102a012c0ab6119d3e39646b2db.jpg",
+    "category": "Women",
+    "subcategory": "sleeveless top",
+    "color": "pink",
+    "season": "Summer",
+    "caption": "A pink sleeveless top paired with white high-waisted pants on a runway model.",
+    "tags": [
+      "sleeveless",
+      "pink",
+      "fashion",
+      "runway",
+      "summer",
+      "pants"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0f22ce024edb2c7936858b043b05947a",
+    "imagePath": "images/Women/0f22ce024edb2c7936858b043b05947a.jpg",
+    "category": "Women",
+    "subcategory": "leggings",
+    "color": "white",
+    "season": "Fall",
+    "caption": "Black and white patterned leggings paired with brown boots and a black fur vest.",
+    "tags": [
+      "leggings",
+      "boots",
+      "fall fashion",
+      "patterned",
+      "casual"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0f455cd20bfc86f3a58bdf2fffe6ae3d",
+    "imagePath": "images/Women/0f455cd20bfc86f3a58bdf2fffe6ae3d.jpg",
+    "category": "Women",
+    "subcategory": "wool coat",
+    "color": "green",
+    "season": "Fall",
+    "caption": "Green wool coat with button closure and front pockets.",
+    "tags": [
+      "wool",
+      "coat",
+      "green",
+      "fall",
+      "outerwear"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0f684ed72cd6360d7955f51532136013",
+    "imagePath": "images/Women/0f684ed72cd6360d7955f51532136013.jpg",
+    "category": "Women",
+    "subcategory": "zip-up hoodie",
+    "color": "gray",
+    "season": "All-Season",
+    "caption": "Gray zip-up hoodie with white drawstrings and front pockets.",
+    "tags": [
+      "hoodie",
+      "zip-up",
+      "gray",
+      "casual",
+      "all-season"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0fce707a4cfb20831181195bcf08c2f2",
+    "imagePath": "images/Women/0fce707a4cfb20831181195bcf08c2f2.jpg",
+    "category": "Women",
+    "subcategory": "evening gown",
+    "color": "blue",
+    "season": "All-Season",
+    "caption": "Elegant strapless blue evening gown with embellished waistline.",
+    "tags": [
+      "evening wear",
+      "strapless",
+      "formal",
+      "blue",
+      "gown"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_0fd5ccf7ebafd87546e37be0c95fd253",
+    "imagePath": "images/Women/0fd5ccf7ebafd87546e37be0c95fd253.jpg",
+    "category": "Women",
+    "subcategory": "turtleneck sweater",
+    "color": "white",
+    "season": "Fall",
+    "caption": "A cozy white ribbed turtleneck sweater with long sleeves.",
+    "tags": [
+      "sweater",
+      "turtleneck",
+      "ribbed",
+      "white",
+      "fall",
+      "casual"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_1aede06311dcae4d510489a0a768ddc5",
+    "imagePath": "images/Women/1aede06311dcae4d510489a0a768ddc5.jpg",
+    "category": "Women",
+    "subcategory": "sleeveless top",
+    "color": "black",
+    "season": "All-Season",
+    "caption": "Black sleeveless top with white accents and draped design.",
+    "tags": [
+      "sleeveless",
+      "black",
+      "draped",
+      "top",
+      "white accents"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_1b137e06c02325498fc204e05fabe2ef",
+    "imagePath": "images/Women/1b137e06c02325498fc204e05fabe2ef.jpg",
+    "category": "Women",
+    "subcategory": "knit sweater",
+    "color": "beige",
+    "season": "Fall",
+    "caption": "Beige knit sweater with a textured pattern, perfect for fall weather.",
+    "tags": [
+      "sweater",
+      "knit",
+      "beige",
+      "fall",
+      "cozy"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_1b6216e04e3d49252c889669b0877c8d",
+    "imagePath": "images/Women/1b6216e04e3d49252c889669b0877c8d.jpg",
+    "category": "Women",
+    "subcategory": "evening gown",
+    "color": "blue",
+    "season": "All-Season",
+    "caption": "Elegant blue evening gown with embellished straps and pleated bodice.",
+    "tags": [
+      "evening wear",
+      "formal",
+      "blue dress",
+      "embellished",
+      "pleated"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_1b63d2efeec2ca7122c5d0c4ddbc4a0e",
+    "imagePath": "images/Women/1b63d2efeec2ca7122c5d0c4ddbc4a0e.jpg",
+    "category": "Women",
+    "subcategory": "strapless dress",
+    "color": "black",
+    "season": "All-Season",
+    "caption": "Elegant black strapless dress with tiered design and floral detail.",
+    "tags": [
+      "dress",
+      "strapless",
+      "black",
+      "formal",
+      "tiered",
+      "elegant"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_1ea73de26e3e183b113082b16dbb1864",
+    "imagePath": "images/Women/1ea73de26e3e183b113082b16dbb1864.jpg",
+    "category": "Women",
+    "subcategory": "women's suit",
+    "color": "black",
+    "season": "All-Season",
+    "caption": "Black pinstripe women's suit with a blue top, perfect for professional settings.",
+    "tags": [
+      "suit",
+      "formal",
+      "pinstripe",
+      "professional",
+      "women's wear"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_1ef2b11a53922b8796c28a83e33efbc8",
+    "imagePath": "images/Women/1ef2b11a53922b8796c28a83e33efbc8.jpg",
+    "category": "Women",
+    "subcategory": "tank top",
+    "color": "orange",
+    "season": "Summer",
+    "caption": "Orange athletic tank top paired with black shorts, ideal for workouts.",
+    "tags": [
+      "tank top",
+      "athletic",
+      "orange",
+      "summer",
+      "workout",
+      "activewear"
+    ],
+    "public": true
+  },
+  {
+    "assetId": "women_1f5e803ea0574ad02b13086243a60138",
+    "imagePath": "images/Women/1f5e803ea0574ad02b13086243a60138.jpg",
+    "category": "Women",
+    "subcategory": "sun hat",
+    "color": "blue",
+    "season": "Summer",
+    "caption": "Striped sun hat and sunglasses paired with a red and orange striped dress.",
+    "tags": [
+      "sun hat",
+      "sunglasses",
+      "striped dress",
+      "summer fashion",
+      "accessories"
+    ],
+    "public": true
+  }
+]

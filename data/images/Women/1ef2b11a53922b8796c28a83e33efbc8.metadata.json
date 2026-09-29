@@ -1,0 +1,20 @@
+{
+  "assetId": "women_1ef2b11a53922b8796c28a83e33efbc8",
+  "subcategory": "tank top",
+  "color": "orange",
+  "season": "Summer",
+  "caption": "Orange athletic tank top paired with black shorts, ideal for workouts.",
+  "tags": [
+    "tank top",
+    "athletic",
+    "orange",
+    "summer",
+    "workout",
+    "activewear"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:44:16.1706135Z"
+  }
+}

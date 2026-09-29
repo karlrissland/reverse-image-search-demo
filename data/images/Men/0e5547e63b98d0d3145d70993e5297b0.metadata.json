@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0e5547e63b98d0d3145d70993e5297b0",
+  "subcategory": "polo shirt",
+  "color": "green",
+  "season": "All-Season",
+  "caption": "Green polo shirt with contrasting collar and rolled sleeves.",
+  "tags": [
+    "polo shirt",
+    "green",
+    "casual",
+    "short sleeves",
+    "collared"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:40:37.1549242Z"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "assetId": "women_0c26538de480a11a1f0764f7a3239173",
+  "subcategory": "crossbody bag",
+  "color": "brown",
+  "season": "All-Season",
+  "caption": "Brown leather crossbody bag paired with casual attire outdoors.",
+  "tags": [
+    "crossbody bag",
+    "leather",
+    "casual",
+    "accessory",
+    "outdoor"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:43:00.6358467Z"
+  }
+}

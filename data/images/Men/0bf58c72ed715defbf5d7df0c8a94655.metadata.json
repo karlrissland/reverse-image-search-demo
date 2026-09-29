@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0bf58c72ed715defbf5d7df0c8a94655",
+  "subcategory": "t-shirt",
+  "color": "blue",
+  "season": "All-Season",
+  "caption": "Men's blue V-neck t-shirt with short sleeves.",
+  "tags": [
+    "t-shirt",
+    "blue",
+    "v-neck",
+    "casual",
+    "short sleeves"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:39:55.5864486Z"
+  }
+}

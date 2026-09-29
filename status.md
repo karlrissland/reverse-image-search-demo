@@ -10,12 +10,17 @@ See [plan.md](plan.md) for full detail.
 ## Phase 0 — Trackers
 - [x] Write `plan.md` (personalization plan)
 - [x] Write `status.md` (this file)
-- 🛑 **CHECKPOINT 0** — [ ] user reads plan.md + status.md and confirms scope/approach
+- ✅ **CHECKPOINT 0** — [x] user reviewed plan.md + status.md and approved scope/approach
 
 ## Phase 1 — Establish the baseline
-- [ ] Obtain/confirm a small test image set + metadata (reuse sample corpus or assemble neutral set)
-- [ ] Validate `data/manifest.json` against the schema
-- [ ] Deploy the apps (`azd up` and/or run both apps locally)
+> Note: the repo shipped with NO baseline dataset. Assembled fresh from Fashionpedia (86 images: 42 Men, 44 Women, all .jpg).
+- [x] Source test images — Fashionpedia images placed in `data/images/Men` + `data/images/Women` (86 total)
+- [x] Add attribution footnotes (Fashionpedia, Archify, scraping stack) to README
+- [x] Generate `data/manifest.json` (structural) via `src/scripts/build-manifest.ps1`
+- [x] gpt-4o enrichment → 86 `.metadata.json` sidecars via `src/hooks/enrich-metadata.ps1` (0 failed)
+- [x] Mirror descriptive fields into `data/manifest.json` via `src/scripts/merge-sidecars.ps1`
+- [x] Validate `data/manifest.json` against the schema (86 unique ids, no disallowed keys, valid seasons)
+- [ ] Deploy the apps — user will run `azd up` and report results
 - [ ] Verify search (image/URL/crop) + facets + no-strong-match + public/internal boundaries on test data
 - [ ] Verify the generic neutral skin renders correctly on both internal and public sites
 - [ ] Record the baseline (deployment + dataset + screenshots/notes) as the reference point

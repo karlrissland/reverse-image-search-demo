@@ -1,0 +1,19 @@
+{
+  "assetId": "women_0a0930e15c3f11841551ea9816a281c9",
+  "subcategory": "crop top",
+  "color": "pink",
+  "season": "Summer",
+  "caption": "Bright pink textured crop top with short sleeves, perfect for summer wear.",
+  "tags": [
+    "crop top",
+    "pink",
+    "summer",
+    "textured",
+    "short sleeves"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:42:06.0101851Z"
+  }
+}

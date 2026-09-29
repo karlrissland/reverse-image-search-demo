@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0a6f1c749b91422ea630a25e86ebaff8",
+  "subcategory": "dress shirt",
+  "color": "white",
+  "season": "All-Season",
+  "caption": "White dress shirt paired with a leather-strap watch and a black necklace.",
+  "tags": [
+    "shirt",
+    "white",
+    "formal",
+    "watch",
+    "necklace"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:39:21.9611001Z"
+  }
+}

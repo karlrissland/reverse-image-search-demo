@@ -1,0 +1,19 @@
+{
+  "assetId": "men_1b1126d7845d1270834ec19b4757fe52",
+  "subcategory": "overcoat",
+  "color": "gray",
+  "season": "Winter",
+  "caption": "A man wearing a gray checkered overcoat and holding a small blue box.",
+  "tags": [
+    "overcoat",
+    "gray",
+    "winter",
+    "checkered",
+    "fashion"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:41:07.4912984Z"
+  }
+}

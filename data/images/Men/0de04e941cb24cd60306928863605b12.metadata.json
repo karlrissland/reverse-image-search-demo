@@ -1,0 +1,20 @@
+{
+  "assetId": "men_0de04e941cb24cd60306928863605b12",
+  "subcategory": "polo shirt",
+  "color": "green",
+  "season": "All-Season",
+  "caption": "Striped green and red polo shirt with short sleeves.",
+  "tags": [
+    "polo shirt",
+    "striped",
+    "green",
+    "red",
+    "casual",
+    "short sleeves"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:40:26.4879536Z"
+  }
+}

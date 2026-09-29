@@ -1,0 +1,19 @@
+{
+  "assetId": "women_0f455cd20bfc86f3a58bdf2fffe6ae3d",
+  "subcategory": "wool coat",
+  "color": "green",
+  "season": "Fall",
+  "caption": "Green wool coat with button closure and front pockets.",
+  "tags": [
+    "wool",
+    "coat",
+    "green",
+    "fall",
+    "outerwear"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:43:42.8316372Z"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "assetId": "men_1c0ca8c82577c47c2e8ba21c222d9b35",
+  "subcategory": "blazer",
+  "color": "gray",
+  "season": "Fall",
+  "caption": "Gray herringbone blazer with black shawl collar and button closure.",
+  "tags": [
+    "blazer",
+    "formal",
+    "gray",
+    "shawl collar",
+    "herringbone"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:41:11.4192254Z"
+  }
+}

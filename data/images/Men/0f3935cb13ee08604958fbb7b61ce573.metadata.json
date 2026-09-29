@@ -1,0 +1,20 @@
+{
+  "assetId": "men_0f3935cb13ee08604958fbb7b61ce573",
+  "subcategory": "button-up shirt",
+  "color": "blue",
+  "season": "All-Season",
+  "caption": "Light blue button-up shirt paired with tan pants and brown shoes.",
+  "tags": [
+    "shirt",
+    "pants",
+    "casual",
+    "blue",
+    "tan",
+    "all-season"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:40:44.5186105Z"
+  }
+}

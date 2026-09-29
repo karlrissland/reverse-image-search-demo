@@ -1,0 +1,20 @@
+{
+  "assetId": "men_0d16fca3f6aa58b785b02494581fec7e",
+  "subcategory": "blazer",
+  "color": "black",
+  "season": "Fall",
+  "caption": "Black blazer with leather sleeves and zippered pockets.",
+  "tags": [
+    "blazer",
+    "leather sleeves",
+    "formal",
+    "black",
+    "fall",
+    "zippered pockets"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:40:02.8001303Z"
+  }
+}

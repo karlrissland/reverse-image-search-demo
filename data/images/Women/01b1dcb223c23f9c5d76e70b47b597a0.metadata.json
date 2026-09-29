@@ -1,0 +1,19 @@
+{
+  "assetId": "women_01b1dcb223c23f9c5d76e70b47b597a0",
+  "subcategory": "hoodie",
+  "color": "black",
+  "season": "All-Season",
+  "caption": "Black hoodie with front pocket and drawstring hood.",
+  "tags": [
+    "hoodie",
+    "black",
+    "casual",
+    "long-sleeve",
+    "comfortable"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:42:01.5432095Z"
+  }
+}

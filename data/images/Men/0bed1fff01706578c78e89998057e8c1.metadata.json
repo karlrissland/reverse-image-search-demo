@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0bed1fff01706578c78e89998057e8c1",
+  "subcategory": "graphic t-shirt",
+  "color": "black",
+  "season": "All-Season",
+  "caption": "Black graphic t-shirt featuring a bold illustrated design and text.",
+  "tags": [
+    "t-shirt",
+    "graphic",
+    "black",
+    "casual",
+    "illustration"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:39:51.8101301Z"
+  }
+}

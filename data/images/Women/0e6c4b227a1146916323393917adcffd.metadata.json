@@ -1,0 +1,20 @@
+{
+  "assetId": "women_0e6c4b227a1146916323393917adcffd",
+  "subcategory": "wedding dress",
+  "color": "white",
+  "season": "All-Season",
+  "caption": "Elegant strapless white wedding dress with flowing layered skirt.",
+  "tags": [
+    "wedding",
+    "dress",
+    "formal",
+    "bridal",
+    "strapless",
+    "elegant"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:43:32.1478781Z"
+  }
+}

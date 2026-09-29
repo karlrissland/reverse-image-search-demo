@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0a657c09b2f668075d758bdaaf0bb6f8",
+  "subcategory": "hoodie",
+  "color": "gray",
+  "season": "All-Season",
+  "caption": "Gray hoodie with maroon sleeves and a front pocket.",
+  "tags": [
+    "hoodie",
+    "casual",
+    "gray",
+    "maroon",
+    "long-sleeve"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:39:18.4356776Z"
+  }
+}

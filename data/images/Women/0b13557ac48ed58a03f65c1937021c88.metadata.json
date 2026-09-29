@@ -1,0 +1,20 @@
+{
+  "assetId": "women_0b13557ac48ed58a03f65c1937021c88",
+  "subcategory": "polka dot dress",
+  "color": "white",
+  "season": "All-Season",
+  "caption": "White polka dot dress with black lace sleeves and flared skirt.",
+  "tags": [
+    "polka dots",
+    "lace sleeves",
+    "flared dress",
+    "white",
+    "black",
+    "elegant"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:42:37.1187325Z"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "assetId": "women_0fce707a4cfb20831181195bcf08c2f2",
+  "subcategory": "evening gown",
+  "color": "blue",
+  "season": "All-Season",
+  "caption": "Elegant strapless blue evening gown with embellished waistline.",
+  "tags": [
+    "evening wear",
+    "strapless",
+    "formal",
+    "blue",
+    "gown"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:43:49.8328942Z"
+  }
+}

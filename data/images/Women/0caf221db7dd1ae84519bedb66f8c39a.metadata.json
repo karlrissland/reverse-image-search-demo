@@ -1,0 +1,19 @@
+{
+  "assetId": "women_0caf221db7dd1ae84519bedb66f8c39a",
+  "subcategory": "blouse",
+  "color": "blue",
+  "season": "All-Season",
+  "caption": "Bright blue short-sleeve blouse with a high neckline.",
+  "tags": [
+    "blouse",
+    "blue",
+    "short-sleeve",
+    "high-neck",
+    "fashion"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:43:08.0766728Z"
+  }
+}

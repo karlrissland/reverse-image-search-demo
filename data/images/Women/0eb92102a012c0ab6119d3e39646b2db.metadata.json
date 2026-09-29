@@ -1,0 +1,20 @@
+{
+  "assetId": "women_0eb92102a012c0ab6119d3e39646b2db",
+  "subcategory": "sleeveless top",
+  "color": "pink",
+  "season": "Summer",
+  "caption": "A pink sleeveless top paired with white high-waisted pants on a runway model.",
+  "tags": [
+    "sleeveless",
+    "pink",
+    "fashion",
+    "runway",
+    "summer",
+    "pants"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:43:35.8368992Z"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "assetId": "men_0d25c10a8cdeb84bdf2a0a8005fa7dec",
+  "subcategory": "t-shirt",
+  "color": "green",
+  "season": "All-Season",
+  "caption": "Green t-shirt with a printed design and text on the front.",
+  "tags": [
+    "t-shirt",
+    "green",
+    "casual",
+    "printed",
+    "short-sleeve"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:40:11.0113025Z"
+  }
+}

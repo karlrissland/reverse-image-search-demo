@@ -1,0 +1,19 @@
+{
+  "assetId": "women_0cd489f33d6fbf78db72b0fb81174370",
+  "subcategory": "halter dress",
+  "color": "black",
+  "season": "All-Season",
+  "caption": "Elegant black halter dress with a keyhole neckline.",
+  "tags": [
+    "dress",
+    "halter",
+    "black",
+    "keyhole",
+    "elegant"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:43:11.3081058Z"
+  }
+}

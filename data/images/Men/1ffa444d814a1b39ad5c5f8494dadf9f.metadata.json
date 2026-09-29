@@ -1,0 +1,20 @@
+{
+  "assetId": "men_1ffa444d814a1b39ad5c5f8494dadf9f",
+  "subcategory": "quilted vest",
+  "color": "beige",
+  "season": "Fall",
+  "caption": "Beige quilted vest with navy sleeves and patterned inner shirt.",
+  "tags": [
+    "vest",
+    "beige",
+    "quilted",
+    "fall",
+    "casual",
+    "layered"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:41:33.9852834Z"
+  }
+}

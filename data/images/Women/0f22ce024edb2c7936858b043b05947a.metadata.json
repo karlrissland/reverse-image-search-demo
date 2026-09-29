@@ -1,0 +1,19 @@
+{
+  "assetId": "women_0f22ce024edb2c7936858b043b05947a",
+  "subcategory": "leggings",
+  "color": "white",
+  "season": "Fall",
+  "caption": "Black and white patterned leggings paired with brown boots and a black fur vest.",
+  "tags": [
+    "leggings",
+    "boots",
+    "fall fashion",
+    "patterned",
+    "casual"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:43:39.8073265Z"
+  }
+}

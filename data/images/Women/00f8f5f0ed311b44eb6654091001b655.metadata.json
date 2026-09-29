@@ -1,0 +1,19 @@
+{
+  "assetId": "women_00f8f5f0ed311b44eb6654091001b655",
+  "subcategory": "tank top",
+  "color": "red",
+  "season": "Summer",
+  "caption": "Red sleeveless tank top with a scoop neckline.",
+  "tags": [
+    "tank top",
+    "red",
+    "sleeveless",
+    "summer",
+    "casual"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:41:54.0321825Z"
+  }
+}

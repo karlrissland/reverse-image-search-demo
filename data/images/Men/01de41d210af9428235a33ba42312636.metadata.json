@@ -1,0 +1,19 @@
+{
+  "assetId": "men_01de41d210af9428235a33ba42312636",
+  "subcategory": "denim shirt",
+  "color": "blue",
+  "season": "All-Season",
+  "caption": "Stylish blue denim shirt with button-down collar and chest pockets.",
+  "tags": [
+    "denim",
+    "shirt",
+    "blue",
+    "casual",
+    "long-sleeve"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:39:02.0393280Z"
+  }
+}

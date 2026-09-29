@@ -1,0 +1,20 @@
+{
+  "assetId": "women_0a4a0ca461b21a6d45f830659cdcfa11",
+  "subcategory": "sweatshirt",
+  "color": "gray",
+  "season": "All-Season",
+  "caption": "Gray sweatshirt with a golden lucky cat graphic and floral accents.",
+  "tags": [
+    "sweatshirt",
+    "graphic print",
+    "casual",
+    "gray",
+    "cat",
+    "comfortable"
+  ],
+  "enrichment": {
+    "model": "gpt-4o",
+    "modelVersion": "2024-11-20",
+    "generatedAt": "2026-09-29T15:42:09.9667613Z"
+  }
+}

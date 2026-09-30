@@ -63,6 +63,23 @@ point. Work on a throwaway branch so the whole run is easy to unwind.
    is reverted to the last good commit, never piled on. If flow work can't be stabilized, revert and
    ship without it — the branding + catalog + skin demo already stands on its own.
 
+## Fallback when scraping is blocked (don't stall the demo)
+The onboarding scripts make extraction accurate and precise, but they are an accelerator, not a hard
+requirement. They already drive a **real Edge/Chrome browser headed by default**, so watch the window
+and click through any bot challenge that appears. If a site still fights back (aggressive bot
+protection, JS-only rendering, login walls) and a tool times out or returns mostly defaults, escalate:
+- **Escalate to the MCP browser first.** Open the site in the keyless **Playwright MCP** browser
+  (Edge, `.vscode/mcp.json`) and drive it interactively so the human clears the challenge, then read
+  branding/URLs/images directly. Only drop to approximation if even that can't reach the site.
+- **Branding:** ask the user for screenshots (homepage, a category page, header/footer) and eyeball
+  the palette, fonts, logo, and copy into `branding.json`. See the `scrape-branding` fallback section.
+- **Catalog:** read products off screenshots, and where the real images/copy are blocked, use image
+  generation to synthesize representative stand-in images and draft descriptions/metadata. Mark them
+  as generated in the sidecar `attributes`. See the `build-catalog` fallback section.
+- Always tell the user which parts are approximated vs scraped, keep the not-affiliated disclaimer,
+  and invite corrections at each checkpoint. A close-enough demo built from a couple of screenshots is
+  a valid outcome — more real data just raises the fidelity.
+
 ## Contracts & scripts
 All script names, flags, and the `catalog.json` / `branding.json` shapes are pinned in
 [`tools/onboarding/CONTRACT.md`](../../../tools/onboarding/CONTRACT.md). Use those exact commands.

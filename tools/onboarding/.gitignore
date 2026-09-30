@@ -1,6 +1,7 @@
 # Onboarding tool local artifacts — never commit customer data or heavy deps.
 node_modules/
 storage/
+.playwright-mcp/
 .cache/
 # Screenshots + working outputs from a personalization run (customer data).
 *.png

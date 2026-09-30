@@ -12,6 +12,23 @@ All scripts live in `tools/onboarding/` (a self-contained Node package, its own 
 They are keyless, idempotent, honor `robots.txt`, and rate-limit by default. Run from the repo root
 unless noted. Node 20+; browsers installed via `npx playwright install`.
 
+### Browser driving (scrapers #1 and #3)
+
+The two scraping scripts drive a **real installed browser channel** (Microsoft **Edge** first, then
+Chrome) via raw Playwright — not bundled headless Chromium, which retail bot walls detect and stall.
+They run **headed by default** so a human can click through any bot challenge / CAPTCHA in the window.
+Shared flags:
+
+- `--headless` — opt out of headed mode (CI / cooperative sites). Default is headed.
+- `--channel <msedge|chrome>` — pin a specific channel. Default tries `msedge` then `chrome`, then
+  falls back to bundled Chromium with a warning.
+
+**Bot-protected sites (escalation).** If even the headed real browser is blocked, or the site is
+JS-only / behind a login wall, escalate to the keyless **Playwright MCP** browser (Edge) configured in
+`.vscode/mcp.json` and drive it interactively (human-in-the-loop) to read branding/URLs. If that still
+fails, fall back to **approximation** (screenshots the user provides + generated stand-in catalog
+images), clearly marking what is approximated vs scraped. See the personalization skills.
+
 ---
 
 ## Data locations (targets the scripts write)
@@ -27,14 +44,29 @@ unless noted. Node 20+; browsers installed via `npx playwright install`.
 ## 1. `scrape-catalog.mjs` — discover products, emit a catalog
 
 ```
-node tools/onboarding/scrape-catalog.mjs --url <site> [--map <urls.json>] \
-  [--max <n>] [--categories "A,B,C"] --out catalog.json
+node tools/onboarding/scrape-catalog.mjs [--url <site>] \
+  [--category-urls "<listing1>,<listing2>"] [--map <urls.json>] \
+  [--max <n>] [--categories "A,B,C"] [--headless] [--channel msedge] --out catalog.json
 ```
 
-- Crawls with Crawlee + Playwright to discover product pages and extract product info + image URLs.
-- `--map` optionally supplies known page/category URLs to skip discovery.
-- `--max` caps items (per run) for quick demos. `--categories` constrains discovery.
-- **Downloads nothing.** Output only: `catalog.json` (shape below).
+- Raw Playwright (real Edge/Chrome channel, headed by default). **Downloads nothing.** Output only:
+  `catalog.json` (shape below). Three input modes, in order of preference:
+  1. **`--category-urls "<u1>,<u2>"` (preferred)** — each URL is a **category listing page**; the script
+     loads it, scrolls to trigger lazy images, and harvests product data (URL + image + title) straight
+     from the listing tiles. It does **not** open each product page — many retail sites bot-block deep
+     product navigation, and the listing tile already carries what a demo corpus needs. The category
+     name is derived from the listing (h1/og:title) or supplied via the `--map` object form. Sibling
+     subcategory tiles (those sharing the listing's first path segment) are dropped. `--max` is applied
+     **per category**. The category URLs typically come from `extract-branding.mjs`'s `navLinks` output
+     (run branding first, curate its nav links, feed the product categories here).
+  2. **`--map <urls.json>`** — a JSON file. `{ "categories": [ {"name":"Women","url":"…"}, "…" ] }`
+     expands listing pages (same as mode 1, with optional explicit names). A bare array or
+     `{ "pages": […] }` is treated as **direct product-page URLs**. Use this when category URLs contain
+     commas or you want to name categories.
+  3. **`--url <site>` only** — fallback bounded, robots-aware same-origin crawl from the homepage.
+- `--url` is optional when `--category-urls`/`--map` is given (origin is taken from the first URL).
+- `--max` caps items (per category in modes 1–2, total in mode 3). `--categories` supplies name hints.
+- `--headless` / `--channel` as described in **Browser driving** above.
 
 ## 2. `download-catalog.mjs` — fetch images, write manifest + sidecars
 
@@ -50,11 +82,15 @@ node tools/onboarding/download-catalog.mjs --input catalog.json [--public-split 
 ## 3. `extract-branding.mjs` — palette, fonts, logo, copy
 
 ```
-node tools/onboarding/extract-branding.mjs --url <site> --out branding.json
+node tools/onboarding/extract-branding.mjs --url <site> [--headless] [--channel msedge] --out branding.json
 ```
 
-- Playwright screenshots + node-vibrant palette; computed styles → fonts; og:image/favicon/header
-  `<img>` → logo URL. Emits `branding.json` (shape below). Downloads nothing.
+- Playwright screenshots (real Edge/Chrome channel, headed by default) + node-vibrant palette;
+  computed styles → fonts; og:image/favicon/header `<img>` → logo URL. Emits `branding.json`
+  (shape below). Downloads nothing (a `<host>-home.png` screenshot is written beside `--out`).
+- Also harvests the homepage's primary navigation into `navLinks` (labeled, same-origin candidate
+  category URLs). These are **advisory** — not applied to the skin — and exist so the AI can curate
+  the real product categories and feed them to `scrape-catalog.mjs --category-urls`.
 
 ## 4. `apply-branding.mjs` — map branding into both apps
 
@@ -134,9 +170,16 @@ Personalization edits files in place, so undo is a git operation, not a bundled 
     "danger": "#e5484d"
   },
   "fonts": { "heading": "Poppins, sans-serif", "body": "Inter, sans-serif" },
+  "navLinks": [
+    { "label": "Women's Costumes", "url": "https://www.example.com/category/womens/..." },
+    { "label": "Decorations", "url": "https://www.example.com/category/decor/..." }
+  ],
   "provenance": { "screenshots": ["home.png"], "swatchSource": "node-vibrant" }
 }
 ```
+
+- `navLinks` are **advisory** candidate category URLs harvested from the homepage nav (not applied to
+  the skin). Curate them into product categories and pass to `scrape-catalog.mjs --category-urls`.
 
 `brand.logoUrl`, `brand.fontUrl`, and `fonts.*` are consumed only once **Phase 4** lands; earlier
 phases ignore them safely.

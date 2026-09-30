@@ -15,12 +15,15 @@ disclaimer. Do not commit customer logos/assets to a shared branch.
 ## Steps
 1. **Inspect the site** with the Playwright MCP server: navigate to the homepage (and a category page),
    capture a screenshot, and read computed styles for dominant fonts.
-2. **Extract branding** → run `extract-branding.mjs --url <site> --out branding.json`
+2. **Extract branding** → run `extract-branding.mjs --url <site> [--headless] [--channel msedge] --out branding.json`
    *(Phase 3 script; see [CONTRACT.md](../../../tools/onboarding/CONTRACT.md) for the exact `branding.json`
-   shape).* It uses node-vibrant for the palette, computed styles for fonts, and og:image/favicon/header
-   `<img>` for the logo.
+   shape).* It drives a real Edge/Chrome browser **headed by default** (watch the window and click
+   through any bot challenge), then uses node-vibrant for the palette, computed styles for fonts, and
+   og:image/favicon/header `<img>` for the logo.
 3. **Review** the proposed `branding.json` with the user: palette swatches, fonts, logo URL, and the
    `brand.*` copy (name, tagline, hero title/subtitle, footer note, page title). Adjust before applying.
+   The file also carries a `navLinks` array (labeled homepage nav/category links) — hand these to the
+   `build-catalog` step as candidate `--category-urls` (curate out Account/Stores/Help/etc. first).
 4. **Apply** → run `apply-branding.mjs --input branding.json`. This maps the palette onto BOTH apps'
    token sets (they differ — see the mapping table in CONTRACT.md) and sets `brand.*`, preserving each
    app's `apiBaseUrl`.
@@ -34,6 +37,31 @@ disclaimer. Do not commit customer logos/assets to a shared branch.
 ## Fidelity
 - **v1 (now):** palette + `brand.*` copy. Logo image and web fonts are wired in **Phase 4**
   (`brand.logoUrl` / `brand.fontUrl` are written but only render once Phase 4 lands — harmless earlier).
+
+## Fallback when the tools are blocked
+The scraper makes extraction accurate and precise, but it is not required. Some sites use bot
+protection (Akamai/Cloudflare/PerimeterX), aggressive JS, or a login wall that blocks headless
+navigation — `extract-branding.mjs` will then time out or return mostly defaults. When that happens,
+**escalate before approximating**:
+0. **Drive the MCP browser first.** The script already runs a real Edge headed, but if it is still
+   blocked, open the homepage in the keyless **Playwright MCP** browser (Edge, `.vscode/mcp.json`)
+   and navigate interactively so the human can clear the challenge. Then read the palette off a
+   screenshot and the logo/fonts/copy off the rendered DOM, and hand-fill `branding.json`. Only fall
+   back to pure approximation if even the MCP browser can't reach the site.
+
+When no browser can reach it, **approximate the branding from what a human can see** instead of stalling:
+1. **Ask the user for screenshots.** Have them open the site in a normal browser and capture the
+   homepage, a category/product page, and the header/footer (logo, nav, buttons). They can drag the
+   images into chat.
+2. **Read the branding off the screenshots.** Eyeball the dominant/accent colors, the general font
+   feel (serif vs sans, weight), the wordmark, and the tone of the hero/marketing copy. If the user
+   can share the logo file or an exact hex/brand-guide, even better.
+3. **Hand-fill `branding.json`** with those approximations (palette hexes, font family names, `logoUrl`
+   or a saved local logo, `brand.*` copy) using the exact shape in
+   [CONTRACT.md](../../../tools/onboarding/CONTRACT.md), then run `apply-branding.mjs` as usual.
+4. **Be explicit that it's an approximation.** Tell the user these values were eyeballed, not measured,
+   and invite corrections in the review step. A close-enough skin is fine for a demo; the disclaimer
+   already makes the not-affiliated status clear.
 
 ## Verify
 Reload each app (or `npm run dev`) and confirm the header wordmark, hero copy, page title, and accent

@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "ajv": "^8.17.1",
-    "crawlee": "^3.11.5",
     "node-vibrant": "^3.1.6",
     "playwright": "^1.47.2",
     "sharp": "^0.33.5"

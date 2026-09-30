@@ -4,8 +4,15 @@
 // Interface pinned in tools/onboarding/CONTRACT.md.
 import { dirname, join } from 'node:path';
 import Vibrant from 'node-vibrant';
-import { chromium } from 'playwright';
 import { parseArgs, requireArg, writeJson, ensureDir, toHex, darken, log } from './lib/util.mjs';
+import { launchBrowser, newPage } from './lib/browser.mjs';
+
+// Drive a REAL browser channel (Edge/Chrome) headed by default — bundled headless Chromium
+// presents an obvious fingerprint that retail bot walls stall on (the homepage `commit` timeout
+// we hit). Headed + real channel loads the very same sites, and lets a human clear any challenge.
+const NAV_TIMEOUT = 45000;
+const SHOT_TIMEOUT = 15000; // cap on the screenshot
+const SETTLE_MS = 1500; // let late hero CSS/images paint
 
 async function main() {
   const args = parseArgs();
@@ -16,16 +23,35 @@ async function main() {
   const shotPath = join(shotDir, `${host}-home.png`);
   await ensureDir(shotDir);
 
-  const browser = await chromium.launch();
-  let dom, shot;
+  let dom = {}, shot = null, navLinks = [];
+  const browser = await launchBrowser(args);
   try {
-    const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
-    await page.goto(url, { waitUntil: 'networkidle', timeout: 45000 }).catch(() => page.goto(url, { waitUntil: 'load', timeout: 45000 }));
-    shot = await page.screenshot({ path: shotPath, fullPage: false });
-    dom = await page.evaluate(readDom);
+    const page = await newPage(browser);
+    log.info(`Navigating to ${url} … (solve any bot challenge in the window if it appears)`);
+    // Heavy retail homepages may never fire `load`; settle on a parsed DOM instead and proceed
+    // with whatever rendered rather than aborting.
+    try { await page.goto(url, { waitUntil: 'domcontentloaded', timeout: NAV_TIMEOUT }); }
+    catch (e) { log.warn(`Navigation didn't fully settle (${String(e.message).split('\n')[0]}); proceeding with whatever loaded.`); }
+    await page.waitForTimeout(SETTLE_MS); // let late hero CSS/images paint
+
+    log.info('Reading computed styles, fonts, logo, and copy…');
+    try { dom = await page.evaluate(readDom); }
+    catch (e) { log.warn(`Style/DOM read failed (${e.message}); using defaults.`); }
+
+    log.info('Harvesting navigation / category links…');
+    try { navLinks = await page.evaluate(collectNav); }
+    catch (e) { log.warn(`Nav harvest failed (${e.message}); navLinks will be empty.`); }
+
+    // `animations: 'disabled'` stops infinite CSS/Web animations that keep a retail homepage
+    // from ever stabilizing for capture (a common screenshot-timeout cause).
+    log.info('Capturing screenshot for palette…');
+    try { shot = await page.screenshot({ path: shotPath, fullPage: false, animations: 'disabled', timeout: SHOT_TIMEOUT }); }
+    catch (e) { log.warn(`Screenshot failed (${e.message}); palette will use neutral defaults.`); }
   } finally {
     await browser.close();
   }
+
+  log.info('Extracting palette and assembling branding.json…');
 
   const swatches = await paletteFrom(shot);
   const palette = buildPalette(swatches, dom);
@@ -38,9 +64,14 @@ async function main() {
     brand,
     palette,
     fonts,
+    navLinks,
     provenance: { screenshots: [`${host}-home.png`], swatchSource: 'node-vibrant' },
   });
   log.ok(`Wrote ${outPath} (screenshot: ${shotPath}).`);
+  if (navLinks.length) {
+    log.info(`Found ${navLinks.length} candidate nav/category link(s) → branding.json "navLinks".`);
+    log.info('Curate these into product-category URLs, then: scrape-catalog.mjs --category-urls "<u1>,<u2>".');
+  }
   log.info('Review palette/fonts/logo/copy, then apply-branding.mjs. Keep the "not affiliated" footer.');
 }
 
@@ -70,7 +101,32 @@ function readDom() {
   };
 }
 
+// Labeled, same-origin links inside the site's primary navigation — advisory candidate category
+// URLs for the AI to curate and feed to scrape-catalog.mjs --category-urls. Not part of the skin.
+function collectNav() {
+  const origin = location.origin;
+  const SKIP = /account|login|sign[\s-]?in|register|cart|bag|checkout|wishlist|store[\s-]?locator|find[\s-]?a[\s-]?store|gift[\s-]?card|help|support|contact|track|order|careers|blog|privacy|terms|policy|faq|shipping|returns|klarna|afterpay/i;
+  const scopes = [...document.querySelectorAll('header, nav, [role="navigation"], [class*="nav" i], [class*="menu" i]')];
+  const out = new Map();
+  for (const scope of scopes) {
+    for (const a of scope.querySelectorAll('a[href]')) {
+      let u;
+      try { u = new URL(a.getAttribute('href'), location.href); } catch { continue; }
+      if (u.origin !== origin) continue;
+      if (u.pathname === '/' || u.pathname === '') continue;
+      const label = (a.textContent || '').replace(/\s+/g, ' ').trim();
+      if (!label || label.length > 40) continue;
+      if (SKIP.test(label) || SKIP.test(u.pathname)) continue;
+      u.hash = '';
+      const key = u.href;
+      if (!out.has(key)) out.set(key, { label, url: key });
+    }
+  }
+  return [...out.values()].slice(0, 40);
+}
+
 async function paletteFrom(buffer) {
+  if (!Buffer.isBuffer(buffer)) return {}; // no screenshot → neutral defaults (skip node-vibrant)
   try {
     const p = await Vibrant.from(buffer).getPalette();
     const hex = (s) => (s ? s.getHex() : null);

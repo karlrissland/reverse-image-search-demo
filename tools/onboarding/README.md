@@ -17,7 +17,8 @@ npx playwright install chromium   # or: npm run install:browsers
 ```
 
 Node 20+. No API keys. `sharp` (image re-encode), `node-vibrant` (palette), `playwright`
-+ `crawlee` (headless crawl), and `ajv` (manifest schema validation) install locally.
+(real Edge/Chrome browser, driven headed by default), and `ajv` (manifest schema validation)
+install locally.
 
 ## Legal / ethical guardrails
 

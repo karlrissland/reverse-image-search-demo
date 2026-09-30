@@ -35,8 +35,10 @@ disclaimer. Do not commit customer logos/assets to a shared branch.
   `background→paper/bg`. Full table in CONTRACT.md. Setting `theme: {}` restores the built-in palette.
 
 ## Fidelity
-- **v1 (now):** palette + `brand.*` copy. Logo image and web fonts are wired in **Phase 4**
-  (`brand.logoUrl` / `brand.fontUrl` are written but only render once Phase 4 lands — harmless earlier).
+- **Runtime skin:** palette + `brand.*` copy via `config.js` (edit + reload, no rebuild).
+- **Logo + fonts:** done as **direct code edits** in `reskin` — swap the logo into each app's `public/`
+  and adjust font stacks in `styles.css`. `branding.json`'s `logoUrl`/`fonts` are the AI's *inputs* for
+  those edits, not a runtime slot.
 
 ## Fallback when the tools are blocked
 The scraper makes extraction accurate and precise, but it is not required. Some sites use bot

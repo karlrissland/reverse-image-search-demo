@@ -87,12 +87,15 @@ any personalization tooling — this is the reference point every customer run i
   enrich yes/no), enforce legal guardrails, sequence sub-skills, drive the deploy/iterate loop.
 - `.github/skills/scrape-branding/SKILL.md` — Playwright MCP screenshots + node-vibrant palette ->
   theme tokens; computed styles -> fonts; og:image/favicon/header `<img>` -> logo; write brand + theme
-  into both `public/config.js`; optional logo download + font wiring.
+  into both `public/config.js`. Surfaces the palette/fonts/logo as **inputs the AI uses to edit the CSS**
+  (colors/fonts) and **swap the logo** — not a rigid logo/font slot system.
 - `.github/skills/build-catalog/SKILL.md` — interview/propose metadata fields; Playwright MCP to
   navigate + identify product pages/images; run the Crawlee scraper for bulk download + info; write
   manifest + sidecars; validate uniqueness / required fields / Unicode.
-- `.github/skills/reskin/SKILL.md` — apply/iterate the visual skin (theme tokens, logo, fonts, hero
-  copy), rebuild, verify locally, then the deploy-test-refine loop.
+- `.github/skills/reskin/SKILL.md` — apply/iterate the visual skin: base palette + hero copy via
+  `config.js`, then **AI-directed CSS edits** (`styles.css` colors/fonts/spacing) and a **logo swap**
+  (drop into `public/`, replace the header wordmark with an `<img>`); rebuild, verify locally, then the
+  deploy-test-refine loop.
 - `.github/skills/adapt-layout/SKILL.md` — OPTIONAL, riskier, do-LAST skill that edits real React code
   so the demo *flows* like the customer's site (layout/structure/navigation). Gated behind committed
   branding+catalog+skin; reverts via git if it destabilizes the demo.
@@ -111,26 +114,37 @@ any personalization tooling — this is the reference point every customer run i
     write/merge `data/manifest.json`, write `.metadata.json` sidecars. Idempotent, schema-validated.
   - `extract-branding.mjs --url <site> --out branding.json` — screenshot + node-vibrant palette +
     computed fonts + logo URL.
-  - `apply-branding.mjs --input branding.json` — map palette -> theme tokens, set brand text + logo in
-    both `public/config.js`; download logo into each app's `public/`.
+  - `apply-branding.mjs --input branding.json` — **optional** fast first pass: map palette -> theme
+    tokens + brand text in both `public/config.js` (preserving apiBaseUrl). Deeper fidelity (fonts,
+    logo swap, spacing) is done by the AI editing `styles.css` + `public/` directly, per `reskin`.
   - Revert is a git operation (`git restore` / `git clean`) — no bundled reset script.
 - `tools/onboarding/README.md` — catalog.json + branding.json shapes, invocation, idempotency,
   robots.txt/rate-limit behavior, Node/Playwright install (`npx playwright install`).
 - **CHECKPOINT 3:** user runs the scripts against a test site and verifies output.
 
-### Phase 4 — Branding enhancements (progressive fidelity, opt-in)
-- Optional logo image slot: extend BrandConfig (logoUrl?, logoAlt?) + branding.ts + App.tsx header in
-  BOTH apps — render `<img>` when logoUrl set, else text wordmark (current behavior).
-- Optional web fonts: brand.fontUrl? + font tokens; branding.ts injects `<link>` and sets
-  `--font-brand` / `--font-body`; add those CSS vars to both styles.css (default to current stacks).
-- Asset/data note: a **logo file, web-font file, and the skinned `config.js` are customer data**, not
-  code. Only the **generic code** ships to the baseline (the new `BrandConfig` fields, the App.tsx
-  `<img>`/font-link logic, the CSS vars, and unchanged default stacks). Personalizing/testing Phase 4
-  with a real logo + skin happens in a **fork**, where the logo and skin are committed (into each
-  app's `public/` and `config.js`) as part of handoff. If exercising it from the baseline while
-  developing the code, use a remote logo URL or a gitignored `public/brand/` path so the baseline's
-  tracked files stay pristine.
-- **CHECKPOINT 4:** user reviews changes; default unchanged, opt-in renders.
+### Phase 4 — Branding fidelity via AI-directed CSS + logo swap (RETIRED the rigid token/slot approach)
+Because this is a **Copilot-directed** flow and the **fork is the committed deliverable** (we also adapt
+layout anyway), branding beyond the base palette is done by the **AI editing the fork's code directly**,
+not by a rigid runtime contract. **Do NOT build** the `BrandConfig.logoUrl?/fontUrl?` slots, the
+`--font-brand`/`--font-body` token machinery, or an `App.tsx` logo-slot — that ceremony is retired.
+- **Colors / fonts / spacing:** the AI edits `styles.css` in each app directly — retune the existing
+  `:root` CSS color vars, swap the font stacks (add an `@font-face` / `@import` for the real web font),
+  adjust spacing. No token-mapping table to maintain.
+- **Logo:** the AI drops the customer logo into each app's `public/` and swaps the header wordmark
+  `<span>` for an `<img>` — one small per-skin code edit, no generic slot.
+- **`config.js` stays minimal:** `apiBaseUrl` (required; stamped at provision) plus optional brand
+  **text** (name/hero copy, already wired). The existing runtime theme-token override stays as-is
+  (works today, harmless) — it is **not** extended.
+- **Script roles shift:** `extract-branding.mjs` becomes **recon** that hands the AI the palette, fonts,
+  and logo URL as *inputs* to its CSS edits; `apply-branding.mjs` is **optional** for a fast first color
+  pass. Neither is a required rigid token-writer.
+- **Baseline hygiene:** these CSS edits + the logo file + the committed skin live in the **fork** (the
+  handoff artifact). The baseline stays generic; during baseline testing the logo/CSS edits are
+  reverted via git (logo under a gitignored path or a remote URL). Trade-off: editing CSS means a
+  **rebuild to preview** each change (vs. runtime config reload) — fine in a fork-committed flow.
+- **CHECKPOINT 4:** user reviews the reskinned apps — colors, fonts, and logo render correctly, both
+  apps build, and the neutral baseline is unchanged. (Branding fidelity now lives in the `reskin` and
+  `adapt-layout` skills; there is no separate slot/token feature to ship.)
 
 ### Phase 5 — Flexible metadata / manifest (v1, LOCKED)
 - Relax the manifest schema: add an optional `attributes` object (string map) for extra scraped fields,

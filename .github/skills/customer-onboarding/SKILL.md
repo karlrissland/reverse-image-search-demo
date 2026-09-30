@@ -30,7 +30,8 @@ State this to the user and get acknowledgement:
 2. **Image categories** to feature (e.g. Costumes, Accessories) and rough **count per category**.
 3. **Public/internal split** — which items appear on the public site vs internal only.
 4. **Metadata fields** that matter for facets/captions (map onto the generic facets; extras → attributes).
-5. **Fidelity level** — text+palette only, or also logo/fonts (logo/fonts land in Phase 4).
+5. **Fidelity level** — text+palette via `config.js` only, or also logo + fonts (done as AI-directed CSS
+   edits + a logo swap in `reskin`, not a config slot).
 6. **AI enrichment** yes/no (reuse `src/hooks/enrich-metadata.ps1` for gpt-4o sidecars).
 
 ## Sequence (each stage is user-gated — the user drives how the demo materializes)

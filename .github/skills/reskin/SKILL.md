@@ -16,8 +16,10 @@ reload, no rebuild needed to preview.
   - Internal: `bg, surface, surface-2, ink, muted, line, accent, accent-dark, blue, danger`.
   - Keep both apps visually consistent; the palette→token mapping is in
     [CONTRACT.md](../../../tools/onboarding/CONTRACT.md).
-- Logo image and web fonts arrive in **Phase 4** (`brand.logoUrl` / `brand.fontUrl`). Until then the
-  header is a text wordmark.
+- **Logo + fonts** are done as **direct code edits** (not config slots): drop the customer logo into each
+  app's `public/` and replace the header wordmark `<span>` with an `<img>`; change the font stacks (and
+  add an `@font-face`/`@import`) directly in `styles.css`. Deeper color/spacing tuning is also just
+  editing `styles.css`. A rebuild is needed to preview these (vs. runtime for `config.js` changes).
 - Structural **layout / flow** (page structure, navigation, component arrangement) is out of scope here
   — that's the `adapt-layout` skill (opt-in, riskier, do last).
 

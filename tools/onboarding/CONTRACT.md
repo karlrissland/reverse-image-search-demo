@@ -98,8 +98,10 @@ node tools/onboarding/extract-branding.mjs --url <site> [--headless] [--channel 
 node tools/onboarding/apply-branding.mjs --input branding.json
 ```
 
-- Maps `palette` → the two apps' theme token sets (mapping table below), sets `brand.*`, and
-  (Phase 4) writes `logoUrl` / `fontUrl`. Merges into both `config.js` files, preserving `apiBaseUrl`.
+- Maps `palette` → the two apps' theme token sets (mapping table below) and sets `brand.*` text,
+  merging into both `config.js` files and preserving `apiBaseUrl`. `logoUrl`/`fontUrl` are **not**
+  written as runtime slots — the logo swap and font changes are AI-directed edits to `public/` and
+  `styles.css` (see the `reskin` skill).
 
 ## 5. Reset — use git (no reset script)
 
@@ -181,8 +183,9 @@ Personalization edits files in place, so undo is a git operation, not a bundled 
 - `navLinks` are **advisory** candidate category URLs harvested from the homepage nav (not applied to
   the skin). Curate them into product categories and pass to `scrape-catalog.mjs --category-urls`.
 
-`brand.logoUrl`, `brand.fontUrl`, and `fonts.*` are consumed only once **Phase 4** lands; earlier
-phases ignore them safely.
+`brand.logoUrl`, `brand.fontUrl`, and `fonts.*` are **advisory inputs** — the AI uses them to edit the
+apps' `styles.css` (fonts) and swap the header logo in `public/` during `reskin`. They are not consumed
+by a runtime slot; only `brand.*` text and `theme` tokens are read from `config.js` at runtime.
 
 ## Palette → theme-token mapping (used by #4)
 

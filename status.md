@@ -49,10 +49,11 @@ See [plan.md](plan.md) for full detail.
 - [x] Smoke-tested offline: download-catalog (data-URL → jpg → sidecar → schema-valid manifest, idempotent) and apply-branding (both config.js skinned, apiBaseUrl preserved); baseline restored via git
 - 🛑 **CHECKPOINT 3** — [ ] user runs scripts against a live test site (needs `npx playwright install chromium`) and verifies output
 
-## Phase 4 — Branding enhancements (progressive fidelity, opt-in)
-- [ ] Logo image slot: BrandConfig + branding.ts + App.tsx header (both apps); falls back to wordmark
-- [ ] Web-font support: brand.fontUrl + `--font-brand`/`--font-body` CSS vars (both styles.css)
-- 🛑 **CHECKPOINT 4** — [ ] user reviews; default unchanged, opt-in renders; both apps build
+## Phase 4 — Branding fidelity via AI-directed CSS + logo swap (rigid token/slot approach RETIRED)
+- [ ] Do NOT build logoUrl/fontUrl slots or `--font-brand`/`--font-body` token machinery (retired)
+- [ ] Branding fidelity = AI edits `styles.css` (colors/fonts/spacing) + swaps the logo in `public/`, per `reskin`
+- [ ] `extract-branding` = recon inputs; `apply-branding` optional (fast palette pass); `config.js` stays apiBaseUrl + brand text
+- 🛑 **CHECKPOINT 4** — [ ] user reviews reskinned apps (colors/fonts/logo render, both build); neutral baseline unchanged
 
 ## Phase 5 — Flexible metadata / manifest (v1)
 - [ ] Relax `data/manifest.schema.json` with optional `attributes` passthrough

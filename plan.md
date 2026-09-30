@@ -6,6 +6,16 @@ questions, and end up with a customer-branded, catalog-populated, deploy-ready r
 search demo. Delivered through Copilot skills + **keyless, open-source** web scraping + thin
 deterministic Node scripts + docs. Edits are applied **in place** (the fork is handed to the customer).
 
+### Baseline vs. fork (two repos, two rules)
+- **This repo is the baseline/template** and stays generic. Customer-specific bytes — branding
+  values, logos, catalog images, skinned `config.js` — must **never enter its history**, including
+  while we build and test the personalization tooling here.
+- **A fork is where personalization happens.** Edits are applied in place, then the customized fork is
+  **committed and pushed**, so the customer clones a fully-personalized starting point. Customer data
+  *is* meant to be versioned — just in the fork, never in the baseline.
+- Practical consequence: "clean" applies to the **baseline**, not to every run. A fork is *supposed* to
+  end customized-and-committed.
+
 ## Confirmed decisions
 - In-place editing (no per-customer folders); revert via `git restore` / `git clean` (no reset script).
 - **Keyless, all open-source** scraping. No Firecrawl, no API keys, no per-request limits.
@@ -16,6 +26,13 @@ deterministic Node scripts + docs. Edits are applied **in place** (the fork is h
 - Skills: orchestrator + focused sub-skills (`scrape-branding`, `build-catalog`, `reskin`).
 - **User checkpoint after every phase** — the user reads and verifies the artifacts before the next
   phase starts. Nothing proceeds past a checkpoint without explicit approval.
+- **Baseline hygiene during development.** Because we build and test the tooling in the baseline
+  itself, a live customer run here must not pollute the baseline: do it on a **disposable branch**
+  (never merged to `main`, deleted after), keep customer working artifacts in **gitignored paths**
+  (`branding.json`, `catalog.json`, `*-home.png`, and — when added — `data/.customer/`, `public/brand/`,
+  an optional `config.local.js` overlay), and keep a **pre-flight guard** that fails if any customer
+  artifact is staged. The baseline's own tracked sample corpus (`data/images`, `data/manifest.json`)
+  and neutral `config.js` are the reference point and are never overwritten by a customer run.
 
 ## Scraping stack (keyless, all OSS)
 - **Playwright MCP** (`npx @playwright/mcp@latest`, Apache-2.0, Microsoft, keyless, 1-click VS Code
@@ -104,6 +121,12 @@ any personalization tooling — this is the reference point every customer run i
   BOTH apps — render `<img>` when logoUrl set, else text wordmark (current behavior).
 - Optional web fonts: brand.fontUrl? + font tokens; branding.ts injects `<link>` and sets
   `--font-brand` / `--font-body`; add those CSS vars to both styles.css (default to current stacks).
+- Asset/data note: a **logo file, web-font file, and the skinned `config.js` are customer data**, not
+  code. Only the **generic code** ships to the baseline (the new `BrandConfig` fields, the App.tsx
+  `<img>`/font-link logic, the CSS vars, and unchanged default stacks). In a **fork** the actual logo
+  and skin are committed (into each app's `public/` and `config.js`) as part of handoff. While
+  developing/testing Phase 4 in the **baseline**, exercise them via a remote logo URL or a gitignored
+  `public/brand/` path on a disposable branch, so the baseline's tracked files stay pristine.
 - **CHECKPOINT 4:** user reviews changes; default unchanged, opt-in renders.
 
 ### Phase 5 — Flexible metadata / manifest (v1, LOCKED)
@@ -126,7 +149,8 @@ any personalization tooling — this is the reference point every customer run i
 
 ### Phase 7 — Final acceptance test: push, fork, build a real customer demo
 - Pre-flight: build both apps; run frontend-ux-contract + unit tests (green); schema-validate a
-  dry-run catalog; confirm no secrets/customer data committed.
+  dry-run catalog; confirm the **baseline** has no secrets or customer data committed (the
+  customer-artifact guard passes on `main`) — customer data is expected only in forks.
 - Push the finished repo to GitHub.
 - Fork it into a clean, separate location (a new user with no prior context).
 - From a cold start, follow ONLY `docs/personalize.md`: install prereqs, enable Playwright MCP, open
@@ -134,6 +158,9 @@ any personalization tooling — this is the reference point every customer run i
 - Verify: branding -> both config.js skinned; catalog -> data/images + valid manifest; both apps build;
   optional `azd up` renders the customer-branded internal + public sites and verify-sites.ps1 passes.
   **Time the run — it must be quick.**
+- **Hand off:** in the fork, commit the personalization (branding + catalog + skin + logo) and push,
+  so the customer clones a fully-personalized starting point. This commit is expected and correct — it
+  lives in the fork, never in the baseline.
 - **CHECKPOINT 7 (final):** user confirms the fork-to-demo experience is fast, clear, and correct.
 
 ## Relevant files

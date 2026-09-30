@@ -169,6 +169,20 @@ See:
 - [`status.md`](status.md) for phase status and known blockers.
 - [`docs/implementation-status.md`](docs/implementation-status.md) for implementation history.
 
+## Personalize this demo for a customer
+
+This repo can be **forked and personalized** to demo Vision Search for a specific company: point GitHub
+Copilot at a customer website and it skins both apps with the customer's branding and loads their
+product catalog behind the search. It's Copilot-directed — keyless open-source scrapers gather the data
+and images, and the AI edits the app code to match the look.
+
+- Do it in a **fork** (the baseline stays generic); commit and push the fork so the customer clones a
+  fully-personalized starting point.
+- Demo-only: respects `robots.txt`, keeps the public "not affiliated" disclaimer, images belong to
+  their owners.
+
+**Full walkthrough:** [`docs/personalize.md`](docs/personalize.md).
+
 ## Documentation map
 
 | Document | Purpose |
@@ -183,6 +197,9 @@ See:
 | [`status.md`](status.md) | Phase tracker. |
 | [`architecture-requirements.md`](architecture-requirements.md) | Original architecture requirements. |
 | [`plan.md`](plan.md) | Approved implementation plan and work phases. |
+| [`docs/personalize.md`](docs/personalize.md) | Fork-and-personalize-for-a-customer guide (Copilot-driven). |
+| [`tools/onboarding/CONTRACT.md`](tools/onboarding/CONTRACT.md) | Onboarding script + JSON interface contract. |
+| [`tools/onboarding/README.md`](tools/onboarding/README.md) | Keyless scraper/branding tooling notes. |
 | [`data/README.md`](data/README.md) | Data folder overview. |
 | [`src/api/README.md`](src/api/README.md) | API project notes. |
 | [`src/apps/internal/README.md`](src/apps/internal/README.md) | Internal UX notes. |
@@ -205,4 +222,4 @@ This is a demo-quality POC. Production hardening should include:
 
 - **Demo imagery** — the neutral sample image corpus is sourced from [Fashionpedia](https://github.com/cvdfoundation/fashionpedia) (CVD Foundation). Verify individual image licenses before any non-demo or public use.
 - **Architecture diagrams** — generated with the [Archify](.github/skills/archify/SKILL.md) skill.
-- **Web scraping & personalization tooling** — [Playwright MCP](https://github.com/microsoft/playwright-mcp), [Crawlee](https://github.com/apify/crawlee), and [node-vibrant](https://github.com/Vibrant-Colors/node-vibrant).
+- **Web scraping & personalization tooling** — [Playwright](https://playwright.dev) / [Playwright MCP](https://github.com/microsoft/playwright-mcp), [node-vibrant](https://github.com/Vibrant-Colors/node-vibrant), and [sharp](https://github.com/lovell/sharp).

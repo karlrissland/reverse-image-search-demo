@@ -17,7 +17,12 @@
       "tags": { "type": "array", "items": { "type": "string" } },
       "celebrity": { "type": "string" },
       "celebritySource": { "type": "string" },
-      "public": { "type": "boolean" }
+      "public": { "type": "boolean" },
+      "attributes": {
+        "type": "object",
+        "description": "Optional passthrough metadata (string map) for extra scraped fields (e.g. sku, price, material). NOT auto-faceted — sidecar/caption use only.",
+        "additionalProperties": { "type": "string" }
+      }
     },
     "additionalProperties": false
   }

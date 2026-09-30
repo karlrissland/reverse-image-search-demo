@@ -47,7 +47,7 @@ See [plan.md](plan.md) for full detail.
 - [x] Document git-based revert (`git restore` / `git clean`) — no reset script
 - [x] `tools/onboarding/README.md` + `.gitignore` — shapes, invocation, idempotency, robots.txt, playwright install
 - [x] Smoke-tested offline: download-catalog (data-URL → jpg → sidecar → schema-valid manifest, idempotent) and apply-branding (both config.js skinned, apiBaseUrl preserved); baseline restored via git
-- 🛑 **CHECKPOINT 3** — [ ] user runs scripts against a live test site (needs `npx playwright install chromium`) and verifies output
+- ✅ **CHECKPOINT 3** — [x] scrapers validated live against spirithalloween.com (category scrape → clean catalog.json; extract-branding → real branding.json)
 
 ## Phase 4 — Branding fidelity via AI-directed CSS + logo swap (rigid token/slot approach RETIRED)
 - [ ] Do NOT build logoUrl/fontUrl slots or `--font-brand`/`--font-body` token machinery (retired)
@@ -56,14 +56,14 @@ See [plan.md](plan.md) for full detail.
 - 🛑 **CHECKPOINT 4** — [ ] user reviews reskinned apps (colors/fonts/logo render, both build); neutral baseline unchanged
 
 ## Phase 5 — Flexible metadata / manifest (v1)
-- [ ] Relax `data/manifest.schema.json` with optional `attributes` passthrough
-- [ ] Map scraped data → existing generic facets; extras → attributes/tags; doc the manual-facet note
+- [x] Relax `data/manifest.schema.json` with optional `attributes` passthrough (string map; baseline 86-entry manifest re-validated OK)
+- [x] Map scraped data → generic facets; extras → attributes/tags; manual-facet note documented in `data/README.md`
 - 🛑 **CHECKPOINT 5** — [ ] user reviews schema change; ingestion/search still validates
 
 ## Phase 6 — Docs + legal guardrails
-- [ ] `docs/personalize.md` — prerequisites, walk-through, iterate/deploy loop, troubleshooting, revert
-- [ ] README "Personalize this demo for a customer" section
-- [ ] Legal/ethical guardrails section + baked into orchestrator skill
+- [x] `docs/personalize.md` — prerequisites, baseline-vs-fork model, Copilot walk-through, iterate/deploy loop, troubleshooting, revert
+- [x] README "Personalize this demo for a customer" section + doc-map rows (also fixed stale Crawlee credit)
+- [x] Legal/ethical guardrails section in `docs/personalize.md` + already baked into the orchestrator skill
 - 🛑 **CHECKPOINT 6** — [ ] user reads docs + guardrails end-to-end
 
 ## Phase 7 — Final acceptance test: push, fork, build a real customer demo

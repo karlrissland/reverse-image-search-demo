@@ -5,9 +5,10 @@ description: Use when applying, previewing, and iterating the customer visual sk
 
 # Reskin (apply & iterate)
 
-Own the fast visual iteration loop after `scrape-branding` has produced a first skin. Skinning is
-runtime via `window.__VISIONSEARCH__` (`brand` + `theme`) in each app's `public/config.js` — edit and
-reload, no rebuild needed to preview.
+Own the fast visual iteration loop after `scrape-branding` has produced a first skin. The **base skin**
+(palette + brand text) is runtime via `window.__VISIONSEARCH__` (`brand` + `theme`) in each app's
+`public/config.js` — edit and reload, no rebuild. **Logo, fonts, and deeper color/spacing fidelity are
+direct code edits** (swap the logo in `public/`, tune `styles.css`) and need a rebuild to preview.
 
 ## What you can change (v1)
 - `brand.*`: `name`, `tagline`, `heroTitle`, `heroSubtitle`, `footerNote`, `homeAriaLabel`, `pageTitle`.

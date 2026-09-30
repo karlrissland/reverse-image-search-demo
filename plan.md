@@ -26,13 +26,15 @@ deterministic Node scripts + docs. Edits are applied **in place** (the fork is h
 - Skills: orchestrator + focused sub-skills (`scrape-branding`, `build-catalog`, `reskin`).
 - **User checkpoint after every phase** — the user reads and verifies the artifacts before the next
   phase starts. Nothing proceeds past a checkpoint without explicit approval.
-- **Baseline hygiene during development.** Because we build and test the tooling in the baseline
-  itself, a live customer run here must not pollute the baseline: do it on a **disposable branch**
-  (never merged to `main`, deleted after), keep customer working artifacts in **gitignored paths**
-  (`branding.json`, `catalog.json`, `*-home.png`, and — when added — `data/.customer/`, `public/brand/`,
-  an optional `config.local.js` overlay), and keep a **pre-flight guard** that fails if any customer
-  artifact is staged. The baseline's own tracked sample corpus (`data/images`, `data/manifest.json`)
-  and neutral `config.js` are the reference point and are never overwritten by a customer run.
+- **Baseline hygiene: customize in a fork, never the baseline.** A live customer run — whether for
+  our own testing or a real handoff — happens in a **fork** of this repo, not in the baseline. The
+  fork is both the test vehicle and the artifact handed to the customer (they clone it). The baseline
+  is only ever edited to improve the **generic tooling/code**; its tracked sample corpus
+  (`data/images`, `data/manifest.json`) and neutral `config.js` are the reference point and are never
+  overwritten by a customer run. As a backstop against accidental pollution, keep customer working
+  artifacts gitignored (`branding.json`, `catalog.json`, `*-home.png`, and — when added —
+  `data/.customer/`, `public/brand/`, an optional `config.local.js` overlay) and add a **pre-flight
+  guard** that fails if any customer artifact is staged in the baseline.
 
 ## Scraping stack (keyless, all OSS)
 - **Playwright MCP** (`npx @playwright/mcp@latest`, Apache-2.0, Microsoft, keyless, 1-click VS Code
@@ -123,10 +125,11 @@ any personalization tooling — this is the reference point every customer run i
   `--font-brand` / `--font-body`; add those CSS vars to both styles.css (default to current stacks).
 - Asset/data note: a **logo file, web-font file, and the skinned `config.js` are customer data**, not
   code. Only the **generic code** ships to the baseline (the new `BrandConfig` fields, the App.tsx
-  `<img>`/font-link logic, the CSS vars, and unchanged default stacks). In a **fork** the actual logo
-  and skin are committed (into each app's `public/` and `config.js`) as part of handoff. While
-  developing/testing Phase 4 in the **baseline**, exercise them via a remote logo URL or a gitignored
-  `public/brand/` path on a disposable branch, so the baseline's tracked files stay pristine.
+  `<img>`/font-link logic, the CSS vars, and unchanged default stacks). Personalizing/testing Phase 4
+  with a real logo + skin happens in a **fork**, where the logo and skin are committed (into each
+  app's `public/` and `config.js`) as part of handoff. If exercising it from the baseline while
+  developing the code, use a remote logo URL or a gitignored `public/brand/` path so the baseline's
+  tracked files stay pristine.
 - **CHECKPOINT 4:** user reviews changes; default unchanged, opt-in renders.
 
 ### Phase 5 — Flexible metadata / manifest (v1, LOCKED)

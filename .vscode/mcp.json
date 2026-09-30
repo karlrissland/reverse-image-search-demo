@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest", "--browser", "msedge", "--viewport-size", "1440,900"]
+    }
+  }
+}

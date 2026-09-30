@@ -20,3 +20,12 @@ data/raw/
 data/source/
 *.sas
 *.key
+
+# Onboarding tool local artifacts — customer working data + browser session output (never commit).
+# Anchored to the repo root (where the tools write them); the archify skill's own
+# catalog.json under .github/ is intentionally NOT matched.
+/storage/
+/.playwright-mcp/
+/catalog.json
+/branding.json
+/*-home.png

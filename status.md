@@ -27,44 +27,49 @@ See [plan.md](plan.md) for full detail.
 - ✅ **CHECKPOINT 1** — [x] user confirmed baseline works and the generic skin is correct
 
 ## Phase 2 — MCP + skills scaffold
-- [ ] `.vscode/mcp.json` — register `playwright` MCP (keyless)
-- [ ] `.github/skills/customer-onboarding/SKILL.md` — orchestrator (interview, guardrails, sequencing)
-- [ ] `.github/skills/scrape-branding/SKILL.md` — palette/fonts/logo → brand + theme
-- [ ] `.github/skills/build-catalog/SKILL.md` — metadata interview + scrape + manifest
-- [ ] `.github/skills/reskin/SKILL.md` — apply/iterate skin, deploy-test-refine loop
-- [ ] `.github/copilot-instructions.md` — add Personalization/onboarding subsection
-- 🛑 **CHECKPOINT 2** — [ ] user reads the 4 SKILL.md files, mcp.json, and instructions changes
+- [x] `.vscode/mcp.json` — register `playwright` MCP (keyless)
+- [x] `.github/skills/customer-onboarding/SKILL.md` — orchestrator (interview, guardrails, sequencing)
+- [x] `.github/skills/scrape-branding/SKILL.md` — palette/fonts/logo → brand + theme
+- [x] `.github/skills/build-catalog/SKILL.md` — metadata interview + scrape + manifest
+- [x] `.github/skills/reskin/SKILL.md` — apply/iterate skin, deploy-test-refine loop
+- [x] `.github/skills/adapt-layout/SKILL.md` — OPTIONAL/riskier/do-last: edit React code to flow like the site
+- [x] `tools/onboarding/CONTRACT.md` — script/JSON interface appendix (anti-drift anchor for Phase 3)
+- [x] `.github/copilot-instructions.md` — add Personalization/onboarding subsection
+- ✅ **CHECKPOINT 2** — [x] user reviewed the 5 SKILL.md files, mcp.json, CONTRACT.md, and instructions changes — **Phase 2 complete**
 
 ## Phase 3 — Onboarding scraper + scripts (Node, keyless OSS)
-- [ ] `tools/onboarding/package.json` (deps: crawlee, playwright, node-vibrant)
-- [ ] `scrape-catalog.mjs` — discover product pages + extract info/image URLs (robots.txt, rate-limited)
-- [ ] `download-catalog.mjs` — download images, write/merge manifest + sidecars (idempotent, validated)
-- [ ] `extract-branding.mjs` — screenshot + palette + fonts + logo URL → branding.json
-- [ ] `apply-branding.mjs` — map palette→theme, set brand text + logo in both config.js
-- [ ] `reset-to-sample.mjs` (or documented git restore)
-- [ ] `tools/onboarding/README.md` — shapes, invocation, idempotency, robots.txt, playwright install
-- 🛑 **CHECKPOINT 3** — [ ] user runs scripts against a test site and verifies output
+- [x] `tools/onboarding/package.json` (deps: crawlee, playwright, node-vibrant, sharp, ajv)
+- [x] `scrape-catalog.mjs` — discover product pages + extract info/image URLs (robots.txt, rate-limited)
+- [x] `download-catalog.mjs` — download images, write/merge manifest + sidecars (idempotent, schema-validated)
+- [x] `extract-branding.mjs` — screenshot + palette + fonts + logo URL → branding.json
+- [x] `apply-branding.mjs` — map palette→theme (both token sets), set brand text, preserve apiBaseUrl
+- [x] `lib/util.mjs` + `lib/robots.mjs` — shared helpers (args, hash, color, JSON) + robots.txt matcher
+- [x] Document git-based revert (`git restore` / `git clean`) — no reset script
+- [x] `tools/onboarding/README.md` + `.gitignore` — shapes, invocation, idempotency, robots.txt, playwright install
+- [x] Smoke-tested offline: download-catalog (data-URL → jpg → sidecar → schema-valid manifest, idempotent) and apply-branding (both config.js skinned, apiBaseUrl preserved); baseline restored via git
+- ✅ **CHECKPOINT 3** — [x] scrapers validated live against spirithalloween.com (category scrape → clean catalog.json; extract-branding → real branding.json)
 
-## Phase 4 — Branding enhancements (progressive fidelity, opt-in)
-- [ ] Logo image slot: BrandConfig + branding.ts + App.tsx header (both apps); falls back to wordmark
-- [ ] Web-font support: brand.fontUrl + `--font-brand`/`--font-body` CSS vars (both styles.css)
-- 🛑 **CHECKPOINT 4** — [ ] user reviews; default unchanged, opt-in renders; both apps build
+## Phase 4 — Branding fidelity via AI-directed CSS + logo swap (rigid token/slot approach RETIRED)
+- [ ] Do NOT build logoUrl/fontUrl slots or `--font-brand`/`--font-body` token machinery (retired)
+- [ ] Branding fidelity = AI edits `styles.css` (colors/fonts/spacing) + swaps the logo in `public/`, per `reskin`
+- [ ] `extract-branding` = recon inputs; `apply-branding` optional (fast palette pass); `config.js` stays apiBaseUrl + brand text
+- 🛑 **CHECKPOINT 4** — [ ] user reviews reskinned apps (colors/fonts/logo render, both build); neutral baseline unchanged
 
 ## Phase 5 — Flexible metadata / manifest (v1)
-- [ ] Relax `data/manifest.schema.json` with optional `attributes` passthrough
-- [ ] Map scraped data → existing generic facets; extras → attributes/tags; doc the manual-facet note
+- [x] Relax `data/manifest.schema.json` with optional `attributes` passthrough (string map; baseline 86-entry manifest re-validated OK)
+- [x] Map scraped data → generic facets; extras → attributes/tags; manual-facet note documented in `data/README.md`
 - 🛑 **CHECKPOINT 5** — [ ] user reviews schema change; ingestion/search still validates
 
 ## Phase 6 — Docs + legal guardrails
-- [ ] `docs/personalize.md` — prerequisites, walk-through, iterate/deploy loop, troubleshooting, revert
-- [ ] README "Personalize this demo for a customer" section
-- [ ] Legal/ethical guardrails section + baked into orchestrator skill
+- [x] `docs/personalize.md` — prerequisites, baseline-vs-fork model, Copilot walk-through, iterate/deploy loop, troubleshooting, revert
+- [x] README "Personalize this demo for a customer" section + doc-map rows (also fixed stale Crawlee credit)
+- [x] Legal/ethical guardrails section in `docs/personalize.md` + already baked into the orchestrator skill
 - 🛑 **CHECKPOINT 6** — [ ] user reads docs + guardrails end-to-end
 
 ## Phase 7 — Final acceptance test: push, fork, build a real customer demo
 - [ ] Pre-flight: build both apps; frontend-ux-contract + unit tests green; schema-validate dry-run; no secrets
 - [ ] Push finished repo to GitHub
 - [ ] Fork into a clean, separate location (cold-start new user)
-- [ ] Follow only `docs/personalize.md`: personalize for a real customer (e.g. spirithalloween.com)
+- [ ] Follow only `docs/personalize.md`: personalize for a real customer (e.g. tailwindtoys.com)
 - [ ] Verify branding + catalog + build; optional `azd up` renders customer sites; verify-sites passes; time it
 - 🛑 **CHECKPOINT 7 (final)** — [ ] user confirms fork-to-demo is fast, clear, and correct = DONE

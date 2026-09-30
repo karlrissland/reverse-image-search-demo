@@ -6,8 +6,18 @@ questions, and end up with a customer-branded, catalog-populated, deploy-ready r
 search demo. Delivered through Copilot skills + **keyless, open-source** web scraping + thin
 deterministic Node scripts + docs. Edits are applied **in place** (the fork is handed to the customer).
 
+### Baseline vs. fork (two repos, two rules)
+- **This repo is the baseline/template** and stays generic. Customer-specific bytes — branding
+  values, logos, catalog images, skinned `config.js` — must **never enter its history**, including
+  while we build and test the personalization tooling here.
+- **A fork is where personalization happens.** Edits are applied in place, then the customized fork is
+  **committed and pushed**, so the customer clones a fully-personalized starting point. Customer data
+  *is* meant to be versioned — just in the fork, never in the baseline.
+- Practical consequence: "clean" applies to the **baseline**, not to every run. A fork is *supposed* to
+  end customized-and-committed.
+
 ## Confirmed decisions
-- In-place editing (no per-customer folders); revert-to-sample via a reset script / `git restore`.
+- In-place editing (no per-customer folders); revert via `git restore` / `git clean` (no reset script).
 - **Keyless, all open-source** scraping. No Firecrawl, no API keys, no per-request limits.
 - Iterative fidelity: start with a simple skin, deploy, test, then refine until the demoer is happy.
 - Interview-driven / variable metadata; Copilot proposes fields from the site; enrichment optional.
@@ -16,6 +26,15 @@ deterministic Node scripts + docs. Edits are applied **in place** (the fork is h
 - Skills: orchestrator + focused sub-skills (`scrape-branding`, `build-catalog`, `reskin`).
 - **User checkpoint after every phase** — the user reads and verifies the artifacts before the next
   phase starts. Nothing proceeds past a checkpoint without explicit approval.
+- **Baseline hygiene: customize in a fork, never the baseline.** A live customer run — whether for
+  our own testing or a real handoff — happens in a **fork** of this repo, not in the baseline. The
+  fork is both the test vehicle and the artifact handed to the customer (they clone it). The baseline
+  is only ever edited to improve the **generic tooling/code**; its tracked sample corpus
+  (`data/images`, `data/manifest.json`) and neutral `config.js` are the reference point and are never
+  overwritten by a customer run. As a backstop against accidental pollution, keep customer working
+  artifacts gitignored (`branding.json`, `catalog.json`, `*-home.png`, and — when added —
+  `data/.customer/`, `public/brand/`, an optional `config.local.js` overlay) and add a **pre-flight
+  guard** that fails if any customer artifact is staged in the baseline.
 
 ## Scraping stack (keyless, all OSS)
 - **Playwright MCP** (`npx @playwright/mcp@latest`, Apache-2.0, Microsoft, keyless, 1-click VS Code
@@ -68,14 +87,24 @@ any personalization tooling — this is the reference point every customer run i
   enrich yes/no), enforce legal guardrails, sequence sub-skills, drive the deploy/iterate loop.
 - `.github/skills/scrape-branding/SKILL.md` — Playwright MCP screenshots + node-vibrant palette ->
   theme tokens; computed styles -> fonts; og:image/favicon/header `<img>` -> logo; write brand + theme
-  into both `public/config.js`; optional logo download + font wiring.
+  into both `public/config.js`. Surfaces the palette/fonts/logo as **inputs the AI uses to edit the CSS**
+  (colors/fonts) and **swap the logo** — not a rigid logo/font slot system.
 - `.github/skills/build-catalog/SKILL.md` — interview/propose metadata fields; Playwright MCP to
   navigate + identify product pages/images; run the Crawlee scraper for bulk download + info; write
   manifest + sidecars; validate uniqueness / required fields / Unicode.
-- `.github/skills/reskin/SKILL.md` — apply/iterate the visual skin (theme tokens, logo, fonts, hero
-  copy), rebuild, verify locally, then the deploy-test-refine loop.
+- `.github/skills/reskin/SKILL.md` — apply/iterate the visual skin: base palette + hero copy via
+  `config.js`, then **AI-directed CSS edits** (`styles.css` colors/fonts/spacing) and a **logo swap**
+  (drop into `public/`, replace the header wordmark with an `<img>`); rebuild, verify locally, then the
+  deploy-test-refine loop.
+- `.github/skills/adapt-layout/SKILL.md` — OPTIONAL, riskier, do-LAST skill that edits real React code
+  so the demo *flows* like the customer's site (layout/structure/navigation). Gated behind committed
+  branding+catalog+skin; reverts via git if it destabilizes the demo.
+- Onboarding practice: user-gated stages, and **commit after every approved stage** with a descriptive
+  message so each stable point is an easy git rollback target.
 - Update `.github/copilot-instructions.md` with a "Personalization / onboarding" subsection.
-- **CHECKPOINT 2:** user reads the 4 SKILL.md files, `mcp.json`, and copilot-instructions changes.
+- `tools/onboarding/CONTRACT.md` — pin the Phase 3 script names/flags and the `catalog.json` /
+  `branding.json` shapes + palette→token mapping, so the skills-first order can't drift from Phase 3.
+- **CHECKPOINT 2:** user reads the 4 SKILL.md files, `mcp.json`, `CONTRACT.md`, and copilot-instructions changes.
 
 ### Phase 3 — Onboarding scraper + scripts (Node, keyless OSS)
 - `tools/onboarding/` Node package (own `package.json`; deps: crawlee, playwright, node-vibrant):
@@ -85,19 +114,37 @@ any personalization tooling — this is the reference point every customer run i
     write/merge `data/manifest.json`, write `.metadata.json` sidecars. Idempotent, schema-validated.
   - `extract-branding.mjs --url <site> --out branding.json` — screenshot + node-vibrant palette +
     computed fonts + logo URL.
-  - `apply-branding.mjs --input branding.json` — map palette -> theme tokens, set brand text + logo in
-    both `public/config.js`; download logo into each app's `public/`.
-  - `reset-to-sample.mjs` (or documented `git restore`) — restore neutral sample data + config.
+  - `apply-branding.mjs --input branding.json` — **optional** fast first pass: map palette -> theme
+    tokens + brand text in both `public/config.js` (preserving apiBaseUrl). Deeper fidelity (fonts,
+    logo swap, spacing) is done by the AI editing `styles.css` + `public/` directly, per `reskin`.
+  - Revert is a git operation (`git restore` / `git clean`) — no bundled reset script.
 - `tools/onboarding/README.md` — catalog.json + branding.json shapes, invocation, idempotency,
   robots.txt/rate-limit behavior, Node/Playwright install (`npx playwright install`).
 - **CHECKPOINT 3:** user runs the scripts against a test site and verifies output.
 
-### Phase 4 — Branding enhancements (progressive fidelity, opt-in)
-- Optional logo image slot: extend BrandConfig (logoUrl?, logoAlt?) + branding.ts + App.tsx header in
-  BOTH apps — render `<img>` when logoUrl set, else text wordmark (current behavior).
-- Optional web fonts: brand.fontUrl? + font tokens; branding.ts injects `<link>` and sets
-  `--font-brand` / `--font-body`; add those CSS vars to both styles.css (default to current stacks).
-- **CHECKPOINT 4:** user reviews changes; default unchanged, opt-in renders.
+### Phase 4 — Branding fidelity via AI-directed CSS + logo swap (RETIRED the rigid token/slot approach)
+Because this is a **Copilot-directed** flow and the **fork is the committed deliverable** (we also adapt
+layout anyway), branding beyond the base palette is done by the **AI editing the fork's code directly**,
+not by a rigid runtime contract. **Do NOT build** the `BrandConfig.logoUrl?/fontUrl?` slots, the
+`--font-brand`/`--font-body` token machinery, or an `App.tsx` logo-slot — that ceremony is retired.
+- **Colors / fonts / spacing:** the AI edits `styles.css` in each app directly — retune the existing
+  `:root` CSS color vars, swap the font stacks (add an `@font-face` / `@import` for the real web font),
+  adjust spacing. No token-mapping table to maintain.
+- **Logo:** the AI drops the customer logo into each app's `public/` and swaps the header wordmark
+  `<span>` for an `<img>` — one small per-skin code edit, no generic slot.
+- **`config.js` stays minimal:** `apiBaseUrl` (required; stamped at provision) plus optional brand
+  **text** (name/hero copy, already wired). The existing runtime theme-token override stays as-is
+  (works today, harmless) — it is **not** extended.
+- **Script roles shift:** `extract-branding.mjs` becomes **recon** that hands the AI the palette, fonts,
+  and logo URL as *inputs* to its CSS edits; `apply-branding.mjs` is **optional** for a fast first color
+  pass. Neither is a required rigid token-writer.
+- **Baseline hygiene:** these CSS edits + the logo file + the committed skin live in the **fork** (the
+  handoff artifact). The baseline stays generic; during baseline testing the logo/CSS edits are
+  reverted via git (logo under a gitignored path or a remote URL). Trade-off: editing CSS means a
+  **rebuild to preview** each change (vs. runtime config reload) — fine in a fork-committed flow.
+- **CHECKPOINT 4:** user reviews the reskinned apps — colors, fonts, and logo render correctly, both
+  apps build, and the neutral baseline is unchanged. (Branding fidelity now lives in the `reskin` and
+  `adapt-layout` skills; there is no separate slot/token feature to ship.)
 
 ### Phase 5 — Flexible metadata / manifest (v1, LOCKED)
 - Relax the manifest schema: add an optional `attributes` object (string map) for extra scraped fields,
@@ -119,18 +166,22 @@ any personalization tooling — this is the reference point every customer run i
 
 ### Phase 7 — Final acceptance test: push, fork, build a real customer demo
 - Pre-flight: build both apps; run frontend-ux-contract + unit tests (green); schema-validate a
-  dry-run catalog; confirm no secrets/customer data committed.
+  dry-run catalog; confirm the **baseline** has no secrets or customer data committed (the
+  customer-artifact guard passes on `main`) — customer data is expected only in forks.
 - Push the finished repo to GitHub.
 - Fork it into a clean, separate location (a new user with no prior context).
 - From a cold start, follow ONLY `docs/personalize.md`: install prereqs, enable Playwright MCP, open
-  Copilot, and ask it to personalize the demo for a specific real customer (e.g. spirithalloween.com).
+  Copilot, and ask it to personalize the demo for a specific real customer (e.g. tailwindtoys.com).
 - Verify: branding -> both config.js skinned; catalog -> data/images + valid manifest; both apps build;
   optional `azd up` renders the customer-branded internal + public sites and verify-sites.ps1 passes.
   **Time the run — it must be quick.**
+- **Hand off:** in the fork, commit the personalization (branding + catalog + skin + logo) and push,
+  so the customer clones a fully-personalized starting point. This commit is expected and correct — it
+  lives in the fork, never in the baseline.
 - **CHECKPOINT 7 (final):** user confirms the fork-to-demo experience is fast, clear, and correct.
 
 ## Relevant files
-- `.vscode/mcp.json` (new, playwright only); `.github/skills/{customer-onboarding,scrape-branding,build-catalog,reskin}/SKILL.md` (new)
+- `.vscode/mcp.json` (new, playwright only); `.github/skills/{customer-onboarding,scrape-branding,build-catalog,reskin,adapt-layout}/SKILL.md` (new); `tools/onboarding/CONTRACT.md` (new, script/JSON interface spec)
 - `.github/copilot-instructions.md` (edit)
 - `tools/onboarding/*.mjs` + package.json + README (new)
 - `data/manifest.schema.json` (relax), `data/README.md` (edit)

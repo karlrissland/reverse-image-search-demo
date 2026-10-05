@@ -35,6 +35,9 @@ images), clearly marking what is approximated vs scraped. See the personalizatio
 
 - Images: `data/images/<Category>/<assetId>.<ext>` (category folders, matching the Phase 1 layout).
 - Manifest: `data/manifest.json` (array; schema `data/manifest.schema.json`). Merge, don't clobber.
+  Because downloads **merge**, a customer fork must **clear the baseline sample corpus first** (manifest
+  → `[]`, remove the sample `data/images/*` category folders) so customer items don't mix with the
+  baseline apparel — see the reset section. The shared baseline repo keeps its sample catalog.
 - Sidecars: `data/images/<Category>/<assetId>.metadata.json` (descriptive + attributes + provenance).
 - Public site config: `src/apps/public/public/config.js` (`window.__VISIONSEARCH__`).
 - Internal site config: `src/apps/internal/public/config.js` (`window.__VISIONSEARCH__`).
@@ -115,6 +118,12 @@ Personalization edits files in place, so undo is a git operation, not a bundled 
   tracked edits to `config.js`, `data/manifest.json`, etc.
 - `git clean -nd` (preview) then `git clean -fd` to remove newly downloaded images/sidecars.
 - Recommend running personalization on a throwaway branch so revert is trivial.
+
+**Clear the baseline sample corpus (fork only, before the first customer catalog):** downloads merge
+into `data/manifest.json`, so a fork otherwise keeps the neutral baseline's sample apparel. Reset the
+manifest to `[]` and `git rm -r` the baseline sample category folders (e.g. `data/images/Men`,
+`data/images/Women`), keeping `data/manifest.schema.json`, `data/README.md`, and the `Evaluation/`
+fixture. Do this **only in the customer fork** — never in the shared baseline repo.
 
 ---
 

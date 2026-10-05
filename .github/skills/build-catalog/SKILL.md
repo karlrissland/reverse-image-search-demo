@@ -20,6 +20,18 @@ Map the customer's product data onto the existing **generic facets** (do not inv
 - Extra product data (price, SKU, material…) goes to sidecar **`attributes`** — passthrough only, not
   auto-faceted in v1 (a real new facet is a manual, out-of-scope extension; see Phase 5).
 
+## Start from a clean corpus (fork only)
+`download-catalog.mjs` **merges** into the existing `data/manifest.json` (it doesn't clobber), so a fork
+still carries the neutral baseline's sample apparel. Loading a customer catalog on top mixes the two.
+**Before the first customer download, clear the baseline sample corpus** so the demo shows only the
+customer's items:
+- Reset the manifest to empty: write `[]` to `data/manifest.json`.
+- Remove the baseline sample images: e.g. `git rm -r data/images/Men data/images/Women`.
+- **Keep** `data/manifest.schema.json`, the `data/README.md`, and the `Evaluation/` technical fixture.
+
+Do this **in the customer fork only — never in the shared baseline repo** (the baseline keeps its sample
+catalog as the working demo). Commit the clean slate before downloading so it's an easy rollback point.
+
 ## Steps
 1. **Discover + extract** \u2192 run
    `scrape-catalog.mjs [--url <site>] [--category-urls "<listing1>,<listing2>"] [--map urls.json] [--max N] [--categories "A,B"] [--headless] [--channel msedge] --out catalog.json`.

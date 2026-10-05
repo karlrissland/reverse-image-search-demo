@@ -51,6 +51,11 @@ point. Work on a throwaway branch so the whole run is easy to unwind.
      step. Adjust anything the user flags, re-apply, and re-confirm. On approval, **commit** before continuing.
 2. **Catalog** → run the `build-catalog` skill → discovers products, downloads images, writes
    `data/manifest.json` + sidecars.
+   - **Start clean (fork only):** `download-catalog.mjs` *merges* into `data/manifest.json`, so a fork
+     still carries the baseline sample apparel. Before the first customer download, clear the baseline
+     corpus (manifest → `[]`, `git rm -r data/images/Men data/images/Women`; keep the schema, README,
+     and `Evaluation/` fixture) so the customer demo isn't mixed with sample data. Baseline repo keeps
+     its sample catalog — only do this in the customer fork. See the `build-catalog` skill.
    - **Checkpoint:** review the proposed `catalog.json` BEFORE downloading (categories, public/internal
      split, counts, metadata), then spot-check the imported results. Adjust and re-run as needed.
      On approval, **commit** before continuing.

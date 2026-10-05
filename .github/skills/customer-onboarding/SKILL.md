@@ -19,8 +19,10 @@ the user, enforce guardrails, then sequence the sub-skills and drive the deploy/
 State this to the user and get acknowledgement:
 - **Demo use only.** Scraped images and text belong to their owners; this is a short-lived demo, not a
   redistribution or a product.
-- **Respect `robots.txt` and site ToS.** The scraper honors `robots.txt` and rate-limits by default;
-  do not override those without the site owner's permission.
+- **Respect `robots.txt` and site ToS.** The scraper honors `robots.txt` and rate-limits by default.
+  If `robots.txt`/ToS disallows the target, **don't silently override and don't silently stop** — ask
+  the user whether to continue and proceed only if they **explicitly accept responsibility**. Basing
+  styling/data off a screenshot is a last-resort fallback that requires this user permission.
 - **Keep the "not affiliated" disclaimer** in the public app's footer for any customer skin.
 - **Remove/replace** the customer's data and branding before any non-demo use. Never commit customer
   images or private data to a shared branch.
@@ -100,5 +102,7 @@ because every approved stage is committed, rolling back to a stable point is eas
 - Recommend a throwaway branch so the entire run can be discarded at once.
 
 ## Stop conditions
-- If `robots.txt` disallows the target, or the user can't confirm demo-only use → stop and explain.
+- If `robots.txt`/ToS disallows the target → **ask the user whether to continue** (they take
+  responsibility); proceed only on explicit confirmation (e.g. via the screenshot / MCP-browser
+  fallback), otherwise stop and explain. If the user can't confirm demo-only use → stop and explain.
 - If the baseline isn't healthy → fix that first (don't skin on top of a broken demo).

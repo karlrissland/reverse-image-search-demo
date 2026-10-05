@@ -11,6 +11,8 @@ Turn a customer's product pages into the demo's searchable corpus: images in Blo
 ## Guardrails
 Demo-only; honor `robots.txt` and rate limits (the scraper does by default); keep public/internal
 boundaries correct; never commit customer images to a shared branch. Preserve Unicode (e.g. `rosé`).
+If `robots.txt`/ToS disallows the target, **ask the user whether to continue** before scraping — don't
+silently override or silently stop; proceed only if they explicitly accept responsibility.
 
 ## Interview / propose metadata
 Map the customer's product data onto the existing **generic facets** (do not invent new index facets):

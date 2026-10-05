@@ -10,7 +10,10 @@ Derive a runtime skin from a customer's website and apply it to both apps. Skinn
 
 ## Guardrails
 Follow the onboarding guardrails: demo-only, respect `robots.txt`, keep the public "not affiliated"
-disclaimer. Do not commit customer logos/assets to a shared branch.
+disclaimer. Do not commit customer logos/assets to a shared branch. If `robots.txt`/ToS disallows the
+site, **ask the user whether to continue before scraping** — don't silently override or silently stop.
+Screenshot-derived styling is a last-resort fallback that needs their explicit, responsibility-accepting
+go-ahead.
 
 ## Steps
 1. **Inspect the site** with the Playwright MCP server: navigate to the homepage (and a category page),

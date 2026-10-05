@@ -57,8 +57,12 @@ point. Work on a throwaway branch so the whole run is easy to unwind.
 3. **Reskin / iterate** → run the `reskin` skill to refine copy/palette locally.
    - **Checkpoint:** iterate until the look is right — this loop is theirs to drive. On approval,
      **commit** before continuing.
-4. **Deploy (optional)** → only after the user OKs it: `azd up` (or `azd provision` if infra exists)
-   runs `deploy.ps1` ingest/index → `verify-sites.ps1`. See the `azure-deployment` skill for gotchas.
+4. **Deploy (optional)** → only after the user OKs it: **ask what to name the resource group** —
+   since each customer demo is a separate forked stack, name it after the customer/site so multiple
+   demos don't collide. Set it before provisioning: `azd env set AZURE_RG_NAME <customer-slug>` (the RG
+   becomes `rg-<customer-slug>-<env>`; defaults to `reverse-img-search` if unset). Then `azd up` (or
+   `azd provision` if infra exists) runs `deploy.ps1` ingest/index → `verify-sites.ps1`. See the
+   `azure-deployment` skill for gotchas.
    - **Checkpoint:** confirm the deployed customer sites look right and search works.
 5. **Final verify** → image/URL/crop search returns results, facets filter, public/internal boundary
    holds, customer skin renders on both sites, disclaimer present on public. Confirm, then **commit**

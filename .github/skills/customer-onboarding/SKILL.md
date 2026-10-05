@@ -42,8 +42,11 @@ on request, then re-confirm before moving on. Never chain stages without a confi
 point. Work on a throwaway branch so the whole run is easy to unwind.
 
 1. **Branding** → run the `scrape-branding` skill → produces `branding.json` and skins both `config.js`.
-   - **Checkpoint:** show the palette, fonts, logo, and `brand.*` copy (ideally preview a running app).
-     Adjust anything the user flags, re-apply, and re-confirm. On approval, **commit** before continuing.
+   - **Checkpoint (side-by-side diff):** approve the **running app against a screenshot of the live
+     site**, not `branding.json` swatches in isolation — isolated swatch review hides a wrong theme.
+     First confirm the palette is **grounded in the site's computed styles** (not a screenshot-derived
+     dominant color or a brand stereotype like "Halloween → dark"); see the `scrape-branding` grounding
+     step. Adjust anything the user flags, re-apply, and re-confirm. On approval, **commit** before continuing.
 2. **Catalog** → run the `build-catalog` skill → discovers products, downloads images, writes
    `data/manifest.json` + sidecars.
    - **Checkpoint:** review the proposed `catalog.json` BEFORE downloading (categories, public/internal

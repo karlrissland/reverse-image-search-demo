@@ -88,6 +88,11 @@ node tools/onboarding/extract-branding.mjs --url <site> [--headless] [--channel 
 - Playwright screenshots (real Edge/Chrome channel, headed by default) + node-vibrant palette;
   computed styles → fonts; og:image/favicon/header `<img>` → logo URL. Emits `branding.json`
   (shape below). Downloads nothing (a `<host>-home.png` screenshot is written beside `--out`).
+- Also emits `computedStyles` — the site's **actual** computed colors for header, nav, body, and the
+  first opaque primary button (`backgroundColor`/`color`), plus any `:root` CSS custom properties
+  (`rootVars`). These ground the Review step in real values instead of a dominant-color sampler that
+  misreads light-chrome / dark-hero retail sites. Reconcile node-vibrant's swatches against these and
+  prefer the site's actual hexes for `primary`/`background`/`ink`/`muted`.
 - Also harvests the homepage's primary navigation into `navLinks` (labeled, same-origin candidate
   category URLs). These are **advisory** — not applied to the skin — and exist so the AI can curate
   the real product categories and feed them to `scrape-catalog.mjs --category-urls`.
@@ -172,13 +177,25 @@ Personalization edits files in place, so undo is a git operation, not a bundled 
     "danger": "#e5484d"
   },
   "fonts": { "heading": "Poppins, sans-serif", "body": "Inter, sans-serif" },
+  "computedStyles": {
+    "header": { "selector": "header", "backgroundColor": "rgb(255, 255, 255)", "color": "rgb(14, 11, 18)" },
+    "nav":    { "selector": "nav, [role=\"navigation\"]", "backgroundColor": "rgb(255, 255, 255)", "color": "rgb(14, 11, 18)" },
+    "body":   { "backgroundColor": "rgb(14, 11, 18)", "color": "rgb(244, 240, 250)" },
+    "button": { "backgroundColor": "rgb(91, 42, 134)", "color": "rgb(255, 255, 255)" },
+    "rootVars": { "--brand": "#5b2a86", "--bg": "#0e0b12" }
+  },
   "navLinks": [
     { "label": "Women's Costumes", "url": "https://www.example.com/category/womens/..." },
     { "label": "Decorations", "url": "https://www.example.com/category/decor/..." }
   ],
-  "provenance": { "screenshots": ["home.png"], "swatchSource": "node-vibrant" }
+  "provenance": { "screenshots": ["home.png"], "swatchSource": "node-vibrant", "computedStyles": true }
 }
 ```
+
+- `computedStyles` is the site's **actual** computed colors (header/nav/body/primary-button fg+bg) plus
+  any `:root` custom properties (`rootVars`). It is grounding evidence for Review — prefer these hexes
+  over node-vibrant swatches for `primary`/`background`/`ink`/`muted`. Any field may be `null` if the
+  element/stylesheet wasn't found (cross-origin stylesheets are skipped).
 
 - `navLinks` are **advisory** candidate category URLs harvested from the homepage nav (not applied to
   the skin). Curate them into product categories and pass to `scrape-catalog.mjs --category-urls`.

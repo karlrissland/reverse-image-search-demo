@@ -6,7 +6,9 @@ on:
       - main
     paths:
       - ".github/workflows/publish-architecture-pages.yml"
+      - "docs/index.html"
       - "docs/architecture/*.html"
+      - "docs/ux/*.html"
   workflow_dispatch:
 
 permissions:
@@ -23,18 +25,22 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v7
 
-      - name: Stage architecture gallery
+      - name: Stage documentation site
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p _site/architecture
+          mkdir -p _site/architecture _site/ux
+          cp docs/index.html _site/index.html
           cp docs/architecture/*.html _site/architecture/
+          cp docs/ux/*.html _site/ux/
           touch _site/.nojekyll
 
           source_count="$(find docs/architecture -maxdepth 1 -type f -name '*.html' | wc -l)"
           staged_count="$(find _site/architecture -maxdepth 1 -type f -name '*.html' | wc -l)"
           test "$source_count" -eq "$staged_count"
+          test -f _site/index.html
           test -f _site/architecture/index.html
+          test -f _site/ux/vision-search-ux.html
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v6

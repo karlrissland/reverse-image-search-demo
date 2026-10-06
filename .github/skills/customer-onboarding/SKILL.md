@@ -19,8 +19,10 @@ the user, enforce guardrails, then sequence the sub-skills and drive the deploy/
 State this to the user and get acknowledgement:
 - **Demo use only.** Scraped images and text belong to their owners; this is a short-lived demo, not a
   redistribution or a product.
-- **Respect `robots.txt` and site ToS.** The scraper honors `robots.txt` and rate-limits by default;
-  do not override those without the site owner's permission.
+- **Respect `robots.txt` and site ToS.** The scraper honors `robots.txt` and rate-limits by default.
+  If `robots.txt`/ToS disallows the target, **don't silently override and don't silently stop** — ask
+  the user whether to continue and proceed only if they **explicitly accept responsibility**. Basing
+  styling/data off a screenshot is a last-resort fallback that requires this user permission.
 - **Keep the "not affiliated" disclaimer** in the public app's footer for any customer skin.
 - **Remove/replace** the customer's data and branding before any non-demo use. Never commit customer
   images or private data to a shared branch.
@@ -42,18 +44,30 @@ on request, then re-confirm before moving on. Never chain stages without a confi
 point. Work on a throwaway branch so the whole run is easy to unwind.
 
 1. **Branding** → run the `scrape-branding` skill → produces `branding.json` and skins both `config.js`.
-   - **Checkpoint:** show the palette, fonts, logo, and `brand.*` copy (ideally preview a running app).
-     Adjust anything the user flags, re-apply, and re-confirm. On approval, **commit** before continuing.
+   - **Checkpoint (side-by-side diff):** approve the **running app against a screenshot of the live
+     site**, not `branding.json` swatches in isolation — isolated swatch review hides a wrong theme.
+     First confirm the palette is **grounded in the site's computed styles** (not a screenshot-derived
+     dominant color or a brand stereotype like "Halloween → dark"); see the `scrape-branding` grounding
+     step. Adjust anything the user flags, re-apply, and re-confirm. On approval, **commit** before continuing.
 2. **Catalog** → run the `build-catalog` skill → discovers products, downloads images, writes
    `data/manifest.json` + sidecars.
+   - **Start clean (fork only):** `download-catalog.mjs` *merges* into `data/manifest.json`, so a fork
+     still carries the baseline sample apparel. Before the first customer download, clear the baseline
+     corpus (manifest → `[]`, `git rm -r data/images/Men data/images/Women`; keep the schema, README,
+     and `Evaluation/` fixture) so the customer demo isn't mixed with sample data. Baseline repo keeps
+     its sample catalog — only do this in the customer fork. See the `build-catalog` skill.
    - **Checkpoint:** review the proposed `catalog.json` BEFORE downloading (categories, public/internal
      split, counts, metadata), then spot-check the imported results. Adjust and re-run as needed.
      On approval, **commit** before continuing.
 3. **Reskin / iterate** → run the `reskin` skill to refine copy/palette locally.
    - **Checkpoint:** iterate until the look is right — this loop is theirs to drive. On approval,
      **commit** before continuing.
-4. **Deploy (optional)** → only after the user OKs it: `azd up` (or `azd provision` if infra exists)
-   runs `deploy.ps1` ingest/index → `verify-sites.ps1`. See the `azure-deployment` skill for gotchas.
+4. **Deploy (optional)** → only after the user OKs it: **ask what to name the resource group** —
+   since each customer demo is a separate forked stack, name it after the customer/site so multiple
+   demos don't collide. Set it before provisioning: `azd env set AZURE_RG_NAME <customer-slug>` (the RG
+   becomes `rg-<customer-slug>-<env>`; defaults to `reverse-img-search` if unset). Then `azd up` (or
+   `azd provision` if infra exists) runs `deploy.ps1` ingest/index → `verify-sites.ps1`. See the
+   `azure-deployment` skill for gotchas.
    - **Checkpoint:** confirm the deployed customer sites look right and search works.
 5. **Final verify** → image/URL/crop search returns results, facets filter, public/internal boundary
    holds, customer skin renders on both sites, disclaimer present on public. Confirm, then **commit**
@@ -97,5 +111,7 @@ because every approved stage is committed, rolling back to a stable point is eas
 - Recommend a throwaway branch so the entire run can be discarded at once.
 
 ## Stop conditions
-- If `robots.txt` disallows the target, or the user can't confirm demo-only use → stop and explain.
+- If `robots.txt`/ToS disallows the target → **ask the user whether to continue** (they take
+  responsibility); proceed only on explicit confirmation (e.g. via the screenshot / MCP-browser
+  fallback), otherwise stop and explain. If the user can't confirm demo-only use → stop and explain.
 - If the baseline isn't healthy → fix that first (don't skin on top of a broken demo).

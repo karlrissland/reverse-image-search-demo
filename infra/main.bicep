@@ -8,6 +8,11 @@ metadata description = 'Vision Search POC — subscription-scope infrastructure 
 param environmentName string
 
 @minLength(1)
+@maxLength(40)
+@description('Short name slug for the resource group: the RG is named rg-<resourceGroupName>-<environmentName>. Defaults to reverse-img-search. When standing up a customer-branded demo, set this to the customer/site so multiple forked demos get distinct resource groups (e.g. rg-contoso-dev).')
+param resourceGroupName string = 'reverse-img-search'
+
+@minLength(1)
 @description('Primary Azure region. Multimodal embeddings (Vision VectorizeSkill) require a supported region; East US is recommended.')
 param location string = 'eastus'
 
@@ -61,7 +66,7 @@ var defaultTags = union(tags, {
 })
 
 resource rg 'Microsoft.Resources/resourceGroups@2024-03-01' = {
-  name: 'rg-reverse-img-search-${environmentName}'
+  name: 'rg-${resourceGroupName}-${environmentName}'
   location: location
   tags: defaultTags
 }

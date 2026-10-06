@@ -35,6 +35,9 @@ images), clearly marking what is approximated vs scraped. See the personalizatio
 
 - Images: `data/images/<Category>/<assetId>.<ext>` (category folders, matching the Phase 1 layout).
 - Manifest: `data/manifest.json` (array; schema `data/manifest.schema.json`). Merge, don't clobber.
+  Because downloads **merge**, a customer fork must **clear the baseline sample corpus first** (manifest
+  → `[]`, remove the sample `data/images/*` category folders) so customer items don't mix with the
+  baseline apparel — see the reset section. The shared baseline repo keeps its sample catalog.
 - Sidecars: `data/images/<Category>/<assetId>.metadata.json` (descriptive + attributes + provenance).
 - Public site config: `src/apps/public/public/config.js` (`window.__VISIONSEARCH__`).
 - Internal site config: `src/apps/internal/public/config.js` (`window.__VISIONSEARCH__`).
@@ -88,6 +91,11 @@ node tools/onboarding/extract-branding.mjs --url <site> [--headless] [--channel 
 - Playwright screenshots (real Edge/Chrome channel, headed by default) + node-vibrant palette;
   computed styles → fonts; og:image/favicon/header `<img>` → logo URL. Emits `branding.json`
   (shape below). Downloads nothing (a `<host>-home.png` screenshot is written beside `--out`).
+- Also emits `computedStyles` — the site's **actual** computed colors for header, nav, body, and the
+  first opaque primary button (`backgroundColor`/`color`), plus any `:root` CSS custom properties
+  (`rootVars`). These ground the Review step in real values instead of a dominant-color sampler that
+  misreads light-chrome / dark-hero retail sites. Reconcile node-vibrant's swatches against these and
+  prefer the site's actual hexes for `primary`/`background`/`ink`/`muted`.
 - Also harvests the homepage's primary navigation into `navLinks` (labeled, same-origin candidate
   category URLs). These are **advisory** — not applied to the skin — and exist so the AI can curate
   the real product categories and feed them to `scrape-catalog.mjs --category-urls`.
@@ -110,6 +118,12 @@ Personalization edits files in place, so undo is a git operation, not a bundled 
   tracked edits to `config.js`, `data/manifest.json`, etc.
 - `git clean -nd` (preview) then `git clean -fd` to remove newly downloaded images/sidecars.
 - Recommend running personalization on a throwaway branch so revert is trivial.
+
+**Clear the baseline sample corpus (fork only, before the first customer catalog):** downloads merge
+into `data/manifest.json`, so a fork otherwise keeps the neutral baseline's sample apparel. Reset the
+manifest to `[]` and `git rm -r` the baseline sample category folders (e.g. `data/images/Men`,
+`data/images/Women`), keeping `data/manifest.schema.json`, `data/README.md`, and the `Evaluation/`
+fixture. Do this **only in the customer fork** — never in the shared baseline repo.
 
 ---
 
@@ -172,13 +186,25 @@ Personalization edits files in place, so undo is a git operation, not a bundled 
     "danger": "#e5484d"
   },
   "fonts": { "heading": "Poppins, sans-serif", "body": "Inter, sans-serif" },
+  "computedStyles": {
+    "header": { "selector": "header", "backgroundColor": "rgb(255, 255, 255)", "color": "rgb(14, 11, 18)" },
+    "nav":    { "selector": "nav, [role=\"navigation\"]", "backgroundColor": "rgb(255, 255, 255)", "color": "rgb(14, 11, 18)" },
+    "body":   { "backgroundColor": "rgb(14, 11, 18)", "color": "rgb(244, 240, 250)" },
+    "button": { "backgroundColor": "rgb(91, 42, 134)", "color": "rgb(255, 255, 255)" },
+    "rootVars": { "--brand": "#5b2a86", "--bg": "#0e0b12" }
+  },
   "navLinks": [
     { "label": "Women's Costumes", "url": "https://www.example.com/category/womens/..." },
     { "label": "Decorations", "url": "https://www.example.com/category/decor/..." }
   ],
-  "provenance": { "screenshots": ["home.png"], "swatchSource": "node-vibrant" }
+  "provenance": { "screenshots": ["home.png"], "swatchSource": "node-vibrant", "computedStyles": true }
 }
 ```
+
+- `computedStyles` is the site's **actual** computed colors (header/nav/body/primary-button fg+bg) plus
+  any `:root` custom properties (`rootVars`). It is grounding evidence for Review — prefer these hexes
+  over node-vibrant swatches for `primary`/`background`/`ink`/`muted`. Any field may be `null` if the
+  element/stylesheet wasn't found (cross-origin stylesheets are skipped).
 
 - `navLinks` are **advisory** candidate category URLs harvested from the homepage nav (not applied to
   the skin). Curate them into product categories and pass to `scrape-catalog.mjs --category-urls`.

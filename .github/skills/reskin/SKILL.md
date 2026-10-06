@@ -38,6 +38,19 @@ direct code edits** (swap the logo in `public/`, tune `styles.css`) and need a r
 Demo-only; public disclaimer stays; don't commit customer assets to a shared branch. To revert to the
 neutral baseline, set `theme: {}` and restore default `brand`, or use git (`git restore` / `git clean`).
 
+## Known hardcoded artifacts to grep for
+Runtime `config.js` tokens only override `--token` CSS custom properties. Anything hardcoded in
+`styles.css` won't move when you change `theme`, so when a color/font "won't change," grep each app's
+`src/styles.css` for these and edit them directly:
+- **Serif headings:** a hardcoded `font-family: ... serif` on headings/wordmark — grep `serif` /
+  `Georgia`. Swap the stack (and add any `@font-face`/`@import`) directly.
+- **Non-token tints/gradients:** `rgba(...)` fills or gradients that don't use `var(--token)` — grep
+  `rgba(` in `styles.css`; convert to the theme token so the skin drives them.
+- **A second `:root` block:** an "editorial shell" `:root` that re-declares tokens can override the
+  first — confirm which `:root` actually wins before editing.
+- **Two hero systems:** `.hero` / `.campaign` is the rendered one; `.intro` / `.headline` is legacy —
+  confirm which is live before editing so you don't tune dead CSS.
+
 ## Verify
 Both apps render the customer skin, titles/hero/footer read correctly, contrast is legible, and the
 default palette still restores cleanly when `theme` is emptied.

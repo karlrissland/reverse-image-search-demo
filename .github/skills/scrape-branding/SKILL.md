@@ -10,7 +10,10 @@ Derive a runtime skin from a customer's website and apply it to both apps. Skinn
 
 ## Guardrails
 Follow the onboarding guardrails: demo-only, respect `robots.txt`, keep the public "not affiliated"
-disclaimer. Do not commit customer logos/assets to a shared branch.
+disclaimer. Do not commit customer logos/assets to a shared branch. If `robots.txt`/ToS disallows the
+site, **ask the user whether to continue before scraping** — don't silently override or silently stop.
+Screenshot-derived styling is a last-resort fallback that needs their explicit, responsibility-accepting
+go-ahead.
 
 ## Steps
 1. **Inspect the site** with the Playwright MCP server: navigate to the homepage (and a category page),
@@ -20,11 +23,29 @@ disclaimer. Do not commit customer logos/assets to a shared branch.
    shape).* It drives a real Edge/Chrome browser **headed by default** (watch the window and click
    through any bot challenge), then uses node-vibrant for the palette, computed styles for fonts, and
    og:image/favicon/header `<img>` for the logo.
-3. **Review** the proposed `branding.json` with the user: palette swatches, fonts, logo URL, and the
-   `brand.*` copy (name, tagline, hero title/subtitle, footer note, page title). Adjust before applying.
+3. **Ground the palette in computed styles (mandatory, before Review).** node-vibrant samples a
+   *screenshot*, so it misreads light-chrome / dark-hero retail sites. Before trusting the palette,
+   read the site's **actual** computed styles and reconcile:
+   - Use `branding.json` → `computedStyles` (the extractor now emits header/nav/body/primary-button
+     `backgroundColor`/`color` plus `:root` custom properties). If it's missing or sparse, open the
+     live site (headed script or Playwright MCP) and read the computed `background-color`/`color` for
+     header, nav, body, and primary buttons, plus any `:root` CSS variables, yourself.
+   - Prefer the site's real hexes for `primary`/`background`/`ink`/`muted`; treat node-vibrant swatches
+     as a fallback, not the source of truth. Every hex in `branding.json` must trace to the live site.
+   - **Do not invent a palette from brand stereotypes** (e.g. "Halloween → dark"). If you want to
+     propose a creative deviation (e.g. a dark theme), label it as a deviation and get explicit
+     sign-off — never present it as "the brand."
+   - **Light-chrome / dark-hero trap:** retail sites often pair white UI chrome with a dark promo hero
+     banner; a dominant-color sampler can key on either. Separate chrome color (header/nav/body) from
+     marketing imagery, and base the UI palette on the chrome.
+4. **Review** the proposed `branding.json` with the user as a **side-by-side diff**, not isolated
+   swatches: put a screenshot of the live site next to the running app (preview with `npm run dev` or
+   reload the built site) and approve the match. Cover palette, fonts, logo URL, and the `brand.*` copy
+   (name, tagline, hero title/subtitle, footer note, page title). Isolated swatch review hides a wrong
+   theme; the side-by-side surfaces it immediately. Adjust before applying.
    The file also carries a `navLinks` array (labeled homepage nav/category links) — hand these to the
    `build-catalog` step as candidate `--category-urls` (curate out Account/Stores/Help/etc. first).
-4. **Apply** → run `apply-branding.mjs --input branding.json`. This maps the palette onto BOTH apps'
+5. **Apply** → run `apply-branding.mjs --input branding.json`. This maps the palette onto BOTH apps'
    token sets (they differ — see the mapping table in CONTRACT.md) and sets `brand.*`, preserving each
    app's `apiBaseUrl`.
 

@@ -64,8 +64,9 @@ async function main() {
     brand,
     palette,
     fonts,
+    computedStyles: dom.computed || null,
     navLinks,
-    provenance: { screenshots: [`${host}-home.png`], swatchSource: 'node-vibrant' },
+    provenance: { screenshots: [`${host}-home.png`], swatchSource: 'node-vibrant', computedStyles: Boolean(dom.computed) },
   });
   log.ok(`Wrote ${outPath} (screenshot: ${shotPath}).`);
   if (navLinks.length) {
@@ -81,6 +82,41 @@ function readDom() {
   const heading = document.querySelector('h1, h2, header a, .logo');
   const abs = (u) => { try { return u ? new URL(u, location.href).href : null; } catch { return null; } };
   const pick = (sel, attr) => { const el = document.querySelector(sel); return el ? (attr ? el.getAttribute(attr) : (el.textContent || '').trim()) : null; };
+
+  // Computed-style samples ground the Review step in the site's ACTUAL colors (not just a
+  // dominant-color sampler, which misreads light-chrome/dark-hero retail sites). See CONTRACT.md.
+  const opaque = (c) => c && c !== 'transparent' && c !== 'rgba(0, 0, 0, 0)';
+  const sample = (sel) => {
+    const el = document.querySelector(sel);
+    if (!el) return null;
+    const s = getComputedStyle(el);
+    return { selector: sel, backgroundColor: s.backgroundColor || null, color: s.color || null };
+  };
+  const sampleButton = () => {
+    const cands = document.querySelectorAll('button, a.button, [class*="btn" i], [class*="button" i], [class*="cta" i]');
+    for (const el of cands) {
+      const s = getComputedStyle(el);
+      if (opaque(s.backgroundColor)) return { backgroundColor: s.backgroundColor, color: s.color || null };
+    }
+    return null;
+  };
+  // :root CSS custom properties declared in same-origin stylesheets (design tokens, when present).
+  const rootVars = () => {
+    const out = {};
+    for (const sheet of document.styleSheets) {
+      let rules;
+      try { rules = sheet.cssRules; } catch { continue; } // cross-origin sheet — skip
+      if (!rules) continue;
+      for (const rule of rules) {
+        if (rule.selectorText === ':root' && rule.style) {
+          for (const prop of rule.style) {
+            if (prop.startsWith('--')) out[prop] = rule.style.getPropertyValue(prop).trim();
+          }
+        }
+      }
+    }
+    return out;
+  };
 
   let logo = pick('meta[property="og:logo"]', 'content');
   if (!logo) {
@@ -98,6 +134,13 @@ function readDom() {
     title: document.title,
     description: pick('meta[name="description"]', 'content'),
     logoUrl: abs(logo),
+    computed: {
+      header: sample('header'),
+      nav: sample('nav, [role="navigation"]'),
+      body: { backgroundColor: cs(body)?.backgroundColor || null, color: cs(body)?.color || null },
+      button: sampleButton(),
+      rootVars: rootVars(),
+    },
   };
 }
 

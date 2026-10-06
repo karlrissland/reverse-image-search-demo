@@ -95,21 +95,39 @@ function Invoke-Search {
     )
     $sep = if ($Path.Contains('?')) { '&' } else { '?' }
     $uri = "$searchBase/$Path$sep" + "api-version=$ApiVersion"
-    $headers = @{ Authorization = "Bearer $(Get-SearchToken)" }
-    $params = @{ Method = $Method; Uri = $uri; Headers = $headers }
+    $params = @{ Method = $Method; Uri = $uri }
     if ($null -ne $Body) {
         $params.ContentType = 'application/json'
         $params.Body = ($Body | ConvertTo-Json -Depth 20)
     }
-    try {
-        return Invoke-RestMethod @params
-    }
-    catch {
-        if ($AllowNotFound -and [int]$_.Exception.Response.StatusCode -eq 404) {
-            return $null
+
+    $maxAttempts = 5
+    for ($attempt = 1; ; $attempt++) {
+        # Refresh the bearer token each attempt so a long backoff can't outlive it.
+        $params.Headers = @{ Authorization = "Bearer $(Get-SearchToken)" }
+        try {
+            return Invoke-RestMethod @params
         }
-        $msg = if ($_.ErrorDetails.Message) { $_.ErrorDetails.Message } else { $_.Exception.Message }
-        throw "Search $Method $Path failed: $msg"
+        catch {
+            $status = $null
+            try { $status = [int]$_.Exception.Response.StatusCode } catch { }
+
+            if ($AllowNotFound -and $status -eq 404) {
+                return $null
+            }
+
+            # Transient = dropped connection/timeout (no HTTP status) or a retryable server code.
+            $transient = ($null -eq $status) -or $status -in @(408, 429, 500, 502, 503, 504)
+            if ($transient -and $attempt -lt $maxAttempts) {
+                $delay = [Math]::Min(30, [Math]::Pow(2, $attempt))
+                Write-Host "  transient Search $Method $Path (attempt $attempt/$maxAttempts): $($_.Exception.Message). Retrying in ${delay}s..." -ForegroundColor Yellow
+                Start-Sleep -Seconds $delay
+                continue
+            }
+
+            $msg = if ($_.ErrorDetails.Message) { $_.ErrorDetails.Message } else { $_.Exception.Message }
+            throw "Search $Method $Path failed: $msg"
+        }
     }
 }
 

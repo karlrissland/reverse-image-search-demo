@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Vision Search — an Azure-native reverse image search proof of concept. Rendered documentation home with the architecture gallery and UX walkthrough.">
+  <title>Vision Search — Documentation Home</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f4f7fb;
+      --panel: #ffffff;
+      --text: #172033;
+      --muted: #5f6b7a;
+      --border: #d8e0ea;
+      --accent: #2457d6;
+      --accent-hover: #173e9e;
+      --motion: #7a3fc1;
+      --code-bg: #eef2f8;
+      --shadow: 0 16px 40px rgba(25, 41, 72, 0.09);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1521;
+        --panel: #171f2d;
+        --text: #edf2fa;
+        --muted: #aab6c8;
+        --border: #2d394c;
+        --accent: #8aafff;
+        --accent-hover: #b5cbff;
+        --motion: #d1a8ff;
+        --code-bg: #0c121d;
+        --shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    main {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 56px 0 72px;
+    }
+
+    header { margin-bottom: 38px; }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 5vw, 3.35rem);
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+    }
+
+    h2 { margin: 0 0 4px; font-size: 1.35rem; letter-spacing: -0.01em; }
+    h3 { margin: 4px 0 0; font-size: 1rem; }
+    p { margin: 0; }
+
+    .lede {
+      max-width: 820px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .sections { display: grid; gap: 28px; }
+
+    section {
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .section-copy { margin: 7px 0 18px; color: var(--muted); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 14px;
+    }
+
+    article {
+      display: flex;
+      min-height: 150px;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+    }
+
+    .number {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .links { display: flex; flex-wrap: wrap; gap: 9px; }
+
+    a { color: var(--accent); }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 7px 14px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--accent);
+    }
+
+    .button:hover,
+    .button:focus-visible { color: var(--accent-hover); outline-offset: 3px; }
+
+    .button.motion { color: var(--motion); }
+
+    ul { margin: 0; padding-left: 1.15rem; }
+    li { margin: 3px 0; }
+    li::marker { color: var(--muted); }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    th, td {
+      text-align: left;
+      padding: 9px 10px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    th { color: var(--muted); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    td code, p code, li code { background: var(--code-bg); border-radius: 5px; padding: 1px 5px; font-size: 0.85em; }
+
+    pre {
+      margin: 12px 0 0;
+      padding: 14px 16px;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      overflow-x: auto;
+      font-size: 0.86rem;
+      line-height: 1.5;
+    }
+    code { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; }
+
+    .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
+
+    footer {
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    footer a { color: var(--accent); }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 4px 11px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <span class="tag">Azure-native reverse image search · Proof of concept</span>
+      <h1>Vision Search</h1>
+      <p class="lede">
+        A proof of concept for a fashion-retail digital asset discovery demo. Image binaries stay in
+        private Azure Blob Storage; image vectors and metadata are indexed in Azure AI Search;
+        multimodal embeddings come from Azure Vision; and search is exposed through a .NET isolated
+        Azure Function. Two React/Vite frontends demonstrate the experience — an internal diagnostic
+        image-library app and a public-style shopping/search surface.
+      </p>
+    </header>
+
+    <div class="sections">
+      <!-- Explore the rendered experiences -->
+      <section>
+        <h2>Explore the rendered docs</h2>
+        <p class="section-copy">The interactive HTML artifacts in this repository, rendered for the browser.</p>
+        <div class="grid">
+          <article>
+            <div>
+              <span class="number">Diagrams</span>
+              <h3>Architecture gallery</h3>
+              <p class="section-copy">15 showcase-quality Archify diagrams — topology, workflow, sequence, data flow, and lifecycle — each with a static and a motion-trace variant.</p>
+            </div>
+            <div class="links">
+              <a class="button" href="architecture/">Open gallery</a>
+            </div>
+          </article>
+          <article>
+            <div>
+              <span class="number">Experience</span>
+              <h3>UX walkthrough</h3>
+              <p class="section-copy">The Vision Search UX concept for the internal and public search surfaces.</p>
+            </div>
+            <div class="links">
+              <a class="button motion" href="ux/vision-search-ux.html">Open UX</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- What this repo contains -->
+      <section>
+        <h2>What this repo contains</h2>
+        <p class="section-copy">Links below point to source on GitHub.</p>
+        <table>
+          <thead><tr><th>Area</th><th>Path</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>Infrastructure</td><td><a href="https://github.com/karlrissland/reverse-image-search-demo/tree/main/infra"><code>infra/</code></a></td><td>Subscription-scope Bicep for Blob Storage, Azure AI Search, AI Services, Function App, Static Web Apps, monitoring, RBAC, and Azure Load Testing.</td></tr>
+            <tr><td>API</td><td><a href="https://github.com/karlrissland/reverse-image-search-demo/tree/main/src/api"><code>src/api/</code></a></td><td>.NET 10 isolated Function with <code>POST /api/search</code> and <code>POST /api/search/internal</code>.</td></tr>
+            <tr><td>Internal UX</td><td><a href="https://github.com/karlrissland/reverse-image-search-demo/tree/main/src/apps/internal"><code>src/apps/internal/</code></a></td><td>Diagnostic search app: upload, image URL, crop search, facets, similarity bands, no-strong-match guidance, provenance.</td></tr>
+            <tr><td>Public UX</td><td><a href="https://github.com/karlrissland/reverse-image-search-demo/tree/main/src/apps/public"><code>src/apps/public/</code></a></td><td>Public-safe shopping-style surface: upload, image URL, crop search, facets — no internal scores/provenance.</td></tr>
+            <tr><td>Data</td><td><a href="https://github.com/karlrissland/reverse-image-search-demo/tree/main/data"><code>data/</code></a></td><td>Demo manifest, 200-image corpus plus four non-public evaluation assets, schema, Unicode fixture, and metadata sidecars.</td></tr>
+            <tr><td>Hooks</td><td><a href="https://github.com/karlrissland/reverse-image-search-demo/tree/main/src/hooks"><code>src/hooks/</code></a></td><td><code>azd</code> lifecycle scripts for site config stamping, data upload, Search configuration, and load-test setup.</td></tr>
+            <tr><td>Load tests</td><td><a href="https://github.com/karlrissland/reverse-image-search-demo/tree/main/src/loadtest"><code>src/loadtest/</code></a></td><td>Locust-based API/site test harness for Azure Load Testing.</td></tr>
+            <tr><td>Documentation</td><td><a href="https://github.com/karlrissland/reverse-image-search-demo/tree/main/docs"><code>docs/</code></a></td><td>Contracts, capability gate evidence, implementation status, reranking notes, and Archify diagrams.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Architecture -->
+      <section>
+        <h2>Current architecture</h2>
+        <p class="section-copy">The POC has three main runtime paths.</p>
+        <ul>
+          <li><strong>Provision and deploy:</strong> <code>azd</code> provisions Azure resources from Bicep, stamps the Function API origin into both SPA configs, and deploys the API plus both Static Web Apps.</li>
+          <li><strong>Ingest and index:</strong> image assets and trusted metadata are uploaded to private Blob Storage; the Azure AI Search indexer and Vision VectorizeSkill create one searchable document per image with a 1024-dimensional vector.</li>
+          <li><strong>Search at runtime:</strong> users submit an uploaded image, crop, or image URL; the Function generates a query embedding, searches Azure AI Search, optionally reranks qualified candidates, mints short-lived Blob SAS URLs, and returns either public-safe or internal diagnostic fields.</li>
+        </ul>
+        <p class="section-copy" style="margin-top:16px">
+          Celebrity intent is a separate metadata path. The allowlist comes from current non-empty
+          <code>celebrity</code> facets in Search; a complete allowlisted name — or an internal,
+          explicitly enabled, allowlist-constrained image recognition — runs an exact celebrity
+          metadata filter without vector identity detection.
+          See <a href="https://github.com/karlrissland/reverse-image-search-demo/blob/main/docs/celebrity-search.md">celebrity-search.md</a>.
+        </p>
+        <h3 style="margin-top:18px">Key design invariants</h3>
+        <ul>
+          <li>Image binaries stay in Blob Storage only.</li>
+          <li>Azure AI Search stores metadata and vectors, not image binaries.</li>
+          <li>Public responses never expose raw scores, provenance, blob paths, celebrity metadata, or model/version fields.</li>
+          <li>Internal responses include diagnostics such as raw similarity, match quality, provenance, and indexing metadata.</li>
+          <li>Unicode metadata such as <code>rosé</code> is preserved end to end.</li>
+        </ul>
+      </section>
+
+      <!-- Search behavior + Data -->
+      <section>
+        <div class="two-col">
+          <div>
+            <h2>Search behavior</h2>
+            <p class="section-copy">The Function API accepts at most one image source:</p>
+            <ul>
+              <li>uploaded image bytes,</li>
+              <li>uploaded crop bytes, or</li>
+              <li>an image URL.</li>
+            </ul>
+            <p class="section-copy" style="margin-top:12px">
+              An image may be omitted only for one complete celebrity name currently present in the
+              Search-derived allowlist. The API embeds the query image with the same Azure Vision model
+              version used for indexing, performs exhaustive vector search over the 200-image POC corpus,
+              expands the candidate set for qualified searches, and applies deterministic
+              metadata-consensus reranking. Raw Vision similarity still controls <code>matchState</code>;
+              weak or out-of-domain queries are not reranked into matches.
+            </p>
+          </div>
+          <div>
+            <h2>Data included in the POC</h2>
+            <p class="section-copy">200 catalog images under <code>data/images/</code>, split evenly across Home, Kids-Baby, Mens, and Women.</p>
+            <ul>
+              <li>Four additional non-public evaluation assets carry trusted celebrity labels for allowlist/facet validation — not production identity claims or public assets.</li>
+              <li><code>data/manifest.json</code> is the asset source of record, mapping each image to an <code>assetId</code>, path, category, and public flag.</li>
+              <li>Generated <code>*.metadata.json</code> sidecars add caption, tags, color, season, and subcategory for most assets.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Running + Deploying -->
+      <section>
+        <div class="two-col">
+          <div>
+            <h2>Running locally</h2>
+            <p class="section-copy">The frontends read their API origin from <code>public/config.js</code>.</p>
+            <pre><code># Internal diagnostic UX
+cd src\apps\internal
+npm install
+npm run dev -- --host 127.0.0.1 --port 5173
+
+# Public-style UX
+cd ..\public
+npm install
+npm run dev -- --host 127.0.0.1 --port 5174</code></pre>
+            <p class="section-copy" style="margin-top:12px">The API targets .NET 10:</p>
+            <pre><code>$env:DOTNET_ROOT = "$env:USERPROFILE\.dotnet"
+$env:PATH = "$env:DOTNET_ROOT;$env:PATH"
+dotnet build src\api\VisionSearch.Api.csproj</code></pre>
+          </div>
+          <div>
+            <h2>Deploying</h2>
+            <p class="section-copy">Azure Developer CLI is the lifecycle entry point.</p>
+            <pre><code>azd up --environment visionsearch --location eastus</code></pre>
+            <p class="section-copy" style="margin-top:12px">
+              Infrastructure is subscription-scoped Bicep. Most resources run in East US for Vision
+              multimodal embeddings; Static Web Apps use East US 2 for the SWA control plane. The
+              post-provision Search step detects immutable index-field differences before updating and
+              fails fast for an incompatible existing index. For the disposable 200-image POC, after
+              explicit maintainer approval, recreate and reindex from Blob with:
+            </p>
+            <pre><code>.\src\hooks\configure-search.ps1 -Reset</code></pre>
+            <p class="section-copy" style="margin-top:12px">
+              Do not use that destructive migration for a production-scale corpus — use a versioned
+              index, blue-green reindex, validation, and alias cutover instead.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Personalize -->
+      <section>
+        <h2>Personalize this demo for a customer</h2>
+        <p class="section-copy">
+          This repo can be <strong>forked and personalized</strong> to demo Vision Search for a specific
+          company: point GitHub Copilot at a customer website and it skins both apps with the customer's
+          branding and loads their product catalog behind the search. Keyless open-source scrapers gather
+          the data and images, and the AI edits the app code to match the look.
+        </p>
+        <ul>
+          <li>Do it in a <strong>fork</strong> (the baseline stays generic); commit and push so the customer clones a fully-personalized starting point.</li>
+          <li>Demo-only: respects <code>robots.txt</code>, keeps the public "not affiliated" disclaimer, images belong to their owners.</li>
+        </ul>
+        <p class="section-copy" style="margin-top:12px">
+          Full walkthrough: <a href="https://github.com/karlrissland/reverse-image-search-demo/blob/main/docs/personalize.md">docs/personalize.md</a>.
+        </p>
+      </section>
+
+      <!-- Documentation map -->
+      <section>
+        <h2>Documentation map</h2>
+        <table>
+          <thead><tr><th>Document</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td><a href="https://github.com/karlrissland/reverse-image-search-demo/blob/main/docs/architecture/README.md">docs/architecture/README.md</a></td><td>Complete Archify architecture gallery (source + rendered routes).</td></tr>
+            <tr><td><a href="https://github.com/karlrissland/reverse-image-search-demo/blob/main/docs/contracts.md">docs/contracts.md</a></td><td>Search document schema, API contract, public/internal response boundaries, facets, match-state behavior.</td></tr>
+            <tr><td><a href="https://github.com/karlrissland/reverse-image-search-demo/blob/main/docs/capability-gate.md">docs/capability-gate.md</a></td><td>Vision VectorizeSkill validation and go/no-go decision.</td></tr>
+            <tr><td><a href="https://github.com/karlrissland/reverse-image-search-demo/blob/main/docs/reranking-prototype.md">docs/reranking-prototype.md</a></td><td>Second-pass reranking method, validation, and limitations.</td></tr>
+            <tr><td><a href="https://github.com/karlrissland/reverse-image-search-demo/blob/main/docs/implementation-status.md">docs/implementation-status.md</a></td><td>Detailed build history and current follow-up notes.</td></tr>
+            <tr><td><a href="https://github.com/karlrissland/reverse-image-search-demo/blob/main/docs/personalize.md">docs/personalize.md</a></td><td>Fork-and-personalize-for-a-customer guide (Copilot-driven).</td></tr>
+            <tr><td><a href="https://github.com/karlrissland/reverse-image-search-demo/blob/main/status.md">status.md</a></td><td>Phase tracker and known blockers.</td></tr>
+            <tr><td><a href="https://github.com/karlrissland/reverse-image-search-demo/blob/main/architecture-requirements.md">architecture-requirements.md</a></td><td>Original architecture requirements.</td></tr>
+            <tr><td><a href="https://github.com/karlrissland/reverse-image-search-demo/blob/main/plan.md">plan.md</a></td><td>Approved implementation plan and work phases.</td></tr>
+            <tr><td><a href="https://github.com/karlrissland/reverse-image-search-demo/blob/main/tools/onboarding/CONTRACT.md">tools/onboarding/CONTRACT.md</a></td><td>Onboarding script + JSON interface contract.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Production follow-ups -->
+      <section>
+        <h2>Production follow-ups</h2>
+        <p class="section-copy">This is a demo-quality POC. Production hardening should include:</p>
+        <ul>
+          <li>Entra authentication and stronger authorization on the internal API.</li>
+          <li>Private networking and stricter egress controls.</li>
+          <li>Production AEM workflow integration.</li>
+          <li>Calibrated relevance thresholds from labeled test data.</li>
+          <li>Load testing at representative scale.</li>
+          <li>Monitoring, alerting, and cost governance.</li>
+          <li>Production data-quality processes for metadata, special characters, and celebrity attribution.</li>
+        </ul>
+      </section>
+    </div>
+
+    <footer>
+      <p>
+        Demo imagery sourced from <a href="https://github.com/cvdfoundation/fashionpedia">Fashionpedia</a>
+        (CVD Foundation) — verify individual image licenses before any non-demo or public use.
+        Architecture diagrams generated with the Archify skill. Personalization tooling uses
+        <a href="https://playwright.dev">Playwright</a>,
+        <a href="https://github.com/Vibrant-Colors/node-vibrant">node-vibrant</a>, and
+        <a href="https://github.com/lovell/sharp">sharp</a>.
+      </p>
+      <p style="margin-top:10px">
+        Visual search demo. Not affiliated with any brand whose imagery may appear in a personalized fork.
+      </p>
+    </footer>
+  </main>
+</body>
+</html>
